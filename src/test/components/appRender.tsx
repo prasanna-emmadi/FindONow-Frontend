@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from "react"
+/*import { PropsWithChildren, ReactElement } from "react"
 import { RenderOptions, render } from "@testing-library/react"
 import store from "../shared/store"
 import { Provider } from "react-redux"
@@ -15,4 +15,6 @@ const appRender = (
     }
 }
 
-export default appRender
+export default appRender */
+const test = "hello"
+export default test
