@@ -15,11 +15,9 @@ const UserForm = () => {
     const [updateUser, result] = useAddNewUserMutation()
 
     const onSubmit = (d: any) => {
-        alert(JSON.stringify(d))
         updateUser(d);
     }
 
-    console.log(result);
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <label>

@@ -21,7 +21,6 @@ const InnerProductForm = ({ data }: Props) => {
     const [updateProduct, result] = useAddNewProductMutation()
 
     const onSubmit = (d: any) => {
-        alert(JSON.stringify(d))
         updateProduct(d);
     }
 

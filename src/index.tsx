@@ -9,9 +9,7 @@ import { Provider } from 'react-redux'
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-console.log({ store, state: store.getState(
-  
-) })
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
