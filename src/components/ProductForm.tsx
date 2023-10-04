@@ -1,15 +1,29 @@
 
 import { useForm } from "react-hook-form";
-import { useAddNewProductMutation, useAddNewUserMutation } from "../features/api/apiSlice";
+import { useAddNewProductMutation, useGetCategoriesQuery } from "../features/api/apiSlice";
+import { Category } from "../types/productType";
+import Suspense from "./Suspense";
 
-const ProductForm = () => {
-    const { register, handleSubmit } = useForm();
+interface Props {
+    data: Category[] | undefined
+}
+const InnerProductForm = ({ data }: Props) => {
+
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            title: "",
+            price: 0,
+            description: "",
+            categoryId: 0,
+            images: ""
+        }
+    });
     const [updateProduct, result] = useAddNewProductMutation()
 
-    const onSubmit = (d: any) =>
+    const onSubmit = (d: any) => {
         alert(JSON.stringify(d))
-
-    //updateProduct(d);
+        updateProduct(d);
+    }
 
     console.log(result);
     return (
@@ -30,7 +44,7 @@ const ProductForm = () => {
             <p>Category:</p>
             <label>
                 Category:
-                <input {...register("categoryname")} />
+                <input {...register("categoryId")} />
             </label>
 
 
@@ -39,8 +53,29 @@ const ProductForm = () => {
                 <input {...register("images")} type="image" />
             </label>
 
-            <input type="submit" value="submit" />
+            <button type="submit" value="submit" />
         </form>
     )
 };
+
+const ProductForm = () => {
+    const {
+        data,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetCategoriesQuery()
+
+    return (<Suspense
+        data={data}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        isError={isError}
+        error={error}
+        Component={InnerProductForm} />
+    )
+
+}
+
 export default ProductForm;

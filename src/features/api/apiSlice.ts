@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Product } from "../../types/productType"
+import { Category, Product } from "../../types/productType"
 import { User } from '../../types/userType'
 
 // actions
@@ -57,26 +57,26 @@ export const apiSlice = createApi({
                 }
                 )
             }),
-            getCarts: builder.query({
-                query: () => '/carts',
-                //providesTags: ['Cart']
+            getCategories: builder.query<Category[], void>({
+                query: () => '/categories',
+                //providesTags: ['Category']
             }),
-            getCart: builder.query({
-                query: cartId => `/carts/${cartId}`
+            getCategory: builder.query({
+                query: categoryId => `/categories/${categoryId}`
             }),
-            addNewCart: builder.mutation({
-                query: initialCart => ({
-                    url: '/carts',
+            addNewCategory: builder.mutation({
+                query: initialCategory => ({
+                    url: '/categories',
                     method: 'POST',
-                    body: initialCart
+                    body: initialCategory
                 }),
-                //invalidatesTags: ['Cart']
+                //invalidatesTags: ['Category']
             }),
-            editCart: builder.mutation({
-                query: cart => ({
-                    url: `/users/${cart.id}`,
+            editCategory: builder.mutation({
+                query: category => ({
+                    url: `/users/${category.id}`,
                     method: 'PUT',
-                    body: cart
+                    body: category
                 }
                 )
             }),
@@ -93,9 +93,9 @@ export const {
     useGetProductQuery,
     useAddNewProductMutation,
     useEditProductMutation,
-    useGetCartsQuery,
-    useGetCartQuery,
-    useAddNewCartMutation,
-    useEditCartMutation,
+    useGetCategoriesQuery,
+    useGetCategoryQuery,
+    useAddNewCategoryMutation,
+    useEditCategoryMutation,
 } = apiSlice
 
