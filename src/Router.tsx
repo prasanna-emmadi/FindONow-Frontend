@@ -9,7 +9,8 @@ import Users from "./components/Users";
 import User from "./components/User";
 import Product from "./components/Product";
 import Products from "./components/Products";
-import UserForm from "./components/UserForm";
+import SignUp from "./components/SignUp";
+import ProductForm from "./components/ProductForm";
 
 
 const router = createBrowserRouter([
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
                 element: <Product />,
             },
             {
+                path: "products/create",
+                element: <ProductForm />
+            },
+            {
                 path: "users",
                 element: <Users />
             },
@@ -54,8 +59,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "users/register",
-                element: <UserForm />,
+                element: <SignUp />,
             }
+
 
         ]
     }

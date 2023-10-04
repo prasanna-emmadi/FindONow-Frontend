@@ -3,13 +3,21 @@ import { useForm } from "react-hook-form";
 import { useAddNewUserMutation } from "../features/api/apiSlice";
 
 const UserForm = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            email: "",
+            password: "",
+            name: "",
+            role: "admin",
+            avatar: ""
+        }
+    });
     const [updateUser, result] = useAddNewUserMutation()
 
-    const onSubmit = (d: any) =>
+    const onSubmit = (d: any) => {
         alert(JSON.stringify(d))
-
-    //updateUser(d);
+        updateUser(d);
+    }
 
     console.log(result);
     return (
@@ -30,16 +38,16 @@ const UserForm = () => {
             <p>Role:</p>
             <label>
                 Admin
-                <input {...register("admin")} type="radio" name="role" />
-            </label>
-            
-            <label>
-                Costumer
-                <input {...register("costumer")} type="radio" name="role" />
+                <input {...register("role")} type="radio" value="admin" />
             </label>
 
             <label>
-                Avatar:
+                Customer
+                <input {...register("role")} type="radio" value="customer" />
+            </label>
+
+            <label>
+                Avatar
                 <input {...register("avatar")} type="url" />
             </label>
 
