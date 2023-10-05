@@ -12,6 +12,14 @@ export const apiSlice = createApi({
     //tagTypes: ['User', 'Product', 'Cart'],
     endpoints: (builder) => {
         return {
+            addLogin: builder.mutation({
+                query: initialUser => ({
+                    url: '/auth/login',
+                    method: 'POST',
+                    body: initialUser
+                }),
+                //invalidatesTags: ['User']
+            }),
             getUsers: builder.query<User[], void>({
                 query: () => '/users',
                 //providesTags: ['User']
@@ -85,6 +93,7 @@ export const apiSlice = createApi({
 })
 
 export const {
+    useAddLoginMutation,
     useGetUsersQuery,
     useGetUserQuery,
     useAddNewUserMutation,

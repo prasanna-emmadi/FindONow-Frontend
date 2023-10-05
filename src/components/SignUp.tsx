@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useAddNewUserMutation } from "../features/api/apiSlice";
 
-const UserForm = () => {
+const SignUp = () => {
     const { register, handleSubmit } = useForm({
         defaultValues: {
             email: "",
@@ -53,4 +53,4 @@ const UserForm = () => {
         </form>
     )
 };
-export default UserForm;
+export default SignUp;
