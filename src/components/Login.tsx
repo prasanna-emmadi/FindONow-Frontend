@@ -2,6 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { useAddLoginMutation } from "../features/api/apiSlice";
+import { useEffect } from "react";
+import { useAppDispatch } from "../app/hooks"
+import { addToken } from "../features/user/userSlice";
+
 
 const Login = () => {
     const { register, handleSubmit } = useForm({
@@ -10,10 +14,24 @@ const Login = () => {
             password: "",
         }
     });
-    const [updateLogin, result] = useAddLoginMutation()
+    const [login, result] = useAddLoginMutation()
+    const dispatch = useAppDispatch()
 
-    const onSubmit = (d: any) => {
-        updateLogin(d);
+    useEffect(() => {
+        if (result.isSuccess) {
+            console.log("success data", result.data)
+            // send action to userSlice 
+            dispatch(addToken(result.data))
+        }
+
+    }, [result.isSuccess, result.data, dispatch])
+
+    const onSubmit = async (d: any) => {
+        try {
+            await login(d).unwrap();
+        } catch {
+            console.error("error in login ")
+        }
     }
 
     return (

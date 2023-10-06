@@ -26,16 +26,21 @@ const InnerProductForm = ({ data }: Props) => {
                 categoryOptions.length > 0 ? categoryOptions[0] : defaultOption
         }
     });
-    const [updateProduct, result] = useAddNewProductMutation()
+    const [addProduct, result] = useAddNewProductMutation()
 
 
-    const onSubmit = (d: any) => {
+    const onSubmit = async (d: any) => {
+        try {
         // the shape of  option is {value, label} where value is assigned category.id 
         // and it is converted to string
         // API expects category id to be number hence the conversion to number
         d.categoryId = Number(d.categoryId.value)
         d.images = [d.images]
-        updateProduct(d);
+        // async
+        await addProduct(d).unwrap();
+        } catch {
+            console.error("error in add product");
+        }
     }
 
     return (

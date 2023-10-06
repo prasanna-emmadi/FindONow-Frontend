@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import productsSlice from '../features/products/productsSlice'
+import userSlice from '../features/user/userSlice'
 import { apiSlice } from '../features/api/apiSlice'
 
 const store = configureStore({
     reducer: {
-        products: productsSlice.reducer,
+        user: userSlice.reducer,
         [apiSlice.reducerPath]: apiSlice.reducer
 
     },
