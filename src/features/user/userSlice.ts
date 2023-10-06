@@ -19,6 +19,9 @@ export const userSlice = createSlice({
         addToken: (state, action: PayloadAction<UserState>) => {
             state = action.payload;
         },
+        removeToken: ( state ) => {
+            state = initialState;
+        }
 
     }
 })

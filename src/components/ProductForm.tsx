@@ -4,6 +4,7 @@ import { useAddNewProductMutation, useGetCategoriesQuery } from "../features/api
 import { Category } from "../types/productType";
 import Suspense from "./Suspense";
 import Select from "react-select";
+import { redirect } from "react-router-dom";
 
 interface Props {
     data: Category[]
@@ -31,13 +32,14 @@ const InnerProductForm = ({ data }: Props) => {
 
     const onSubmit = async (d: any) => {
         try {
-        // the shape of  option is {value, label} where value is assigned category.id 
-        // and it is converted to string
-        // API expects category id to be number hence the conversion to number
-        d.categoryId = Number(d.categoryId.value)
-        d.images = [d.images]
-        // async
-        await addProduct(d).unwrap();
+            // the shape of  option is {value, label} where value is assigned category.id 
+            // and it is converted to string
+            // API expects category id to be number hence the conversion to number
+            d.categoryId = Number(d.categoryId.value)
+            d.images = [d.images]
+            // async
+            await addProduct(d).unwrap();
+            redirect("/products")
         } catch {
             console.error("error in add product");
         }
