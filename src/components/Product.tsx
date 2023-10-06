@@ -8,7 +8,6 @@ interface Props {
 }
 
 const InnerProduct = ({ data }: Props) => {
-    if (!data) return <div />
     return <div>{data.title}</div>
 }
 

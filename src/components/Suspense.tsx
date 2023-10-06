@@ -1,4 +1,4 @@
-type WithFetchingProps<T> = ({ data }: { data: T }) => JSX.Element
+type WithFetchingProps<T> = ({ data }: { data: NonNullable<T> }) => JSX.Element
 
 interface Props<T> {
     data: T;
@@ -15,7 +15,7 @@ const Suspense = <T,>({ data, isLoading, isSuccess, isError, error, Component }:
 
     if (isLoading) {
         content = <div>Loading...</div>
-    } else if (isSuccess) {
+    } else if (isSuccess && data) {
         content = <Component data={data} />
 
     } else if (isError) {

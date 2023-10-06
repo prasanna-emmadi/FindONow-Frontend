@@ -5,11 +5,10 @@ import { List } from "@mui/material"
 import Suspense from "./Suspense"
 
 interface Props {
-    data: Product[] | undefined
+    data: Product[]
 }
 
 const InnerProductList = ({ data }: Props) => {
-    if (data === undefined) return <List />;
     return (<List>{data.map((product: Product) => {
         const to = "/products/" + product.id
         return (<Link to={to} key={product.id}>
