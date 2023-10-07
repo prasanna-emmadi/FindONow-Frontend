@@ -2,15 +2,44 @@ import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../features/api/apiSlice";
 import { Product as ProductType } from "../types/productType"
 import Suspense from "./Suspense";
+import { Wrapper } from "./Products.styles";
+import Button from "@mui/material/Button";
 
 interface Props {
-    data: ProductType
+    data: ProductType;
 }
+
 
 const InnerProduct = ({ data }: Props) => {
-    return <div>{data.title}</div>
-}
+    return (
+        <Wrapper>
+            <img src={data.images[0]} alt={data.title} />
+            <div>
+                <h3>{data.title}</h3>
+                <p>{data.description}</p>
+                <h3>${data.price}</h3>
+                <h3>{data.category.id}</h3>
+            </div>
 
+        </Wrapper>
+    )
+
+}
+interface CartProductProps {
+    data: ProductType;
+    handleAddToCart: (clickedItem: ProductType) => void;
+}
+export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
+    return (
+        <>
+            <InnerProduct data={data} />
+            <Button onClick={() => handleAddToCart(data)}>
+                add to cart
+            </Button>
+        </>
+
+    )
+}
 const Product = () => {
     const { id } = useParams();
     const {

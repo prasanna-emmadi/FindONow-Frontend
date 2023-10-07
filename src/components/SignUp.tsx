@@ -12,7 +12,7 @@ const SignUp = () => {
             avatar: ""
         }
     });
-    const [updateUser, result] = useAddNewUserMutation()
+    const [updateUser] = useAddNewUserMutation()
 
     const onSubmit = (d: any) => {
         updateUser(d);

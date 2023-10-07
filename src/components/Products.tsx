@@ -1,23 +1,29 @@
-import { Link } from "react-router-dom"
 import { useGetProductsQuery } from "../features/api/apiSlice"
-import { Product } from "../types/productType"
-import { List } from "@mui/material"
+import { Product as ProductType } from "../types/productType"
 import Suspense from "./Suspense"
-
+import { CartProduct } from "./Product"
+import { Grid } from "@mui/material"
+import { Wrapper } from "./Products.styles"
 interface Props {
-    data: Product[]
+    data: ProductType[]
 }
 
 const InnerProductList = ({ data }: Props) => {
-    return (<List>{data.map((product: Product) => {
-        const to = "/products/" + product.id
-        return (<Link to={to} key={product.id}>
-            <div >{product.title} </div>
-        </Link>)
-    })}
-    </List>);
+    const handleAddToCart = (clickedItem: ProductType) => null;
+    return (
+        <Wrapper>
+            <Grid container spacing={3}>
+                {data?.map((product => (
+                    <Grid item key={product.id} xs={12} sm={4}>
+                        <CartProduct data={product} handleAddToCart={handleAddToCart} />
+                    </Grid>
+                )))}
+            </Grid>
+        </Wrapper>
+    );
 
 }
+
 
 const ProductList = () => {
     const {

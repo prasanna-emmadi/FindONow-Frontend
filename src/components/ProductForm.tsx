@@ -27,7 +27,7 @@ const InnerProductForm = ({ data }: Props) => {
                 categoryOptions.length > 0 ? categoryOptions[0] : defaultOption
         }
     });
-    const [addProduct, result] = useAddNewProductMutation()
+    const [addProduct] = useAddNewProductMutation()
 
 
     const onSubmit = async (d: any) => {
