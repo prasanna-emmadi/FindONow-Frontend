@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-
 export interface UserState {
     access_token?: string
     refresh_token?: string
@@ -19,7 +18,7 @@ export const userSlice = createSlice({
         addToken: (state, action: PayloadAction<UserState>) => {
             state = action.payload;
         },
-        removeToken: ( state ) => {
+        removeToken: (state) => {
             state = initialState;
         }
 

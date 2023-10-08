@@ -8,57 +8,37 @@ import { useState } from "react"
 import { AddShoppingCart } from "@mui/icons-material"
 import Cart from "../Cart/Cart"
 import { CartItemType } from "../../types/cartType"
+import { addToCart, removeFromCart } from "../../features/cart/cartSlice"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 
 interface Props {
     data: ProductType[]
 }
 
 const InnerProductList = ({ data }: Props) => {
+    const dispatch = useAppDispatch()
+    const cart = useAppSelector(state => state.cart)
     const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([] as CartItemType[]);
-    const getTotalItems = (items: CartItemType[]) =>
-        items.reduce((ack: number, item) => ack + item.amount, 0);
 
     const handleAddToCart = (clickedItem: ProductType) => {
-        setCartItems(prev => {
-            const isItemInCart = prev.find(item => item.product.id === clickedItem.id)
-
-            if (isItemInCart) {
-                return prev.map(item => (
-                    item.product.id === clickedItem.id
-                        ? { ...item, amount: item.amount + 1 }
-                        : item
-                ))
-            }
-            return [...prev, { product: { ...clickedItem }, amount: 1 }];
-
-        })
+        dispatch(addToCart(clickedItem))
     };
 
     const handleRemoveFromCart = (id: string) => {
-        setCartItems(prev => (
-            prev.reduce((ack, item) => {
-                if (item.product.id === id) {
-                    if (item.amount === 1) return ack;
-                    return [...ack, { ...item, amount: item.amount - 1 }];
-                } else {
-                    return [...ack, item];
-                }
-            }, [] as CartItemType[])
-        ));
+        dispatch(removeFromCart(id))
     };
 
     return (
         <Wrapper>
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
-                    cartItems={cartItems}
+                    cartItems={cart.cartItems}
                     addToCart={handleAddToCart}
                     removeFromCart={handleRemoveFromCart}
                 />
             </Drawer>
             <StyledButton onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={getTotalItems(cartItems)} color="error">
+                <Badge badgeContent={cart.totalItems} color="error">
                     <AddShoppingCart />
                 </Badge>
             </StyledButton>
