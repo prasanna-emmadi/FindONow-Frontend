@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Category, Product } from "../../types/productType";
-import { User } from "../../types/userType";
+import { CategoryType, ProductType } from "../../types/productType";
+import { UserType } from "../../types/userType";
 
 export const apiSlice = createApi({
     reducerPath: "api",
@@ -16,7 +16,7 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ["User"],
             }),
-            getUsers: builder.query<User[], void>({
+            getUsers: builder.query<UserType[], void>({
                 query: () => "/users",
                 providesTags: ["User"],
             }),
@@ -38,7 +38,7 @@ export const apiSlice = createApi({
                     body: user,
                 }),
             }),
-            getProducts: builder.query<Product[], void>({
+            getProducts: builder.query<ProductType[], void>({
                 query: () => "/products",
                 providesTags: ["Product"],
             }),
@@ -60,7 +60,7 @@ export const apiSlice = createApi({
                     body: product,
                 }),
             }),
-            getCategories: builder.query<Category[], void>({
+            getCategories: builder.query<CategoryType[], void>({
                 query: () => "/categories",
                 providesTags: ["Category"],
             }),

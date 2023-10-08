@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItemType } from "../../types/cartType";
-import { Product } from "../../types/productType";
+import { ProductType } from "../../types/productType";
 
 export interface CartState {
     cartItems: CartItemType[];
@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addToCart: (state, action: PayloadAction<Product>) => {
+        addToCart: (state, action: PayloadAction<ProductType>) => {
             const clickedItem = action.payload;
             const cartItems = state.cartItems;
             const index = cartItems.findIndex(

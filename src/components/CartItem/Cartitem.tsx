@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { CartItemType } from "../../types/cartType";
 import { Wrapper } from "./Cartitem.styles";
-import { Product } from "../../types/productType";
+import { ProductType } from "../../types/productType";
 
 type Props = {
     item: CartItemType;
-    addToCart: (clickedItem: Product) => void;
+    addToCart: (clickedItem: ProductType) => void;
     removeFromCart: (id: string) => void;
 };
 

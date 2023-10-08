@@ -3,13 +3,13 @@ import {
     useAddNewProductMutation,
     useGetCategoriesQuery,
 } from "../features/api/apiSlice";
-import { Category } from "../types/productType";
+import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
 import Select from "react-select";
 import { redirect } from "react-router-dom";
 
 interface Props {
-    data: Category[];
+    data: CategoryType[];
 }
 
 const defaultOption = { value: "", label: "" };

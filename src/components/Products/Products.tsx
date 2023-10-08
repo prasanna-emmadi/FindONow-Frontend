@@ -1,5 +1,5 @@
 import { useGetProductsQuery } from "../../features/api/apiSlice";
-import { Product as ProductType } from "../../types/productType";
+import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { CartProduct } from "../Product/Product";
 import { Badge, Drawer, Grid } from "@mui/material";
