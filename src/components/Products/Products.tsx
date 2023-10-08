@@ -1,13 +1,13 @@
-import { useGetProductsQuery } from "../features/api/apiSlice"
-import { Product as ProductType } from "../types/productType"
-import Suspense from "./Suspense"
-import { CartProduct } from "./Product"
+import { useGetProductsQuery } from "../../features/api/apiSlice"
+import { Product as ProductType } from "../../types/productType"
+import Suspense from "../Suspense"
+import { CartProduct } from "../Product/Product"
 import { Badge, Drawer, Grid } from "@mui/material"
 import { Wrapper, StyledButton } from "./Products.styles"
 import { useState } from "react"
 import { AddShoppingCart } from "@mui/icons-material"
 import Cart from "../Cart/Cart"
-import { CartItemType } from "../types/cartType"
+import { CartItemType } from "../../types/cartType"
 
 interface Props {
     data: ProductType[]

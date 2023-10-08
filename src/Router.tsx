@@ -7,8 +7,8 @@ import Logout from "./components/Logout";
 import Register from "./components/Register";
 import Users from "./components/Users";
 import User from "./components/User";
-import Product from "./components/Product";
-import Products from "./components/Products";
+import Product from "./components/Product/Product";
+import Products from "./components/Products/Products";
 import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
 

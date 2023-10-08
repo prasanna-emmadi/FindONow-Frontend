@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from "../features/api/apiSlice";
-import { Product as ProductType } from "../types/productType"
-import Suspense from "./Suspense";
+import { useGetProductQuery } from "../../features/api/apiSlice";
+import { Product as ProductType } from "../../types/productType"
+import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";
 import Button from "@mui/material/Button";
 
