@@ -3,6 +3,7 @@ import { useAddLoginMutation } from "../features/api/apiSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { addToken } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const { register, handleSubmit } = useForm({
@@ -13,10 +14,10 @@ const Login = () => {
     });
     const [login, result] = useAddLoginMutation();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (result.isSuccess) {
-            console.log("success data", result.data);
             dispatch(addToken(result.data));
         }
     }, [result.isSuccess, result.data, dispatch]);
@@ -24,6 +25,7 @@ const Login = () => {
     const onSubmit = async (d: any) => {
         try {
             await login(d).unwrap();
+            navigate("/home");
         } catch {
             console.error("error in login ");
         }
