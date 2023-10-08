@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }: Props) => {
         }
     }, [token, navigate]);
 
-    return <>children</>;
+    return <>{children}</>;
 };
 
 export default ProtectedRoute;
