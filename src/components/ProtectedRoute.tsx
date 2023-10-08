@@ -1,5 +1,6 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { useEffect } from "react";
 
 interface Props {
     children: React.ReactNode;
@@ -7,13 +8,15 @@ interface Props {
 
 const ProtectedRoute = ({ children }: Props) => {
     const { token } = useAuthContext();
-    const location = useLocation();
+    const navigate = useNavigate();
 
-    if (!token) {
-        return <Navigate to="/home" replace state={{ from: location }} />;
-    }
+    useEffect(() => {
+        if (!token) {
+            navigate("/home");
+        }
+    }, [token, navigate]);
 
-    return children;
+    return <>children</>;
 };
 
 export default ProtectedRoute;
