@@ -88,6 +88,13 @@ export const apiSlice = createApi({
                     method: "GET",
                 }),
             }),
+            refereshToken: builder.mutation({
+                query: (body) => ({
+                    url: "/auth/refresh-token",
+                    method: "POST",
+                    body: body,
+                }),
+            }),
         };
     },
 });
@@ -107,4 +114,5 @@ export const {
     useAddNewCategoryMutation,
     useEditCategoryMutation,
     useGetProfileQuery,
+    useRefereshTokenMutation,
 } = apiSlice;
