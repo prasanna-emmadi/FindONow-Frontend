@@ -1,18 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface UserState {
-    access_token?: string
-    refresh_token?: string
+    access_token?: string;
+    refresh_token?: string;
 }
 
-// Define the initial state using that type
 const initialState: UserState = {
     access_token: undefined,
-    refresh_token: undefined
-}
+    refresh_token: undefined,
+};
 
 export const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         addToken: (state, action: PayloadAction<UserState>) => {
@@ -20,10 +19,10 @@ export const userSlice = createSlice({
         },
         removeToken: (state) => {
             state = initialState;
-        }
+        },
+    },
+});
 
-    }
-})
-export const { addToken } = userSlice.actions
+export const { addToken } = userSlice.actions;
 
-export default userSlice
+export default userSlice;

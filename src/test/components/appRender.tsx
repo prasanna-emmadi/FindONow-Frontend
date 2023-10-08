@@ -16,5 +16,5 @@ const appRender = (
 }
 
 export default appRender */
-const test = "hello"
-export default test
+const test = "hello";
+export default test;

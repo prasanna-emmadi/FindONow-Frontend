@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { useAddNewUserMutation } from "../features/api/apiSlice";
 
@@ -9,14 +8,14 @@ const SignUp = () => {
             password: "",
             name: "",
             role: "admin",
-            avatar: ""
-        }
+            avatar: "",
+        },
     });
-    const [updateUser] = useAddNewUserMutation()
+    const [updateUser] = useAddNewUserMutation();
 
     const onSubmit = (d: any) => {
         updateUser(d);
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,6 +50,6 @@ const SignUp = () => {
 
             <input type="submit" value="submit" />
         </form>
-    )
+    );
 };
 export default SignUp;

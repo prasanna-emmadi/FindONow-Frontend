@@ -1,92 +1,90 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Category, Product } from "../../types/productType"
-import { User } from '../../types/userType'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Category, Product } from "../../types/productType";
+import { User } from "../../types/userType";
 
 export const apiSlice = createApi({
-    reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.escuelajs.co/api/v1/' }),
-    tagTypes: ['User', 'Product', 'Category'],
+    reducerPath: "api",
+    baseQuery: fetchBaseQuery({ baseUrl: "https://api.escuelajs.co/api/v1/" }),
+    tagTypes: ["User", "Product", "Category"],
     endpoints: (builder) => {
         return {
             addLogin: builder.mutation({
-                query: initialUser => ({
-                    url: '/auth/login',
-                    method: 'POST',
-                    body: initialUser
+                query: (initialUser) => ({
+                    url: "/auth/login",
+                    method: "POST",
+                    body: initialUser,
                 }),
-                invalidatesTags: ['User']
+                invalidatesTags: ["User"],
             }),
             getUsers: builder.query<User[], void>({
-                query: () => '/users',
-                providesTags: ['User']
+                query: () => "/users",
+                providesTags: ["User"],
             }),
             getUser: builder.query({
-                query: userId => `/users/${userId}`
+                query: (userId) => `/users/${userId}`,
             }),
             addNewUser: builder.mutation({
-                query: initialUser => ({
-                    url: '/users',
-                    method: 'POST',
-                    body: initialUser
+                query: (initialUser) => ({
+                    url: "/users",
+                    method: "POST",
+                    body: initialUser,
                 }),
-                invalidatesTags: ['User']
+                invalidatesTags: ["User"],
             }),
             editUser: builder.mutation({
-                query: user => ({
+                query: (user) => ({
                     url: `/users/${user.id}`,
-                    method: 'PUT',
-                    body: user
-                })
+                    method: "PUT",
+                    body: user,
+                }),
             }),
             getProducts: builder.query<Product[], void>({
-                query: () => '/products',
-                providesTags: ['Product']
+                query: () => "/products",
+                providesTags: ["Product"],
             }),
             getProduct: builder.query({
-                query: productId => `/products/${productId}`
+                query: (productId) => `/products/${productId}`,
             }),
             addNewProduct: builder.mutation({
-                query: initialProduct => ({
-                    url: '/products',
-                    method: 'POST',
-                    body: initialProduct
+                query: (initialProduct) => ({
+                    url: "/products",
+                    method: "POST",
+                    body: initialProduct,
                 }),
-                invalidatesTags: ['Product']
+                invalidatesTags: ["Product"],
             }),
             editProduct: builder.mutation({
-                query: product => ({
+                query: (product) => ({
                     url: `/products/${product.id}`,
-                    method: 'PUT',
-                    body: product
-                }
-                )
+                    method: "PUT",
+                    body: product,
+                }),
             }),
             getCategories: builder.query<Category[], void>({
-                query: () => '/categories',
-                providesTags: ['Category']
+                query: () => "/categories",
+                providesTags: ["Category"],
             }),
             getCategory: builder.query({
-                query: categoryId => `/categories/${categoryId}`
+                query: (categoryId) => `/categories/${categoryId}`,
             }),
             addNewCategory: builder.mutation({
-                query: initialCategory => ({
-                    url: '/categories',
-                    method: 'POST',
-                    body: initialCategory
+                query: (initialCategory) => ({
+                    url: "/categories",
+                    method: "POST",
+                    body: initialCategory,
                 }),
-                invalidatesTags: ['Category']
+                invalidatesTags: ["Category"],
             }),
             editCategory: builder.mutation({
-                query: category => ({
+                query: (category) => ({
                     url: `/users/${category.id}`,
-                    method: 'PUT',
-                    body: category
-                }
-                )
+                    method: "PUT",
+                    body: category,
+                }),
             }),
-        }
-    }
-})
+        };
+    },
+});
 
 export const {
     useAddLoginMutation,
@@ -102,5 +100,4 @@ export const {
     useGetCategoryQuery,
     useAddNewCategoryMutation,
     useEditCategoryMutation,
-} = apiSlice
-
+} = apiSlice;

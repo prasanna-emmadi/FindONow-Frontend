@@ -8,41 +8,48 @@ export interface CartState {
 }
 const initialState: CartState = {
     cartItems: [],
-    totalItems: 0
-}
+    totalItems: 0,
+};
 
 export const cartSlice = createSlice({
-    name: 'cart',
+    name: "cart",
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<Product>) => {
             const clickedItem = action.payload;
             const cartItems = state.cartItems;
-            const index = cartItems.findIndex(item => item.product.id === clickedItem.id)
+            const index = cartItems.findIndex(
+                (item) => item.product.id === clickedItem.id,
+            );
 
             if (index !== -1) {
-                cartItems[index].amount += 1
+                cartItems[index].amount += 1;
             } else {
                 cartItems.push({ product: { ...clickedItem }, amount: 1 });
             }
-            state.totalItems = cartItems.reduce((ack: number, item) => ack + item.amount, 0);
-
+            state.totalItems = cartItems.reduce(
+                (ack: number, item) => ack + item.amount,
+                0,
+            );
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
             const id = action.payload;
             let cartItems = state.cartItems;
-            const index = cartItems.findIndex(item => item.product.id === id)
+            const index = cartItems.findIndex((item) => item.product.id === id);
             if (index !== -1) {
                 if (cartItems[index].amount === 1) {
-                    cartItems.splice(index, 1)
+                    cartItems.splice(index, 1);
                 } else {
-                    cartItems[index].amount -= 1
+                    cartItems[index].amount -= 1;
                 }
             }
-            state.totalItems = cartItems.reduce((ack: number, item) => ack + item.amount, 0);
-        }
-    }
-})
-export const { addToCart, removeFromCart } = cartSlice.actions
+            state.totalItems = cartItems.reduce(
+                (ack: number, item) => ack + item.amount,
+                0,
+            );
+        },
+    },
+});
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
-export default cartSlice
+export default cartSlice;

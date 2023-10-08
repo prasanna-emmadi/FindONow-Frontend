@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Root from "./components/Root";
 import ErrorPage from "./components/ErrorPage";
@@ -12,7 +12,6 @@ import Products from "./components/Products/Products";
 import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
 
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -22,24 +21,23 @@ const router = createBrowserRouter([
             { index: true, element: <Home /> },
             {
                 path: "home",
-                element: <Home />
+                element: <Home />,
             },
             {
                 path: "login",
-                element: <Login />
+                element: <Login />,
             },
             {
                 path: "logout",
-                element: <Logout />
+                element: <Logout />,
             },
             {
                 path: "register",
-                element: <Register />
+                element: <Register />,
             },
             {
                 path: "products",
                 element: <Products />,
-
             },
             {
                 path: "products/:id",
@@ -47,11 +45,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "products/create",
-                element: <ProductForm />
+                element: <ProductForm />,
             },
             {
                 path: "users",
-                element: <Users />
+                element: <Users />,
             },
             {
                 path: "users/:id",
@@ -60,10 +58,8 @@ const router = createBrowserRouter([
             {
                 path: "signup",
                 element: <SignUp />,
-            }
-
-
-        ]
-    }
-])
+            },
+        ],
+    },
+]);
 export default router;

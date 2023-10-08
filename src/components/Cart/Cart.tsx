@@ -3,8 +3,6 @@ import CartItem from "../CartItem/Cartitem";
 import { CartItemType } from "../../types/cartType";
 import { Product as ProductType } from "../../types/productType";
 
-
-
 type Props = {
     cartItems: CartItemType[];
     addToCart: (clickedItem: ProductType) => void;
@@ -13,12 +11,15 @@ type Props = {
 
 const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
     const calculateTotal = (items: CartItemType[]) =>
-        items.reduce((ack: number, item) => ack + item.amount * item.product.price, 0);
+        items.reduce(
+            (ack: number, item) => ack + item.amount * item.product.price,
+            0,
+        );
     return (
         <Wrapper>
             <h2> Your Shopping Cart</h2>
             {cartItems.length === 0 ? <p> No items in Cart.</p> : null}
-            {cartItems.map(item => (
+            {cartItems.map((item) => (
                 <CartItem
                     key={item.product.id}
                     item={item}

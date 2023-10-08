@@ -19,5 +19,5 @@ describe("Test App component", () => {
 
     })
 })*/
-const test = "hello"
-export default test
+const test = "hello";
+export default test;

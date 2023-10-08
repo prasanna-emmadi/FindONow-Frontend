@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "../../features/api/apiSlice";
-import { Product as ProductType } from "../../types/productType"
+import { Product as ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";
 import Button from "@mui/material/Button";
@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 interface Props {
     data: ProductType;
 }
-
 
 const InnerProduct = ({ data }: Props) => {
     return (
@@ -20,9 +19,8 @@ const InnerProduct = ({ data }: Props) => {
                 <h3>${data.price}</h3>
             </div>
         </Wrapper>
-    )
-
-}
+    );
+};
 interface CartProductProps {
     data: ProductType;
     handleAddToCart: (clickedItem: ProductType) => void;
@@ -37,35 +35,31 @@ export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
                 <p>{data.description}</p>
                 <h3>${data.price}</h3>
             </div>
-            <Button onClick={() => handleAddToCart(data)}>
-                add to cart
-            </Button>
+            <Button onClick={() => handleAddToCart(data)}>add to cart</Button>
         </Wrapper>
-    )
-}
+    );
+};
 const Product = () => {
     const { id } = useParams();
-    const {
-        data,
-        isLoading,
-        isSuccess,
-        isError,
-        error
-    } = useGetProductQuery(id);
+    const { data, isLoading, isSuccess, isError, error } =
+        useGetProductQuery(id);
 
-    let content = <Suspense
-        data={data}
-        isLoading={isLoading}
-        isSuccess={isSuccess}
-        isError={isError}
-        error={error}
-        Component={InnerProduct} />
+    let content = (
+        <Suspense
+            data={data}
+            isLoading={isLoading}
+            isSuccess={isSuccess}
+            isError={isError}
+            error={error}
+            Component={InnerProduct}
+        />
+    );
 
     return (
         <section className="products-list">
             <h2>product</h2>
             {content}
         </section>
-    )
-}
+    );
+};
 export default Product;

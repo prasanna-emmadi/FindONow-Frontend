@@ -1,6 +1,6 @@
 import { LinearProgress } from "@mui/material";
 
-type WithFetchingProps<T> = ({ data }: { data: NonNullable<T> }) => JSX.Element
+type WithFetchingProps<T> = ({ data }: { data: NonNullable<T> }) => JSX.Element;
 
 interface Props<T> {
     data: T;
@@ -11,22 +11,27 @@ interface Props<T> {
     Component: WithFetchingProps<T>;
 }
 
-
-const Suspense = <T,>({ data, isLoading, isSuccess, isError, error, Component }: Props<T>) => {
-    let content
+const Suspense = <T,>({
+    data,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    Component,
+}: Props<T>) => {
+    let content;
 
     if (isLoading) {
-        content = <LinearProgress />
+        content = <LinearProgress />;
     } else if (isSuccess && data) {
-        content = <Component data={data} />
-
+        content = <Component data={data} />;
     } else if (isError) {
-        content = <div>{error.toString()}</div>
+        content = <div>{error.toString()}</div>;
     } else {
         content = <div />;
     }
 
     return content;
-}
+};
 
-export default Suspense
+export default Suspense;
