@@ -11,6 +11,7 @@ import Product from "./components/Product/Product";
 import Products from "./components/Products/Products";
 import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -18,18 +19,18 @@ const router = createBrowserRouter([
         element: <Root />,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, element: <Home /> },
-            {
-                path: "home",
-                element: <Home />,
-            },
+            { index: true, element: <Products /> },
             {
                 path: "login",
                 element: <Login />,
             },
             {
                 path: "logout",
-                element: <Logout />,
+                element: (
+                    <ProtectedRoute>
+                        <Logout />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: "register",
