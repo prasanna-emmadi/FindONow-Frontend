@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import userSlice from "../features/user/userSlice";
+import authSlice from "../features/auth/authSlice";
 import { apiSlice } from "../features/api/apiSlice";
-import { cartSlice } from "../features/cart/cartSlice";
+import cartSlice from "../features/cart/cartSlice";
 
 const createStore = () => {
     const store = configureStore({
         reducer: {
-            user: userSlice.reducer,
+            auth: authSlice.reducer,
             cart: cartSlice.reducer,
             [apiSlice.reducerPath]: apiSlice.reducer,
         },

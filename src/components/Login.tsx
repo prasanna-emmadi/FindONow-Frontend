@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAddLoginMutation } from "../features/api/apiSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "../app/hooks";
-import { addToken } from "../features/user/userSlice";
+import { addToken } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

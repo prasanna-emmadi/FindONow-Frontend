@@ -14,9 +14,9 @@ interface Props {
 }
 
 const AuthContextProvider = (props: Props) => {
-    const user = useAppSelector((state) => state.user);
+    const auth = useAppSelector((state) => state.auth);
     const value: AuthContextType = {
-        token: user.access_token,
+        token: auth.access_token,
     };
     return (
         <AuthContext.Provider value={value}>
