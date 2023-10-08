@@ -82,6 +82,12 @@ export const apiSlice = createApi({
                     body: category,
                 }),
             }),
+            getProfile: builder.query({
+                query: () => ({
+                    url: "/auth/login",
+                    method: "GET",
+                }),
+            }),
         };
     },
 });
@@ -100,4 +106,5 @@ export const {
     useGetCategoryQuery,
     useAddNewCategoryMutation,
     useEditCategoryMutation,
+    useGetProfileQuery,
 } = apiSlice;
