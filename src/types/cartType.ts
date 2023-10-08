@@ -1,4 +1,6 @@
-export interface Cart {
-    productId: string;
-    quantity: number;
+import { Product } from "./productType";
+
+export interface CartItemType {
+    product: Product;
+    amount: number;
 }
