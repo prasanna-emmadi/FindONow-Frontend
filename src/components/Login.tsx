@@ -17,7 +17,6 @@ const Login = () => {
     useEffect(() => {
         if (result.isSuccess) {
             console.log("success data", result.data);
-            // send action to userSlice
             dispatch(addToken(result.data));
         }
     }, [result.isSuccess, result.data, dispatch]);

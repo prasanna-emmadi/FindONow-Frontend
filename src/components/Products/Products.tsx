@@ -7,7 +7,6 @@ import { Wrapper, StyledButton } from "./Products.styles";
 import { useState } from "react";
 import { AddShoppingCart } from "@mui/icons-material";
 import Cart from "../Cart/Cart";
-import { CartItemType } from "../../types/cartType";
 import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
