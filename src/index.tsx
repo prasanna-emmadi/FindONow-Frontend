@@ -4,11 +4,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import store from "./app/store";
+import createStore from "./app/store";
 import { Provider } from "react-redux";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+const store = createStore();
 
 root.render(
     <React.StrictMode>
