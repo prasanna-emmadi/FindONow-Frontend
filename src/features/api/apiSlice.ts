@@ -2,14 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Category, Product } from "../../types/productType"
 import { User } from '../../types/userType'
 
-// actions
-// login
-// logout
-
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.escuelajs.co/api/v1/' }),
-    //tagTypes: ['User', 'Product', 'Cart'],
+    tagTypes: ['User', 'Product', 'Category'],
     endpoints: (builder) => {
         return {
             addLogin: builder.mutation({
@@ -18,11 +14,11 @@ export const apiSlice = createApi({
                     method: 'POST',
                     body: initialUser
                 }),
-                //invalidatesTags: ['User']
+                invalidatesTags: ['User']
             }),
             getUsers: builder.query<User[], void>({
                 query: () => '/users',
-                //providesTags: ['User']
+                providesTags: ['User']
             }),
             getUser: builder.query({
                 query: userId => `/users/${userId}`
@@ -33,7 +29,7 @@ export const apiSlice = createApi({
                     method: 'POST',
                     body: initialUser
                 }),
-                //invalidatesTags: ['User']
+                invalidatesTags: ['User']
             }),
             editUser: builder.mutation({
                 query: user => ({
@@ -44,7 +40,7 @@ export const apiSlice = createApi({
             }),
             getProducts: builder.query<Product[], void>({
                 query: () => '/products',
-                //providesTags: ['Product']
+                providesTags: ['Product']
             }),
             getProduct: builder.query({
                 query: productId => `/products/${productId}`
@@ -55,7 +51,7 @@ export const apiSlice = createApi({
                     method: 'POST',
                     body: initialProduct
                 }),
-                //invalidatesTags: ['Product']
+                invalidatesTags: ['Product']
             }),
             editProduct: builder.mutation({
                 query: product => ({
@@ -67,7 +63,7 @@ export const apiSlice = createApi({
             }),
             getCategories: builder.query<Category[], void>({
                 query: () => '/categories',
-                //providesTags: ['Category']
+                providesTags: ['Category']
             }),
             getCategory: builder.query({
                 query: categoryId => `/categories/${categoryId}`
@@ -78,7 +74,7 @@ export const apiSlice = createApi({
                     method: 'POST',
                     body: initialCategory
                 }),
-                //invalidatesTags: ['Category']
+                invalidatesTags: ['Category']
             }),
             editCategory: builder.mutation({
                 query: category => ({
