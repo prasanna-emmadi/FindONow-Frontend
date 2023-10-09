@@ -16,8 +16,6 @@ interface Props {
 
 const InnerProductList = ({ data }: Props) => {
     const dispatch = useAppDispatch();
-    const api = useAppSelector((state) => state.api);
-    console.log("api", api);
     const cart = useAppSelector((state) => state.cart);
     const [cartOpen, setCartOpen] = useState(false);
 

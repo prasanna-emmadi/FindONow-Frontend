@@ -7,12 +7,19 @@ import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
 import Select from "react-select";
 import { redirect } from "react-router-dom";
+import { Button, Grid, Paper, TextField } from "@mui/material";
 
 interface Props {
     data: CategoryType[];
 }
 
 const defaultOption = { value: "", label: "" };
+
+const paperStyle = {
+    padding: "30px 20px",
+    width: 300,
+    margin: "20px auto",
+};
 
 const InnerProductForm = ({ data }: Props) => {
     //react-select expects the options to be in the form of {value:string, label:string}
@@ -21,10 +28,10 @@ const InnerProductForm = ({ data }: Props) => {
         value: id.toString(),
         label: name,
     }));
-    const { register, handleSubmit, control } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
             title: "",
-            price: 0,
+            price: undefined,
             description: "",
             images: "",
             categoryId:
@@ -49,38 +56,67 @@ const InnerProductForm = ({ data }: Props) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label>
-                Title:
-                <input {...register("title")} type="text" />
-            </label>
-            <label>
-                Price:
-                <input {...register("price")} type="number" />
-            </label>
-            <label>
-                Description:
-                <input {...register("description")} />
-            </label>
-
-            <label>
-                Images:
-                <input {...register("images")} type="url" />
-            </label>
-
-            <p>Category:</p>
-
-            <Controller
-                name="categoryId"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                    <Select {...field} options={categoryOptions} />
-                )}
-            />
-
-            <input type="submit" value="submit" />
-        </form>
+        <Grid>
+            <Paper elevation={20} style={paperStyle}>
+                <Grid
+                    alignItems="center"
+                    justifyContent="center"
+                    style={{ textAlign: "center" }}
+                >
+                    <h2>New Product </h2>
+                </Grid>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Controller
+                        name="title"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <TextField {...field} fullWidth label="Title" />
+                        )}
+                    />
+                    <Controller
+                        name="price"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <TextField {...field} fullWidth label="Price" type="number" />
+                        )}
+                    />
+                    <Controller
+                        name="description"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                fullWidth
+                                label="Description"
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="images"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <TextField {...field} fullWidth label="Images" />
+                        )}
+                    />
+                    <p>Category:</p>
+                    <Controller
+                        name="categoryId"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <Select {...field} options={categoryOptions} />
+                        )}
+                    />
+                    <Button type="submit" variant="contained" color="primary">
+                        Submit
+                    </Button>
+                </form>
+            </Paper>
+        </Grid>
     );
 };
 
