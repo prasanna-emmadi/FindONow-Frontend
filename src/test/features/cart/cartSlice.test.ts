@@ -26,12 +26,15 @@ describe("cart slice reducer", () => {
     test("addToCart", () => {
         store?.dispatch(addToCart(product));
         expect(store?.getState().cart.cartItems.length).toBe(1);
+        expect(store?.getState().cart.totalItems).toBe(1);
     });
 
     test("removeFromCart", () => {
         store?.dispatch(addToCart(product));
         store?.dispatch(addToCart(product));
+        expect(store?.getState().cart.totalItems).toBe(2);
         store?.dispatch(removeFromCart(product.id));
         expect(store?.getState().cart.cartItems.length).toBe(1);
+        expect(store?.getState().cart.totalItems).toBe(1);
     });
 });

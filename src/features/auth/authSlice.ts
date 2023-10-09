@@ -10,19 +10,21 @@ const initialState: AuthState = {
     refresh_token: undefined,
 };
 
-export const userSlice = createSlice({
-    name: "user",
+export const authSlice = createSlice({
+    name: "auth",
     initialState,
     reducers: {
         addToken: (state, action: PayloadAction<AuthState>) => {
-            state = action.payload;
+            state.access_token = action.payload.access_token;
+            state.refresh_token = action.payload.refresh_token;
         },
         removeToken: (state) => {
-            state = initialState;
+            state.access_token = undefined;
+            state.refresh_token = undefined;
         },
     },
 });
 
-export const { addToken } = userSlice.actions;
+export const { addToken, removeToken } = authSlice.actions;
 
-export default userSlice;
+export default authSlice;
