@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Register from "./components/Register";
 import Users from "./components/Users";
 import User from "./components/User";
 import Product from "./components/Product/Product";
@@ -37,10 +36,6 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "register",
-                element: <Register />,
-            },
-            {
                 path: "products",
                 element: <Products />,
             },
@@ -50,11 +45,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "products/create",
-                element: <ProductForm />,
+                element: (
+                    <ProtectedRoute>
+                        <ProductForm />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: "users",
-                element: <Users />,
+                element: (
+                    <ProtectedRoute>
+                        <Users />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: "users/:id",
