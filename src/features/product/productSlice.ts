@@ -19,10 +19,20 @@ const initialState: ProductsState = {
     originalProducts: [],
 };
 
-const sortProducts = (p1: ProductType, p2: ProductType) => {
+const sortProductsByTitle = (p1: ProductType, p2: ProductType) => {
     const p1Title = p1.title.toLocaleLowerCase();
     const p2Title = p2.title.toLocaleLowerCase();
     return p1Title.localeCompare(p2Title);
+};
+
+const sortProductsByPrice = (p1: ProductType, p2: ProductType) => {
+    if (p1.price < p2.price) {
+        return -1;
+    } else if (p1.price > p2.price) {
+        return 1;
+    } else {
+        return 0;
+    }
 };
 
 export const productSlice = createSlice({
@@ -33,20 +43,35 @@ export const productSlice = createSlice({
             state.products = action.payload;
             state.originalProducts = action.payload.map((product) => product);
         },
-        sortBy: (state, action: PayloadAction<SortOrder>) => {
+        sortByTitle: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
                 case SortOrder.Increasing: {
-                    state.products.sort(sortProducts);
+                    state.products.sort(sortProductsByTitle);
                     break;
                 }
                 case SortOrder.Decreasing: {
-                    state.products.sort(sortProducts).reverse();
+                    state.products.sort(sortProductsByTitle).reverse();
                     break;
                 }
                 default:
                     break;
             }
         },
+        sortByPrice: (state, action: PayloadAction<SortOrder>) => {
+            switch (action.payload) {
+                case SortOrder.Increasing: {
+                    state.products.sort(sortProductsByPrice);
+                    break;
+                }
+                case SortOrder.Decreasing: {
+                    state.products.sort(sortProductsByPrice).reverse();
+                    break;
+                }
+                default:
+                    break;
+            }
+        },
+
         searchBy: (state, action: PayloadAction<string>) => {
             const search = action.payload.toLocaleLowerCase();
             state.products = state.originalProducts.filter((product) => {
@@ -62,6 +87,7 @@ export const productSlice = createSlice({
     },
 });
 
-export const { addProducts, sortBy, searchBy } = productSlice.actions;
+export const { addProducts, sortByTitle, sortByPrice, searchBy } =
+    productSlice.actions;
 
 export default productSlice;

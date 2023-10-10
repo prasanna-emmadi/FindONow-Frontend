@@ -3,7 +3,8 @@ import {
     SortOrder,
     addProducts,
     searchBy,
-    sortBy,
+    sortByTitle,
+    sortByPrice,
 } from "../../../features/product/productSlice";
 import products from "../../data/productData";
 
@@ -21,16 +22,23 @@ describe("cart slice reducer", () => {
         expect(store?.getState().product.products.length).toBe(2);
     });
 
-    test("sortBy", () => {
+    test("sortByTitle", () => {
         store?.dispatch(addProducts(products));
-        store?.dispatch(sortBy(SortOrder.Increasing));
+        store?.dispatch(sortByTitle(SortOrder.Increasing));
         expect(store?.getState().product.products[0].title).toBe(
             "Elegant Bronze Mouse",
         );
-        store?.dispatch(sortBy(SortOrder.Decreasing));
+        store?.dispatch(sortByTitle(SortOrder.Decreasing));
         expect(store?.getState().product.products[0].title).toBe(
             "Incredible Metal Hat",
         );
+    });
+    test("sortByPrice", () => {
+        store?.dispatch(addProducts(products));
+        store?.dispatch(sortByPrice(SortOrder.Increasing));
+        expect(store?.getState().product.products[0].price).toBe(794);
+        store?.dispatch(sortByPrice(SortOrder.Decreasing));
+        expect(store?.getState().product.products[0].price).toBe(902);
     });
     test("searchBy", () => {
         store?.dispatch(addProducts(products));

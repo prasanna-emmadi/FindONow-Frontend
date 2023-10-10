@@ -10,11 +10,60 @@ import Cart from "../Cart/Cart";
 import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import SearchIcon from "@mui/icons-material/Search";
-import { addProducts, searchBy } from "../../features/product/productSlice";
+import {
+    SortOrder,
+    addProducts,
+    searchBy,
+    sortByPrice,
+    sortByTitle,
+} from "../../features/product/productSlice";
+import Select from "react-select";
 
 interface Props {
     data: ProductType[];
 }
+
+const options: any = [
+    { value: "title_increasing", label: "Title Increasing" },
+    { value: "title_decreasing", label: "Title Decreasing" },
+    { value: "price_increasing", label: "Price Increasing" },
+    { value: "price_decreasing", label: "Price Decreasing" },
+];
+
+const SortOptions = () => {
+    const dispatch = useAppDispatch();
+    return (
+        <Select
+            options={options}
+            onChange={(newValue: any) => {
+                console.log("newValue", newValue);
+
+                switch (newValue.value) {
+                    case "title_increasing": {
+                        dispatch(sortByTitle(SortOrder.Increasing));
+                        break;
+                    }
+                    case "title_decreasing": {
+                        dispatch(sortByTitle(SortOrder.Decreasing));
+                        break;
+                    }
+                    case "price_increasing": {
+                        dispatch(sortByPrice(SortOrder.Increasing));
+                        break;
+                    }
+                    case "price_decreasing": {
+                        dispatch(sortByPrice(SortOrder.Decreasing));
+                        break;
+                    }
+
+                    default: {
+                        break;
+                    }
+                }
+            }}
+        />
+    );
+};
 const SearchBar = () => {
     const dispatch = useAppDispatch();
 
@@ -48,8 +97,8 @@ const InnerProductList = ({ data }: Props) => {
     const [cartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
-        dispatch(addProducts(data))
-    }, [])
+        dispatch(addProducts(data));
+    }, []);
 
     const handleAddToCart = (clickedItem: ProductType) => {
         dispatch(addToCart(clickedItem));
@@ -78,6 +127,7 @@ const InnerProductList = ({ data }: Props) => {
                 </Badge>
             </StyledButton>
             <SearchBar />
+            <SortOptions />
             <Grid container spacing={3}>
                 {products.map((product) => (
                     <Grid item key={product.id} xs={12} sm={4}>
