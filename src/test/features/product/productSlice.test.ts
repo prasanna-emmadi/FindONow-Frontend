@@ -33,6 +33,7 @@ describe("cart slice reducer", () => {
         );
     });
     test("searchBy", () => {
+        store?.dispatch(addProducts(products));
         store?.dispatch(searchBy("Metal"));
         expect(store?.getState().product.products.length).toBe(1);
         expect(store?.getState().product.products[0].title).toBe(

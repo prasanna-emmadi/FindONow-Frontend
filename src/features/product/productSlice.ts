@@ -31,6 +31,7 @@ export const productSlice = createSlice({
     reducers: {
         addProducts: (state, action: PayloadAction<ProductType[]>) => {
             state.products = action.payload;
+            state.originalProducts = action.payload.map((product) => product);
         },
         sortBy: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -47,13 +48,16 @@ export const productSlice = createSlice({
             }
         },
         searchBy: (state, action: PayloadAction<string>) => {
-            const search = action.payload;
+            const search = action.payload.toLocaleLowerCase();
             state.products = state.originalProducts.filter((product) => {
                 return (
-                    product.description.includes(search) ||
-                    product.title.includes(search)
+                    product.description.toLocaleLowerCase().includes(search) ||
+                    product.title.toLocaleLowerCase().includes(search)
                 );
             });
+        },
+        reset: (state) => {
+            state.products = state.originalProducts.map((product) => product);
         },
     },
 });
