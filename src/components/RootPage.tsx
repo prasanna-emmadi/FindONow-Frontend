@@ -14,8 +14,13 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import GroupIcon from "@mui/icons-material/Group";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import Person2Icon from "@mui/icons-material/Person2";
+import { useAuthContext } from "../context/AuthContext";
 
 const NavOptions = () => {
+    const { token } = useAuthContext();
+
     const options = [
         {
             path: "/home",
@@ -27,7 +32,27 @@ const NavOptions = () => {
             name: "Users",
             icon: <GroupIcon />,
         },
-    ].map((option) => {
+        {
+            path: "/signup",
+            name: "SignUp",
+            icon: <HowToRegIcon />,
+        },
+    ];
+
+    let allOptions = options;
+    if (token !== undefined) {
+        const loggedInOptions = [
+            {
+                path: "/profile",
+                name: "Profile",
+                icon: <Person2Icon />,
+            },
+        ];
+
+        allOptions = allOptions.concat(loggedInOptions);
+    }
+
+    const optionsComponent = allOptions.map((option) => {
         const { path, name, icon } = option;
         return (
             <Link
@@ -43,7 +68,8 @@ const NavOptions = () => {
             </Link>
         );
     });
-    return <List>{options}</List>;
+
+    return <List>{optionsComponent}</List>;
 };
 const drawerWidth = 240;
 const RootPage = () => {
