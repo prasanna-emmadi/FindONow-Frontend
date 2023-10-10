@@ -2,7 +2,15 @@ import { useGetProductsQuery } from "../../features/api/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { CartProduct } from "../Product/Product";
-import { Badge, Drawer, Grid, IconButton, TextField } from "@mui/material";
+import {
+    Badge,
+    Drawer,
+    Grid,
+    IconButton,
+    Pagination,
+    Stack,
+    TextField,
+} from "@mui/material";
 import { Wrapper, StyledButton } from "./Products.styles";
 import { useEffect, useState } from "react";
 import { AddShoppingCart } from "@mui/icons-material";
@@ -18,6 +26,7 @@ import {
     sortByTitle,
 } from "../../features/product/productSlice";
 import Select from "react-select";
+import { useDebounce } from "../hooks/useDebounce";
 
 interface Props {
     data: ProductType[];
@@ -65,7 +74,12 @@ const SortOptions = () => {
     );
 };
 const SearchBar = () => {
+    const [query, setQuery] = useState("");
+    const searchQuery = useDebounce(query, 2000);
     const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(searchBy(searchQuery));
+    }, [dispatch, searchQuery]);
 
     return (
         <form>
@@ -75,7 +89,7 @@ const SearchBar = () => {
                 onInput={(e: any) => {
                     const { target } = e;
                     if (target) {
-                        dispatch(searchBy(e.target.value));
+                        setQuery(e.target.value);
                     }
                 }}
                 label="Enter a city name"
@@ -90,15 +104,36 @@ const SearchBar = () => {
     );
 };
 
+const ProductCountPerPage = 20;
 const InnerProductList = ({ data }: Props) => {
     const dispatch = useAppDispatch();
     const cart = useAppSelector((state) => state.cart);
     const products = useAppSelector((state) => state.product.products);
     const [cartOpen, setCartOpen] = useState(false);
+    const [page, setPage] = useState(1);
 
+    const pageCount = Math.ceil(products.length / ProductCountPerPage);
+    const [productsSlice, setProductsSlice] = useState(
+        data.slice(0, ProductCountPerPage),
+    );
+
+    // onMount adding Products to the productSlice
     useEffect(() => {
         dispatch(addProducts(data));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const handleChange = (
+        _event: React.ChangeEvent<unknown>,
+        value: number,
+    ) => {
+        setPage(value);
+        // show the next slice
+        // 0 - 10
+        // 11 - 20
+        const adjust = (value - 1) * ProductCountPerPage;
+        setProductsSlice(products.slice(adjust, value * ProductCountPerPage));
+    };
 
     const handleAddToCart = (clickedItem: ProductType) => {
         dispatch(addToCart(clickedItem));
@@ -129,7 +164,7 @@ const InnerProductList = ({ data }: Props) => {
             <SearchBar />
             <SortOptions />
             <Grid container spacing={3}>
-                {products.map((product) => (
+                {productsSlice.map((product) => (
                     <Grid item key={product.id} xs={12} sm={4}>
                         <CartProduct
                             data={product}
@@ -138,6 +173,13 @@ const InnerProductList = ({ data }: Props) => {
                     </Grid>
                 ))}
             </Grid>
+            <Stack spacing={2}>
+                <Pagination
+                    count={pageCount}
+                    page={page}
+                    onChange={handleChange}
+                />
+            </Stack>
         </Wrapper>
     );
 };
