@@ -14,15 +14,41 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Outlet } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import GroupIcon from "@mui/icons-material/Group";
 
-
+const NavOptions = () => {
+    const options = [
+        {
+            path: "/home",
+            name: "Home",
+            icon: <HomeIcon />,
+        },
+        {
+            path: "/users",
+            name: "Users",
+            icon: <GroupIcon />,
+        },
+    ].map((option) => {
+        const { path, name, icon } = option;
+        return (
+            <ListItem key={name} disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={name} />
+                </ListItemButton>
+            </ListItem>
+        );
+    });
+    return <List>{options}</List>;
+};
 const drawerWidth = 240;
 const RootPage = () => {
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     const onLoginClick = () => {
-        navigate("/login")
-    }
+        navigate("/login");
+    };
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -39,7 +65,9 @@ const RootPage = () => {
                     >
                         Amazing Products
                     </Typography>
-                    <Button color="inherit" onClick={onLoginClick}>Login</Button>
+                    <Button color="inherit" onClick={onLoginClick}>
+                        Login
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -55,24 +83,7 @@ const RootPage = () => {
             >
                 <Toolbar />
                 <Box sx={{ overflow: "auto" }}>
-                    <List>
-                        {["Inbox", "Starred", "Send email", "Drafts"].map(
-                            (text, index) => (
-                                <ListItem key={text} disablePadding>
-                                    <ListItemButton>
-                                        <ListItemIcon>
-                                            {index % 2 === 0 ? (
-                                                <InboxIcon />
-                                            ) : (
-                                                <MailIcon />
-                                            )}
-                                        </ListItemIcon>
-                                        <ListItemText primary={text} />
-                                    </ListItemButton>
-                                </ListItem>
-                            ),
-                        )}
-                    </List>
+                    <NavOptions />
                 </Box>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
