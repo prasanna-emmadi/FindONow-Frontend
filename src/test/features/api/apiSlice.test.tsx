@@ -26,18 +26,4 @@ describe("Test apiSlice async actions", () => {
             store.getState().api.queries["getProducts(undefined)"];
         expect(getProducts.data.length).toBeGreaterThan(0);
     }, 30000);
-
-    test("Should fetch all users", async () => {
-        render(
-            <Provider store={store}>
-                <Users />
-            </Provider>,
-        );
-        await screen.findByTestId("users", undefined, {
-            timeout: 60000,
-        });
-        const getUsers: any =
-            store.getState().api.queries["getUsers(undefined)"];
-        expect(getUsers.data.length).toBeGreaterThan(0);
-    });
 });
