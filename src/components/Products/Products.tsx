@@ -131,8 +131,8 @@ const InnerProductList = ({ data }: Props) => {
     ) => {
         setPage(value);
         // show the next slice
-        // 0 - 10
-        // 11 - 20
+        // 0 - 20
+        // 21 - 40
         const adjust = (value - 1) * ProductCountPerPage;
         setProductsSlice(products.slice(adjust, value * ProductCountPerPage));
     };

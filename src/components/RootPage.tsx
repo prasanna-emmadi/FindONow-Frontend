@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Outlet } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const drawerWidth = 240;
 const RootPage = () => {
@@ -23,9 +24,15 @@ const RootPage = () => {
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
             >
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1 }}
+                    >
                         Amazing Products
                     </Typography>
+                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
