@@ -29,21 +29,16 @@ const NavOptions = () => {
             name: "Home",
             icon: <HomeIcon />,
         },
-        {
-            path: "/users",
-            name: "Users",
-            icon: <GroupIcon />,
-        },
-        {
-            path: "/signup",
-            name: "SignUp",
-            icon: <HowToRegIcon />,
-        },
     ];
 
     let allOptions = options;
     if (token !== undefined) {
         const loggedInOptions = [
+            {
+                path: "/users",
+                name: "Users",
+                icon: <GroupIcon />,
+            },
             {
                 path: "/profile",
                 name: "Profile",
@@ -52,6 +47,15 @@ const NavOptions = () => {
         ];
 
         allOptions = allOptions.concat(loggedInOptions);
+    } else {
+        allOptions = [
+            ...allOptions,
+            {
+                path: "/signup",
+                name: "SignUp",
+                icon: <HowToRegIcon />,
+            },
+        ];
     }
 
     const optionsComponent = allOptions.map((option) => {
