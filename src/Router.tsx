@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "./components/Root";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
@@ -12,11 +11,12 @@ import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./components/Profile/Profile";
+import RootPage from "./components/RootPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
+        element: <RootPage />,
         errorElement: <ErrorPage />,
         children: [
             { index: true, element: <Products /> },
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile />,
-            }
+            },
         ],
     },
 ]);
