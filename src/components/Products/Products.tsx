@@ -4,6 +4,8 @@ import Suspense from "../Suspense";
 import { CartProduct } from "../Product/Product";
 import {
     Badge,
+    Box,
+    Divider,
     Drawer,
     Grid,
     IconButton,
@@ -92,7 +94,7 @@ const SearchBar = () => {
                         setQuery(e.target.value);
                     }
                 }}
-                label="Enter a city name"
+                label="Enter a product name"
                 variant="outlined"
                 placeholder="Search..."
                 size="small"
@@ -161,8 +163,13 @@ const InnerProductList = ({ data }: Props) => {
                     <AddShoppingCart />
                 </Badge>
             </StyledButton>
-            <SearchBar />
-            <SortOptions />
+            <Stack direction="row" spacing={5}>
+                <SearchBar />
+                <SortOptions />
+            </Stack>
+            <Box pt={5}/>
+            <Divider />
+            <Box pb={5} />
             <Grid container spacing={3}>
                 {productsSlice.map((product) => (
                     <Grid item key={product.id} xs={12} sm={4}>
