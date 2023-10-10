@@ -107,14 +107,19 @@ export const apiSlice = createApi({
                 }),
             }),
             uploadFile: builder.mutation({
-                query: (imageBody) => ({
-                    url: "/file/upload",
-                    method: "POST",
-                    body: imageBody,
-                    headers: {
-                        "content-type": "image/png",
-                    },
-                }),
+                query: (imageFile) => {
+                    const bodyFormData = new FormData();
+                    bodyFormData.append("file", imageFile);
+                    return {
+                        url: "/file/upload",
+                        method: "POST",
+                        body: bodyFormData,
+                        headers: {
+                            "content-type": "multipart/form-data",
+                        },
+                        formData: true,
+                    };
+                },
             }),
         };
     },
@@ -136,5 +141,5 @@ export const {
     useEditCategoryMutation,
     useGetProfileQuery,
     useRefereshTokenMutation,
-    useUploadFileMutation
+    useUploadFileMutation,
 } = apiSlice;
