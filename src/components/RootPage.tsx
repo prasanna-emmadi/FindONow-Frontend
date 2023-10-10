@@ -17,6 +17,8 @@ import GroupIcon from "@mui/icons-material/Group";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Person2Icon from "@mui/icons-material/Person2";
 import { useAuthContext } from "../context/AuthContext";
+import { useAppDispatch } from "../app/hooks";
+import { removeToken } from "../features/auth/authSlice";
 
 const NavOptions = () => {
     const { token } = useAuthContext();
@@ -71,12 +73,22 @@ const NavOptions = () => {
 
     return <List>{optionsComponent}</List>;
 };
+
 const drawerWidth = 240;
 const RootPage = () => {
+    const { token } = useAuthContext();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const isLoggedIn = token !== undefined;
+    const loginButtonText = isLoggedIn ? "Logout" : "Login";
 
     const onLoginClick = () => {
-        navigate("/login");
+        if (!isLoggedIn) {
+            navigate("/login");
+        } else {
+            dispatch(removeToken());
+            navigate("/");
+        }
     };
     return (
         <Box sx={{ display: "flex" }}>
@@ -95,7 +107,7 @@ const RootPage = () => {
                         Amazing Products
                     </Typography>
                     <Button color="inherit" onClick={onLoginClick}>
-                        Login
+                        {loginButtonText}
                     </Button>
                 </Toolbar>
             </AppBar>
