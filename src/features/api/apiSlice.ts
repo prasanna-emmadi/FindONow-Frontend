@@ -106,6 +106,16 @@ export const apiSlice = createApi({
                     body: body,
                 }),
             }),
+            uploadFile: builder.mutation({
+                query: (imageBody) => ({
+                    url: "/file/upload",
+                    method: "POST",
+                    body: imageBody,
+                    headers: {
+                        "content-type": "image/png",
+                    },
+                }),
+            }),
         };
     },
 });
@@ -126,4 +136,5 @@ export const {
     useEditCategoryMutation,
     useGetProfileQuery,
     useRefereshTokenMutation,
+    useUploadFileMutation
 } = apiSlice;
