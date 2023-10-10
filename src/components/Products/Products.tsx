@@ -106,6 +106,19 @@ const SearchBar = () => {
     );
 };
 
+const Options = () => {
+    return (
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <SearchBar />
+            </Grid>
+            <Grid item xs={6}>
+                <SortOptions />
+            </Grid>
+        </Grid>
+    );
+};
+
 const ProductCountPerPage = 20;
 const InnerProductList = ({ data }: Props) => {
     const dispatch = useAppDispatch();
@@ -163,11 +176,8 @@ const InnerProductList = ({ data }: Props) => {
                     <AddShoppingCart />
                 </Badge>
             </StyledButton>
-            <Stack direction="row" spacing={5}>
-                <SearchBar />
-                <SortOptions />
-            </Stack>
-            <Box pt={5}/>
+            <Options />
+            <Box pt={5} />
             <Divider />
             <Box pb={5} />
             <Grid container spacing={3}>
