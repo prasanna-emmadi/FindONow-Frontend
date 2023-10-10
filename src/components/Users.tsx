@@ -5,12 +5,11 @@ import { UserType } from "../types/userType";
 import Suspense from "./Suspense";
 
 interface Props {
-    data: UserType[] | undefined;
+    data: UserType[];
 }
 const InnerUserList = ({ data }: Props) => {
-    if (data === undefined) return <List />;
     return (
-        <List>
+        <List data-testid="users">
             {data.map((user: UserType) => {
                 const to = "/users/" + user.id;
                 return (
