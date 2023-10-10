@@ -4,13 +4,26 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 const paperStyle = {
     padding: "30px 20px",
     width: 300,
     margin: "20px auto",
 };
+
+const options = [
+    {
+        label: "Admin",
+        value: "admin",
+    },
+    {
+        label: "Customer",
+        value: "customer",
+    },
+];
+
 const SignUp = () => {
-    const { register, handleSubmit, control } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
             email: "",
             password: "",
@@ -23,6 +36,17 @@ const SignUp = () => {
 
     const onSubmit = (d: any) => {
         updateUser(d);
+    };
+
+    const generateRadioOptions = () => {
+        return options.map((singleOption, index) => (
+            <FormControlLabel
+                key={index}
+                value={singleOption.value}
+                label={singleOption.label}
+                control={<Radio />}
+            />
+        ));
     };
 
     return (
@@ -75,29 +99,23 @@ const SignUp = () => {
                             />
                         )}
                     />
-                    <p>Role:</p>
-                    <label>
-                        Admin
-                        <input
-                            {...register("role")}
-                            type="radio"
-                            value="admin"
-                        />
-                    </label>
 
-                    <label>
-                        Customer
-                        <input
-                            {...register("role")}
-                            type="radio"
-                            value="customer"
-                        />
-                    </label>
-
-                    <label>
-                        Avatar
-                        <input {...register("avatar")} type="url" />
-                    </label>
+                    <FormLabel id="demo-controlled-radio-buttons-group">
+                        Gender
+                    </FormLabel>
+                    <Controller
+                        name={"role"}
+                        control={control}
+                        render={({
+                            field: { onChange, value },
+                            fieldState: { error },
+                            formState,
+                        }) => (
+                            <RadioGroup value={value} onChange={onChange}>
+                                {generateRadioOptions()}
+                            </RadioGroup>
+                        )}
+                    />
                     <Controller
                         name="avatar"
                         control={control}
