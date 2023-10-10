@@ -11,6 +11,7 @@ import Products from "./components/Products/Products";
 import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
                 path: "signup",
                 element: <SignUp />,
             },
+            {
+                path: "profile",
+                element: <Profile />,
+            }
         ],
     },
 ]);
