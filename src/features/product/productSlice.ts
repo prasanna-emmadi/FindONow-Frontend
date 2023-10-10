@@ -9,14 +9,18 @@ export enum SortOrder {
 
 export interface ProductsState {
     products: ProductType[];
+    productsSlice: ProductType[];
     sortOrder: SortOrder;
     originalProducts: ProductType[];
+    page: number;
 }
 
 const initialState: ProductsState = {
     products: [],
+    productsSlice: [],
     sortOrder: SortOrder.NoOrder,
     originalProducts: [],
+    page: 1,
 };
 
 const sortProductsByTitle = (p1: ProductType, p2: ProductType) => {
@@ -35,6 +39,8 @@ const sortProductsByPrice = (p1: ProductType, p2: ProductType) => {
     }
 };
 
+const ProductCountPerPage = 20;
+
 export const productSlice = createSlice({
     name: "product",
     initialState,
@@ -42,11 +48,17 @@ export const productSlice = createSlice({
         addProducts: (state, action: PayloadAction<ProductType[]>) => {
             state.products = action.payload;
             state.originalProducts = action.payload.map((product) => product);
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
         },
         sortByTitle: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
                 case SortOrder.Increasing: {
                     state.products.sort(sortProductsByTitle);
+
                     break;
                 }
                 case SortOrder.Decreasing: {
@@ -56,6 +68,11 @@ export const productSlice = createSlice({
                 default:
                     break;
             }
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
         },
         sortByPrice: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -70,6 +87,11 @@ export const productSlice = createSlice({
                 default:
                     break;
             }
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
         },
 
         searchBy: (state, action: PayloadAction<string>) => {
@@ -80,14 +102,33 @@ export const productSlice = createSlice({
                     product.title.toLocaleLowerCase().includes(search)
                 );
             });
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
         },
         reset: (state) => {
             state.products = state.originalProducts.map((product) => product);
+            state.page = 1;
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
+        },
+        setPage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload;
+            const adjust = (state.page - 1) * ProductCountPerPage;
+            state.productsSlice = state.products.slice(
+                adjust,
+                state.page * ProductCountPerPage,
+            );
         },
     },
 });
 
-export const { addProducts, sortByTitle, sortByPrice, searchBy } =
+export const { addProducts, sortByTitle, sortByPrice, searchBy, setPage } =
     productSlice.actions;
 
 export default productSlice;

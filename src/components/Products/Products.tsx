@@ -17,7 +17,7 @@ import { AddShoppingCart } from "@mui/icons-material";
 import Cart from "../Cart/Cart";
 import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addProducts } from "../../features/product/productSlice";
+import { addProducts, setPage } from "../../features/product/productSlice";
 import Options from "./Options";
 
 interface Props {
@@ -28,14 +28,9 @@ const ProductCountPerPage = 20;
 const InnerProductList = ({ data }: Props) => {
     const dispatch = useAppDispatch();
     const cart = useAppSelector((state) => state.cart);
-    const products = useAppSelector((state) => state.product.products);
+    const {products, productsSlice, page} = useAppSelector((state) => state.product);
     const [cartOpen, setCartOpen] = useState(false);
-    const [page, setPage] = useState(1);
-
     const pageCount = Math.ceil(products.length / ProductCountPerPage);
-    const [productsSlice, setProductsSlice] = useState(
-        data.slice(0, ProductCountPerPage),
-    );
 
     // onMount adding Products to the productSlice
     useEffect(() => {
@@ -47,12 +42,7 @@ const InnerProductList = ({ data }: Props) => {
         _event: React.ChangeEvent<unknown>,
         value: number,
     ) => {
-        setPage(value);
-        // show the next slice
-        // 0 - 20
-        // 21 - 40
-        const adjust = (value - 1) * ProductCountPerPage;
-        setProductsSlice(products.slice(adjust, value * ProductCountPerPage));
+        dispatch(setPage(value));
     };
 
     const handleAddToCart = (clickedItem: ProductType) => {
