@@ -13,6 +13,7 @@ export interface ProductsState {
     sortOrder: SortOrder;
     originalProducts: ProductType[];
     page: number;
+    pageCount: number;
 }
 
 const initialState: ProductsState = {
@@ -21,6 +22,7 @@ const initialState: ProductsState = {
     sortOrder: SortOrder.NoOrder,
     originalProducts: [],
     page: 1,
+    pageCount: 0
 };
 
 const sortProductsByTitle = (p1: ProductType, p2: ProductType) => {
@@ -41,6 +43,10 @@ const sortProductsByPrice = (p1: ProductType, p2: ProductType) => {
 
 const ProductCountPerPage = 20;
 
+const getPageCount = (productsLength: number) => {
+    return Math.ceil(productsLength / ProductCountPerPage);
+}
+
 export const productSlice = createSlice({
     name: "product",
     initialState,
@@ -53,6 +59,7 @@ export const productSlice = createSlice({
                 adjust,
                 state.page * ProductCountPerPage,
             );
+            state.pageCount = getPageCount(state.products.length);
         },
         sortByTitle: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -73,6 +80,7 @@ export const productSlice = createSlice({
                 adjust,
                 state.page * ProductCountPerPage,
             );
+            state.pageCount = getPageCount(state.products.length);
         },
         sortByPrice: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -92,6 +100,7 @@ export const productSlice = createSlice({
                 adjust,
                 state.page * ProductCountPerPage,
             );
+            state.pageCount = getPageCount(state.products.length);
         },
 
         searchBy: (state, action: PayloadAction<string>) => {
@@ -107,6 +116,7 @@ export const productSlice = createSlice({
                 adjust,
                 state.page * ProductCountPerPage,
             );
+            state.pageCount = getPageCount(state.products.length);
         },
         reset: (state) => {
             state.products = state.originalProducts.map((product) => product);

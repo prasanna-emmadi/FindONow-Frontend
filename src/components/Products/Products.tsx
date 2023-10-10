@@ -24,13 +24,13 @@ interface Props {
     data: ProductType[];
 }
 
-const ProductCountPerPage = 20;
 const InnerProductList = ({ data }: Props) => {
     const dispatch = useAppDispatch();
     const cart = useAppSelector((state) => state.cart);
-    const {products, productsSlice, page} = useAppSelector((state) => state.product);
+    const { productsSlice, page, pageCount } = useAppSelector(
+        (state) => state.product,
+    );
     const [cartOpen, setCartOpen] = useState(false);
-    const pageCount = Math.ceil(products.length / ProductCountPerPage);
 
     // onMount adding Products to the productSlice
     useEffect(() => {
