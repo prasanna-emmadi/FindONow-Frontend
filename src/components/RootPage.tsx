@@ -9,7 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
@@ -30,12 +30,17 @@ const NavOptions = () => {
     ].map((option) => {
         const { path, name, icon } = option;
         return (
-            <ListItem key={name} disablePadding>
-                <ListItemButton>
-                    <ListItemIcon>{icon}</ListItemIcon>
-                    <ListItemText primary={name} />
-                </ListItemButton>
-            </ListItem>
+            <Link
+                to={path}
+                style={{ textDecoration: "none", color: "inherit" }}
+            >
+                <ListItem key={name} disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText primary={name} />
+                    </ListItemButton>
+                </ListItem>
+            </Link>
         );
     });
     return <List>{options}</List>;
