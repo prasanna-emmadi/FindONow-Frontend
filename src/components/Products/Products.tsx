@@ -23,7 +23,7 @@ const InnerProductList = ({ data }: Props) => {
         dispatch(addToCart(clickedItem));
     };
 
-    const handleRemoveFromCart = (id: string) => {
+    const handleRemoveFromCart = (id: number) => {
         dispatch(removeFromCart(id));
     };
 

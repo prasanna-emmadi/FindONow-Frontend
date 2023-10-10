@@ -9,7 +9,7 @@ describe("cart slice reducer", () => {
         image: "https://category-image.url.com",
     };
     const product: ProductType = {
-        id: "1",
+        id: 1,
         title: "title",
         description: "description",
         category: category,

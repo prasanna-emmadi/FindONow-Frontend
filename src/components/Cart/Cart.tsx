@@ -6,7 +6,7 @@ import { ProductType } from "../../types/productType";
 type Props = {
     cartItems: CartItemType[];
     addToCart: (clickedItem: ProductType) => void;
-    removeFromCart: (id: string) => void;
+    removeFromCart: (id: number) => void;
 };
 
 const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
