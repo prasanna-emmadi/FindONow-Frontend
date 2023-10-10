@@ -13,9 +13,16 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Outlet } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+
 
 const drawerWidth = 240;
 const RootPage = () => {
+    const navigate = useNavigate()
+    
+    const onLoginClick = () => {
+        navigate("/login")
+    }
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -32,7 +39,7 @@ const RootPage = () => {
                     >
                         Amazing Products
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" onClick={onLoginClick}>Login</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
