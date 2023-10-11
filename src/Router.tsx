@@ -1,16 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminProducts from "./components/AdminProducts/AdminProducts";
+import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Users from "./components/Users";
-import User from "./components/User";
+import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
-import Products from "./components/Products/Products";
-import SignUp from "./components/SignUp";
 import ProductForm from "./components/ProductForm";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Products from "./components/Products/Products";
 import Profile from "./components/Profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 import RootPage from "./components/RootPage";
+import SignUp from "./components/SignUp";
+import User from "./components/User";
+import Users from "./components/Users";
 
 const router = createBrowserRouter([
     {
@@ -46,17 +49,34 @@ const router = createBrowserRouter([
             {
                 path: "products/create",
                 element: (
-                    <ProtectedRoute>
+                    <AdminRoute>
                         <ProductForm />
-                    </ProtectedRoute>
+                    </AdminRoute>
                 ),
             },
             {
+                path: "products/edit/:id",
+                element: (
+                    <AdminRoute>
+                        <EditProduct />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "admin",
+                element: (
+                    <AdminRoute>
+                        <AdminProducts />
+                    </AdminRoute>
+                ),
+            },
+
+            {
                 path: "users",
                 element: (
-                    <ProtectedRoute>
-                        <Users />
-                    </ProtectedRoute>
+                    //<ProtectedRoute>
+                    <Users />
+                    //</ProtectedRoute>
                 ),
             },
             {

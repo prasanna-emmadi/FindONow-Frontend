@@ -3,10 +3,12 @@ import { useAppSelector } from "../redux/store/hooks";
 
 interface AuthContextType {
     token?: string;
+    isAdmin: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType>({
     token: undefined,
+    isAdmin: false,
 });
 
 interface Props {
@@ -16,8 +18,10 @@ interface Props {
 const AuthContextProvider = (props: Props) => {
     const auth = useAppSelector((state) => state.auth);
     const value: AuthContextType = {
-        token: auth.access_token,
+        token: auth.token.access_token,
+        isAdmin: auth.user?.role === "admin",
     };
+    console.log("authcontext", { value, auth });
     return (
         <AuthContext.Provider value={value}>
             {props.children}

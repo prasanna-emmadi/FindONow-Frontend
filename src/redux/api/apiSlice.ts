@@ -8,15 +8,17 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "https://api.escuelajs.co/api/v1/",
         prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.access_token;
+            const auth = (getState() as RootState).auth;
+            const token = auth.token.access_token;
+            const isAdmin = auth.user?.role === "admin";
             // If we have a token set in state, let's assume that we should be passing it.
-            if (token) {
-                headers.set("authorization", `Bearer ${token}`);
+            if (token && !isAdmin) {
+                headers.set("Authorization", `Bearer ${token}`);
             }
             return headers;
         },
     }),
-    tagTypes: ["User", "Product", "Category"],
+    tagTypes: ["User", "Product", "Category", "Auth"],
     endpoints: (builder) => {
         return {
             addLogin: builder.mutation({
@@ -25,7 +27,19 @@ export const apiSlice = createApi({
                     method: "POST",
                     body: initialUser,
                 }),
-                invalidatesTags: ["User"],
+                invalidatesTags: ["Auth"],
+            }),
+            getProfile: builder.query<UserType, string>({
+                query: (token) => {
+                    return {
+                        url: "/auth/profile",
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    };
+                },
+                providesTags: ["Auth"],
             }),
             getUsers: builder.query<UserType[], void>({
                 query: () => "/users",
@@ -64,7 +78,7 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ["Product"],
             }),
-            editProduct: builder.mutation({
+            updateProduct: builder.mutation({
                 query: (product) => ({
                     url: `/products/${product.id}`,
                     method: "PUT",
@@ -98,12 +112,6 @@ export const apiSlice = createApi({
                     url: `/users/${category.id}`,
                     method: "PUT",
                     body: category,
-                }),
-            }),
-            getProfile: builder.query({
-                query: () => ({
-                    url: "/auth/login",
-                    method: "GET",
                 }),
             }),
             refereshToken: builder.mutation({
@@ -141,7 +149,7 @@ export const {
     useGetProductsQuery,
     useGetProductQuery,
     useAddNewProductMutation,
-    useEditProductMutation,
+    useUpdateProductMutation,
     useDeleteProductMutation,
     useGetCategoriesQuery,
     useGetCategoryQuery,

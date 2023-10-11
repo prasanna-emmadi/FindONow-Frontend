@@ -2,9 +2,9 @@ import { Button, Grid, Paper, Stack } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAddLoginMutation } from "../redux/api/apiSlice";
-import { addToken } from "../redux/auth/authSlice";
-import { useAppDispatch } from "../redux/store/hooks";
+import { useAddLoginMutation, useGetProfileQuery } from "../redux/api/apiSlice";
+import { addToken, addUser } from "../redux/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import FieldController from "./custom/FieldController";
 import { paperStyle } from "./styles";
 
@@ -20,7 +20,11 @@ const Login = () => {
             password: "",
         },
     });
+    const { access_token } = useAppSelector((state) => state.auth.token);
     const [login, result] = useAddLoginMutation();
+    const profileResult = useGetProfileQuery(result.data, {
+        skip: access_token === undefined,
+    });
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -30,10 +34,18 @@ const Login = () => {
         }
     }, [result.isSuccess, result.data, dispatch]);
 
+    console.log("profileResult", profileResult);
+    useEffect(() => {
+        if (profileResult.isSuccess) {
+            console.log("profileResult.isSuccess - navigating home");
+            dispatch(addUser(profileResult.data));
+            navigate("/home");
+        }
+    }, [profileResult.isSuccess, profileResult.data, dispatch, navigate]);
+
     const onSubmit = async (d: any) => {
         try {
             await login(d).unwrap();
-            navigate("/home");
         } catch {
             console.error("error in login ");
         }

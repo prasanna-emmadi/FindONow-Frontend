@@ -14,7 +14,6 @@ import {
 } from "../../redux/api/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
-import { Wrapper } from "./Product.styles";
 import ProductCarousel from "./ProductCarousel";
 
 interface Props {
@@ -96,27 +95,7 @@ const Content = ({ data }: Props) => {
     );
 };
 
-const InnerProduct = ({ data }: Props) => {
-    return (
-        <>
-            <Content data={data} />
-        </>
-    );
-};
-interface CartProductProps {
-    data: ProductType;
-    handleAddToCart: (clickedItem: ProductType) => void;
-}
-
-export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
-    return (
-        <Wrapper>
-            <Content data={data} />
-            <Button onClick={() => handleAddToCart(data)}>add to cart</Button>
-        </Wrapper>
-    );
-};
-const Product = () => {
+const EditProduct = () => {
     const { id } = useParams();
     const { data, isLoading, isSuccess, isError, error } =
         useGetProductQuery(id);
@@ -128,15 +107,15 @@ const Product = () => {
             isSuccess={isSuccess}
             isError={isError}
             error={error}
-            Component={InnerProduct}
+            Component={Content}
         />
     );
 
     return (
         <section className="products-list">
-            <h2>product</h2>
+            <h2>Edit product</h2>
             {content}
         </section>
     );
 };
-export default Product;
+export default EditProduct;

@@ -7,8 +7,10 @@ import createStore from "../../../redux/store/store";
 
 describe("auth slice reducer", () => {
     const state: AuthState = {
-        access_token: "access_token",
-        refresh_token: "refresh_token",
+        token: {
+            access_token: "access_token",
+            refresh_token: "refresh_token",
+        },
     };
     let store: any;
 
@@ -17,9 +19,11 @@ describe("auth slice reducer", () => {
     });
 
     test("addToken and removeToken", () => {
-        store?.dispatch(addToken(state));
-        expect(store?.getState().auth.access_token).toBe(state.access_token);
+        store?.dispatch(addToken(state.token));
+        expect(store?.getState().auth.token.access_token).toBe(
+            state.token.access_token,
+        );
         store?.dispatch(removeToken());
-        expect(store?.getState().auth.access_token).toBe(undefined);
+        expect(store?.getState().auth.token.access_token).toBe(undefined);
     });
 });

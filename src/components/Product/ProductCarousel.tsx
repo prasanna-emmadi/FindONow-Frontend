@@ -10,7 +10,7 @@ const ProductCarousel = ({ images }: Props) => {
         <Carousel useKeyboardArrows centerMode={true}>
             {images.map((image, index) => {
                 return (
-                    <div className="slide">
+                    <div className="slide" key={index}>
                         <img alt="sample_file" src={image} key={index} />
                     </div>
                 );
