@@ -71,6 +71,13 @@ export const apiSlice = createApi({
                     body: product,
                 }),
             }),
+            deleteProduct: builder.mutation({
+                query: (productId) => ({
+                    url: `/products/${productId}`,
+                    method: "DELETE",
+                }),
+            }),
+
             getCategories: builder.query<CategoryType[], void>({
                 query: () => "/categories",
                 providesTags: ["Category"],
@@ -135,6 +142,7 @@ export const {
     useGetProductQuery,
     useAddNewProductMutation,
     useEditProductMutation,
+    useDeleteProductMutation,
     useGetCategoriesQuery,
     useGetCategoryQuery,
     useAddNewCategoryMutation,
