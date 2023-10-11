@@ -27,7 +27,7 @@ import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
 import Cart from "../Cart/Cart";
-import ProductCard from "../ProductItem";
+import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";

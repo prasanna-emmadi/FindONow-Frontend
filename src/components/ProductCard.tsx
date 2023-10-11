@@ -1,6 +1,4 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -26,11 +24,6 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                         {product.category.name[0].toLocaleUpperCase()}
                     </Avatar>
                 }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
                 title={product.title}
                 subheader={product.category.name}
             />
@@ -44,11 +37,11 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                 <Typography variant="body2" color="text.secondary">
                     {product.description}
                 </Typography>
+                <Typography variant="h5" color="text.primary" pt={2}>
+                    $ {product.price}
+                </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
                 <IconButton
                     aria-label="share"
                     onClick={() => handleAddToCart(product)}
