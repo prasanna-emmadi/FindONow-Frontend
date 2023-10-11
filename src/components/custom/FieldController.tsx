@@ -21,7 +21,13 @@ const FieldController = ({
             rules={{ required: true }}
             render={({ field }) => (
                 <>
-                    <TextField {...field} fullWidth label={label} type={type} />
+                    <TextField
+                        {...field}
+                        fullWidth
+                        label={label}
+                        type={type}
+                        size="small"
+                    />
                     <Box pb={2} />
                 </>
             )}

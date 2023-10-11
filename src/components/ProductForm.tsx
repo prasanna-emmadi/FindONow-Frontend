@@ -1,6 +1,7 @@
-import { Box, Button, FormLabel, Grid, Paper } from "@mui/material";
+import { Box, Button, FormLabel, Grid } from "@mui/material";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import {
     useAddNewProductMutation,
@@ -9,7 +10,6 @@ import {
 import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
 import FieldController from "./custom/FieldController";
-import { paperStyle } from "./styles";
 
 interface Props {
     data: CategoryType[];
@@ -34,7 +34,15 @@ const InnerProductForm = ({ data }: Props) => {
                 categoryOptions.length > 0 ? categoryOptions[0] : defaultOption,
         },
     });
-    const [addProduct] = useAddNewProductMutation();
+    const [addProduct, result] = useAddNewProductMutation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (result.isSuccess) {
+            const id = result.data.id;
+            navigate("/products/" + id);
+        }
+    }, [result.isSuccess, result.data, navigate]);
 
     const onSubmit = async (d: any) => {
         try {
@@ -45,66 +53,63 @@ const InnerProductForm = ({ data }: Props) => {
             d.images = [d.images];
             // async
             await addProduct(d).unwrap();
-            redirect("/products");
         } catch {
             console.error("error in add product");
         }
     };
 
     return (
-        <Grid>
-            <Paper elevation={20} style={paperStyle}>
-                <Grid
-                    alignItems="center"
-                    justifyContent="center"
-                    style={{ textAlign: "center" }}
-                >
-                    <h2>New Product </h2>
-                </Grid>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FieldController
-                        name="title"
-                        label="Title"
-                        type="text"
-                        control={control}
-                    />
-                    <FieldController
-                        name="price"
-                        label="Price"
-                        type="number"
-                        control={control}
-                    />
-                    <FieldController
-                        name="description"
-                        label="Description"
-                        type="number"
-                        control={control}
-                    />
-                    <FieldController
-                        name="images"
-                        label="Images"
-                        type="url"
-                        control={control}
-                    />
+        <Grid width={"80%"}>
+            <Grid
+                alignItems="center"
+                justifyContent="center"
+                style={{ textAlign: "center" }}
+            >
+                <h2>New Product </h2>
+            </Grid>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FieldController
+                    name="title"
+                    label="Title"
+                    type="text"
+                    control={control}
+                />
+                <FieldController
+                    name="price"
+                    label="Price"
+                    type="number"
+                    control={control}
+                />
+                <FieldController
+                    name="description"
+                    label="Description"
+                    type="text"
+                    control={control}
+                />
+                <FieldController
+                    name="images"
+                    label="Images"
+                    type="url"
+                    control={control}
+                />
 
-                    <FormLabel id="gender_label">Category</FormLabel>
+                <FormLabel id="gender_label">Category</FormLabel>
 
-                    <Controller
-                        name="categoryId"
-                        control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <>
-                                <Select {...field} options={categoryOptions} />
-                                <Box pb={2} />
-                            </>
-                        )}
-                    />
-                    <Button type="submit" variant="contained" color="primary">
-                        Submit
-                    </Button>
-                </form>
-            </Paper>
+                <Controller
+                    name="categoryId"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                        <>
+                            <Select {...field} options={categoryOptions} />
+                            <Box pb={2} />
+                        </>
+                    )}
+                />
+                <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button>
+            </form>
         </Grid>
     );
 };
