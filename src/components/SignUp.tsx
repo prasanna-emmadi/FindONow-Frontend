@@ -75,9 +75,7 @@ const SignUp = () => {
                         control={control}
                     />
 
-                    <FormLabel id="demo-controlled-radio-buttons-group">
-                        Gender
-                    </FormLabel>
+                    <FormLabel id="gender_label">Gender</FormLabel>
                     <Controller
                         name={"role"}
                         control={control}

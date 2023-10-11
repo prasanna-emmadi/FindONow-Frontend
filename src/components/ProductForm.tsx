@@ -1,25 +1,21 @@
+import { Box, Button, FormLabel, Grid, Paper } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
+import { redirect } from "react-router-dom";
+import Select from "react-select";
 import {
     useAddNewProductMutation,
     useGetCategoriesQuery,
 } from "../redux/api/apiSlice";
 import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
-import Select from "react-select";
-import { redirect } from "react-router-dom";
-import { Button, Grid, Paper, TextField } from "@mui/material";
+import FieldController from "./custom/FieldController";
+import { paperStyle } from "./styles";
 
 interface Props {
     data: CategoryType[];
 }
 
 const defaultOption = { value: "", label: "" };
-
-const paperStyle = {
-    padding: "30px 20px",
-    width: 300,
-    margin: "20px auto",
-};
 
 const InnerProductForm = ({ data }: Props) => {
     //react-select expects the options to be in the form of {value:string, label:string}
@@ -66,54 +62,42 @@ const InnerProductForm = ({ data }: Props) => {
                     <h2>New Product </h2>
                 </Grid>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Controller
+                    <FieldController
                         name="title"
+                        label="Title"
+                        type="text"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField {...field} fullWidth label="Title" />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="price"
+                        label="Price"
+                        type="number"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Price"
-                                type="number"
-                            />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="description"
+                        label="Description"
+                        type="number"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Description"
-                            />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="images"
+                        label="Images"
+                        type="url"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField {...field} fullWidth label="Images" />
-                        )}
                     />
-                    <p>Category:</p>
+
+                    <FormLabel id="gender_label">Category</FormLabel>
+
                     <Controller
                         name="categoryId"
                         control={control}
                         rules={{ required: true }}
                         render={({ field }) => (
-                            <Select {...field} options={categoryOptions} />
+                            <>
+                                <Select {...field} options={categoryOptions} />
+                                <Box pb={2} />
+                            </>
                         )}
                     />
                     <Button type="submit" variant="contained" color="primary">
