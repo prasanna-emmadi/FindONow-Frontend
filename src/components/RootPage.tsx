@@ -1,24 +1,23 @@
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+import GroupIcon from "@mui/icons-material/Group";
+import HomeIcon from "@mui/icons-material/Home";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import Person2Icon from "@mui/icons-material/Person2";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
+import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Link, Outlet } from "react-router-dom";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import GroupIcon from "@mui/icons-material/Group";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import Person2Icon from "@mui/icons-material/Person2";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import { useAppDispatch } from "../app/hooks";
 import { removeToken } from "../redux/auth/authSlice";
+import { useAppDispatch } from "../redux/store/hooks";
 
 const NavOptions = () => {
     const { token } = useAuthContext();

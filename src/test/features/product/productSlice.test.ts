@@ -1,11 +1,11 @@
-import createStore from "../../../app/store";
 import {
     SortOrder,
     addProducts,
     searchBy,
-    sortByTitle,
     sortByPrice,
+    sortByTitle,
 } from "../../../redux/product/productSlice";
+import createStore from "../../../redux/store/store";
 import products from "../../data/productData";
 
 describe("cart slice reducer", () => {

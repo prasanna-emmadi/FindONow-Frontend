@@ -1,14 +1,14 @@
-import { TextField, Grid, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState, useEffect } from "react";
+import { Grid, IconButton, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import Select from "react-select";
-import { useAppDispatch } from "../../app/hooks";
 import {
-    sortByTitle,
     SortOrder,
-    sortByPrice,
     searchBy,
+    sortByPrice,
+    sortByTitle,
 } from "../../redux/product/productSlice";
+import { useAppDispatch } from "../../redux/store/hooks";
 import { useDebounce } from "../hooks/useDebounce";
 
 const options: any = [

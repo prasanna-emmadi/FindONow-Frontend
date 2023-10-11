@@ -1,9 +1,9 @@
-import createStore from "../../../app/store";
 import {
     AuthState,
     addToken,
     removeToken,
 } from "../../../redux/auth/authSlice";
+import createStore from "../../../redux/store/store";
 
 describe("auth slice reducer", () => {
     const state: AuthState = {

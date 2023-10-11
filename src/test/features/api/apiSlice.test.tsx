@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import server from "../../shared/userServer";
-import createStore from "../../../app/store";
-import Products from "../../../components/Products/Products";
 import { Provider } from "react-redux";
-import Users from "../../../components/Users";
+import Products from "../../../components/Products/Products";
+import createStore from "../../../redux/store/store";
+import server from "../../shared/userServer";
 
 let store = createStore();
 

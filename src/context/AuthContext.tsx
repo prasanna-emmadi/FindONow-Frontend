@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../redux/store/hooks";
 
 interface AuthContextType {
     token?: string;

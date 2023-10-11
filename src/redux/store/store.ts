@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import authSlice from "../redux/auth/authSlice";
-import { apiSlice } from "../redux/api/apiSlice";
-import cartSlice from "../redux/cart/cartSlice";
-import productSlice from "../redux/product/productSlice";
+import { apiSlice } from "../api/apiSlice";
+import authSlice from "../auth/authSlice";
+import cartSlice from "../cart/cartSlice";
+import productSlice from "../product/productSlice";
 
 const createStore = () => {
     const store = configureStore({
