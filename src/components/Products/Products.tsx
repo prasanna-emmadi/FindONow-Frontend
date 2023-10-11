@@ -1,11 +1,13 @@
 import { AddShoppingCart } from "@mui/icons-material";
 import {
+    Alert,
     Badge,
     Box,
     Divider,
     Drawer,
     Grid,
     Pagination,
+    Snackbar,
     Stack,
     Tab,
     Tabs,
@@ -46,6 +48,7 @@ const getSlice = (page: number, products: ProductType[]) => {
 };
 
 const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
+    const [snackOpen, setSnackOpen] = useState(false);
     const cart = useAppSelector((state) => state.cart);
     const [cartOpen, setCartOpen] = useState(false);
     const [page, setPage] = useState(1);
@@ -60,11 +63,23 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     };
 
     const handleAddToCart = (clickedItem: ProductType) => {
+        setSnackOpen(true);
         dispatch(addToCart(clickedItem));
     };
 
     const handleRemoveFromCart = (id: number) => {
         dispatch(removeFromCart(id));
+    };
+
+    const handleClose = (
+        event: React.SyntheticEvent | Event,
+        reason?: string,
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setSnackOpen(false);
     };
 
     return (
@@ -108,6 +123,15 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
                     </Grid>
                 ))}
             </Grid>
+            <Snackbar
+                open={snackOpen}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity="success" sx={{ width: "100%" }}>
+                    Item added to cart
+                </Alert>
+            </Snackbar>
         </Wrapper>
     );
 };
