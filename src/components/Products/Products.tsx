@@ -9,11 +9,14 @@ import {
     Stack,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useGetProductsQuery } from "../../redux/api/apiSlice";
+import {
+    useGetCategoriesQuery,
+    useGetProductsQuery,
+} from "../../redux/api/apiSlice";
 import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
-import { addProducts, setPage } from "../../redux/product/productSlice";
+import { addProducts } from "../../redux/product/productSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import { ProductType } from "../../types/productType";
+import { CategoryType, ProductType } from "../../types/productType";
 import Cart from "../Cart/Cart";
 import { CartProduct } from "../Product/Product";
 import Suspense from "../Suspense";
@@ -21,20 +24,34 @@ import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
 
 interface Props {
-    data: ProductType[];
+    data: {
+        products: ProductType[];
+        categories: CategoryType[];
+    };
 }
 
-const InnerProductList = ({ data }: Props) => {
+const ProductCountPerPage = 20;
+const getPageCount = (productsLength: number) => {
+    return Math.ceil(productsLength / ProductCountPerPage);
+};
+
+const getSlice = (page: number, products: ProductType[]) => {
+    const adjust = (page - 1) * ProductCountPerPage;
+    return products.slice(adjust, page * ProductCountPerPage);
+};
+
+const InnerProductList = (props: Props) => {
     const dispatch = useAppDispatch();
     const cart = useAppSelector((state) => state.cart);
-    const { productsSlice, page, pageCount } = useAppSelector(
-        (state) => state.product,
-    );
+    const { products } = useAppSelector((state) => state.product);
     const [cartOpen, setCartOpen] = useState(false);
+    const [page, setPage] = useState(1);
+    const pageCount = getPageCount(products.length);
+    const productsSlice = getSlice(page, products);
 
     // onMount adding Products to the productSlice
     useEffect(() => {
-        dispatch(addProducts(data));
+        dispatch(addProducts(props.data.products));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -42,7 +59,7 @@ const InnerProductList = ({ data }: Props) => {
         _event: React.ChangeEvent<unknown>,
         value: number,
     ) => {
-        dispatch(setPage(value));
+        setPage(value);
     };
 
     const handleAddToCart = (clickedItem: ProductType) => {
@@ -96,12 +113,24 @@ const InnerProductList = ({ data }: Props) => {
     );
 };
 const ProductList = () => {
-    const { data, isLoading, isSuccess, isError, error } =
-        useGetProductsQuery();
+    const productsResult = useGetProductsQuery();
+    const categoriesResult = useGetCategoriesQuery();
+
+    const isSuccess = productsResult.isSuccess && categoriesResult.isSuccess;
+    const isLoading = productsResult.isLoading || categoriesResult.isLoading;
+    const isError = productsResult.isError || categoriesResult.isError;
+    const error = productsResult.error || categoriesResult.error;
+    let wrappedData;
+    if (isSuccess) {
+        wrappedData = {
+            products: productsResult.data,
+            categories: categoriesResult.data,
+        };
+    }
 
     let content = (
         <Suspense
-            data={data}
+            data={wrappedData}
             isLoading={isLoading}
             isSuccess={isSuccess}
             isError={isError}

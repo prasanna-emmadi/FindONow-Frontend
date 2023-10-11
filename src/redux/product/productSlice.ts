@@ -12,8 +12,7 @@ export interface ProductsState {
     productsSlice: ProductType[];
     sortOrder: SortOrder;
     originalProducts: ProductType[];
-    page: number;
-    pageCount: number;
+    categoryProducts: ProductType[];
 }
 
 const initialState: ProductsState = {
@@ -21,8 +20,7 @@ const initialState: ProductsState = {
     productsSlice: [],
     sortOrder: SortOrder.NoOrder,
     originalProducts: [],
-    page: 1,
-    pageCount: 0
+    categoryProducts: [],
 };
 
 const sortProductsByTitle = (p1: ProductType, p2: ProductType) => {
@@ -41,11 +39,9 @@ const sortProductsByPrice = (p1: ProductType, p2: ProductType) => {
     }
 };
 
-const ProductCountPerPage = 20;
-
-const getPageCount = (productsLength: number) => {
-    return Math.ceil(productsLength / ProductCountPerPage);
-}
+// sort by categories
+// how to structure the state
+// key, products
 
 export const productSlice = createSlice({
     name: "product",
@@ -54,12 +50,7 @@ export const productSlice = createSlice({
         addProducts: (state, action: PayloadAction<ProductType[]>) => {
             state.products = action.payload;
             state.originalProducts = action.payload.map((product) => product);
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
-            );
-            state.pageCount = getPageCount(state.products.length);
+            //
         },
         sortByTitle: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -75,12 +66,6 @@ export const productSlice = createSlice({
                 default:
                     break;
             }
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
-            );
-            state.pageCount = getPageCount(state.products.length);
         },
         sortByPrice: (state, action: PayloadAction<SortOrder>) => {
             switch (action.payload) {
@@ -95,12 +80,6 @@ export const productSlice = createSlice({
                 default:
                     break;
             }
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
-            );
-            state.pageCount = getPageCount(state.products.length);
         },
 
         searchBy: (state, action: PayloadAction<string>) => {
@@ -111,34 +90,20 @@ export const productSlice = createSlice({
                     product.title.toLocaleLowerCase().includes(search)
                 );
             });
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
-            );
-            state.pageCount = getPageCount(state.products.length);
         },
         reset: (state) => {
             state.products = state.originalProducts.map((product) => product);
-            state.page = 1;
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
-            );
         },
-        setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload;
-            const adjust = (state.page - 1) * ProductCountPerPage;
-            state.productsSlice = state.products.slice(
-                adjust,
-                state.page * ProductCountPerPage,
+        productsOfCategory: (state, action: PayloadAction<number>) => {
+            const categoryId = action.payload;
+            state.categoryProducts = state.originalProducts.filter(
+                (product) => product.category.id === categoryId,
             );
         },
     },
 });
 
-export const { addProducts, sortByTitle, sortByPrice, searchBy, setPage } =
+export const { addProducts, sortByTitle, sortByPrice, searchBy } =
     productSlice.actions;
 
 export default productSlice;

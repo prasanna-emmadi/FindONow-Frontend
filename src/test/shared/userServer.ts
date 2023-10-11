@@ -1,7 +1,8 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import usersData from "../data/userData";
+import categoryData from "../data/categoryData";
 import productsData from "../data/productData";
+import usersData from "../data/userData";
 
 export const access_token = "my-access-token";
 
@@ -11,6 +12,10 @@ export const handlers = [
     }),
     rest.get("https://api.escuelajs.co/api/v1/products", (req, res, ctx) => {
         return res(ctx.json(productsData));
+    }),
+
+    rest.get("https://api.escuelajs.co/api/v1/categories", (req, res, ctx) => {
+        return res(ctx.json(categoryData));
     }),
 
     rest.post(
