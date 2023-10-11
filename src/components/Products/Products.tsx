@@ -245,7 +245,13 @@ const ProductList = () => {
 
     return (
         <section className="products-list">
-            <img src={logo} alt="Logo" height={1000} width={1200} />
+            <Grid
+                alignItems="center"
+                justifyContent="center"
+                style={{ textAlign: "center" }}
+            >
+                <img src={logo} alt="Logo" height={1000} width={1200} />
+            </Grid>
             {content}
         </section>
     );
