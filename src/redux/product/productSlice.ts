@@ -83,10 +83,7 @@ export const productSlice = createSlice({
         searchBy: (state, action: PayloadAction<string>) => {
             const search = action.payload.toLocaleLowerCase();
             state.products = state.originalProducts.filter((product) => {
-                return (
-                    product.description.toLocaleLowerCase().includes(search) ||
-                    product.title.toLocaleLowerCase().includes(search)
-                );
+                return product.title.toLocaleLowerCase().includes(search);
             });
         },
         reset: (state) => {

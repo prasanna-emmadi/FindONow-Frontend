@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { CartItemType } from "../../types/cartType";
-import { Wrapper } from "./Cartitem.styles";
 import { ProductType } from "../../types/productType";
+import { Wrapper } from "./Cartitem.styles";
 
 type Props = {
     item: CartItemType;
@@ -9,7 +9,7 @@ type Props = {
     removeFromCart: (id: number) => void;
 };
 
-const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
+const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
     <Wrapper>
         <div>
             <h3>{item.product.title}</h3>

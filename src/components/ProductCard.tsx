@@ -38,7 +38,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                     {product.description}
                 </Typography>
                 <Typography variant="h5" color="text.primary" pt={2}>
-                    $ {product.price}
+                    ${product.price}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
