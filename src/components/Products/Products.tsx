@@ -3,12 +3,10 @@ import {
     Alert,
     Badge,
     Box,
-    Divider,
     Drawer,
     Grid,
     Pagination,
     Snackbar,
-    Stack,
     Tab,
     Tabs,
 } from "@mui/material";
@@ -100,18 +98,16 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
                     <AddShoppingCart />
                 </Badge>
             </StyledButton>
+            <Box pt={1} />
             <Options />
-            <Box pt={5} />
-            <Divider />
-            <Stack spacing={2} pt={5} justifyContent={"right"}>
+            <Box pt={3} flex="end" justifyContent={"right"}>
                 <Pagination
                     count={pageCount}
                     page={page}
                     onChange={handleChange}
                     color="secondary"
                 />
-            </Stack>
-
+            </Box>
             <Box pb={5} />
             <Grid container spacing={3}>
                 {productsSlice.map((product) => (
@@ -192,7 +188,13 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     return (
         <>
             <Box sx={{ width: "100%" }}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <Box
+                    sx={{
+                        borderBottom: 1,
+                        borderTop: 1,
+                        borderColor: "divider",
+                    }}
+                >
                     <Tabs
                         value={value}
                         onChange={handleChange}

@@ -12,10 +12,10 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { useDebounce } from "../hooks/useDebounce";
 
 const options: any = [
-    { value: "title_increasing", label: "Title Increasing" },
-    { value: "title_decreasing", label: "Title Decreasing" },
-    { value: "price_increasing", label: "Price Increasing" },
-    { value: "price_decreasing", label: "Price Decreasing" },
+    { value: "title_increasing", label: "Title ↑" },
+    { value: "title_decreasing", label: "Title ↓" },
+    { value: "price_increasing", label: "Price ↑" },
+    { value: "price_decreasing", label: "Price ↓" },
 ];
 
 const SortOptions = () => {
