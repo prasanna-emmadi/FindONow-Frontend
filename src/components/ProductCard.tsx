@@ -29,7 +29,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
             />
             <CardMedia
                 component="img"
-                height="194"
+                height="400"
                 image={product.images[0]}
                 alt={product.title}
             />
