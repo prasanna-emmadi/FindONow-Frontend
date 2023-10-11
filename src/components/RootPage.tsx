@@ -46,7 +46,6 @@ const NavOptions = () => {
 
             allOptions = allOptions.concat(loggedInOptions);
             if (isAdmin) {
-                console.log("populating admin options");
                 allOptions = [
                     ...allOptions,
                     {
@@ -78,6 +77,7 @@ const NavOptions = () => {
                 onClick={() => {
                     navigate(path);
                 }}
+                startIcon={icon}
             >
                 {name}
             </Button>
@@ -86,7 +86,6 @@ const NavOptions = () => {
     return <>{optionComponents}</>;
 };
 
-const drawerWidth = 240;
 const RootPage = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();

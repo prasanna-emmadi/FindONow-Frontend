@@ -34,10 +34,8 @@ const Login = () => {
         }
     }, [result.isSuccess, result.data, dispatch]);
 
-    console.log("profileResult", profileResult);
     useEffect(() => {
         if (profileResult.isSuccess) {
-            console.log("profileResult.isSuccess - navigating home");
             dispatch(addUser(profileResult.data));
             navigate("/home");
         }

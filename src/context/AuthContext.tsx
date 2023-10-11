@@ -21,7 +21,6 @@ const AuthContextProvider = (props: Props) => {
         token: auth.token.access_token,
         isAdmin: auth.user?.role === "admin",
     };
-    console.log("authcontext", { value, auth });
     return (
         <AuthContext.Provider value={value}>
             {props.children}

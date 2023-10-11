@@ -60,7 +60,6 @@ const InnerAdminProducts = ({ data }: Props) => {
 
 const AdminProducts = () => {
     const { originalProducts } = useAppSelector((state) => state.product);
-    console.log({ originalProducts });
     return <InnerAdminProducts data={originalProducts} />;
 };
 

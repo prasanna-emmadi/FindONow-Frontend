@@ -164,7 +164,6 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     }, []);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-        console.log("newValue", newValue);
         if (newValue === 0) {
             dispatch(allCategoryProducts());
         } else {
