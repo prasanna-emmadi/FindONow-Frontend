@@ -1,7 +1,7 @@
 import { Wrapper } from "../../App.styles";
-import CartItem from "../CartItem/Cartitem";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
+import CartItem from "../CartItem/Cartitem";
 
 type Props = {
     cartItems: CartItemType[];
@@ -9,7 +9,7 @@ type Props = {
     removeFromCart: (id: number) => void;
 };
 
-const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
+const Cart = ({ cartItems, addToCart, removeFromCart }: Props) => {
     const calculateTotal = (items: CartItemType[]) =>
         items.reduce(
             (ack: number, item) => ack + item.amount * item.product.price,
