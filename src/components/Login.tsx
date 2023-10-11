@@ -1,10 +1,12 @@
-import { Button, Grid, Paper, TextField } from "@mui/material";
+import { Button, Grid, Paper } from "@mui/material";
 import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAddLoginMutation } from "../redux/api/apiSlice";
 import { addToken } from "../redux/auth/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
+import FieldController from "./custom/FieldController";
+import { paperStyle } from "./styles";
 
 const Login = () => {
     const { handleSubmit, control } = useForm({
@@ -31,11 +33,6 @@ const Login = () => {
             console.error("error in login ");
         }
     };
-    const paperStyle = {
-        padding: "30px 20px",
-        width: 300,
-        margin: "20px auto",
-    };
 
     return (
         <Grid>
@@ -48,32 +45,17 @@ const Login = () => {
                     <h2>Login </h2>
                 </Grid>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Controller
+                    <FieldController
                         name="email"
+                        label="Email"
+                        type="email"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Email"
-                                placeholder="Enter your Email"
-                                type="email"
-                            />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="password"
+                        label="Password"
+                        type="password"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Password"
-                                type="password"
-                            />
-                        )}
                     />
                     <Button type="submit" variant="contained" color="primary">
                         Login

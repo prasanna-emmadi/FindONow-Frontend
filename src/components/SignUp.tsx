@@ -1,15 +1,11 @@
-import { Controller, useForm } from "react-hook-form";
-import { useAddNewUserMutation } from "../redux/api/apiSlice";
+import { FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-const paperStyle = {
-    padding: "30px 20px",
-    width: 300,
-    margin: "20px auto",
-};
+import { Controller, useForm } from "react-hook-form";
+import { useAddNewUserMutation } from "../redux/api/apiSlice";
+import FieldController from "./custom/FieldController";
+import { paperStyle } from "./styles";
 
 const options = [
     {
@@ -60,44 +56,23 @@ const SignUp = () => {
                     <h2>Sign Up</h2>
                 </Grid>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Controller
+                    <FieldController
                         name="email"
+                        label="Email"
+                        type="email"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Email"
-                                type="email"
-                            />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="password"
+                        label="Password"
+                        type="password"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Password"
-                                type="password"
-                            />
-                        )}
                     />
-                    <Controller
+                    <FieldController
                         name="name"
+                        label="Name"
+                        type="text"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Name"
-                                type="name"
-                            />
-                        )}
                     />
 
                     <FormLabel id="demo-controlled-radio-buttons-group">
@@ -116,18 +91,11 @@ const SignUp = () => {
                             </RadioGroup>
                         )}
                     />
-                    <Controller
+                    <FieldController
                         name="avatar"
+                        label="Avatar"
+                        type="url"
                         control={control}
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                label="Avatar"
-                                type="url"
-                            />
-                        )}
                     />
 
                     <Button type="submit" variant="contained" color="primary">
