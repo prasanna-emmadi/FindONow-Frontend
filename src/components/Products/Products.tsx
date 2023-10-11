@@ -29,6 +29,7 @@ import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
+import logo from "./logo.jpg";
 
 interface ActualProductListProps {
     products: ProductType[];
@@ -244,7 +245,7 @@ const ProductList = () => {
 
     return (
         <section className="products-list">
-            <h2>products</h2>
+            <img src={logo} alt="Logo" height={1000} width={1200} />
             {content}
         </section>
     );
