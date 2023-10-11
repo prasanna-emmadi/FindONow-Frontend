@@ -100,6 +100,8 @@ const RootPage = () => {
             <AppBar
                 position="fixed"
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                enableColorOnDark
+                color="secondary"
             >
                 <Toolbar>
                     <Typography

@@ -25,7 +25,7 @@ import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
 import Cart from "../Cart/Cart";
-import { CartProduct } from "../Product/Product";
+import ProductCard from "../ProductItem";
 import Suspense from "../Suspense";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
@@ -88,24 +88,26 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
             <Options />
             <Box pt={5} />
             <Divider />
+            <Stack spacing={2} pt={5} justifyContent={"right"}>
+                <Pagination
+                    count={pageCount}
+                    page={page}
+                    onChange={handleChange}
+                    color="secondary"
+                />
+            </Stack>
+
             <Box pb={5} />
             <Grid container spacing={3}>
                 {productsSlice.map((product) => (
                     <Grid item key={product.id} xs={12} sm={4}>
-                        <CartProduct
-                            data={product}
+                        <ProductCard
+                            product={product}
                             handleAddToCart={handleAddToCart}
                         />
                     </Grid>
                 ))}
             </Grid>
-            <Stack spacing={2}>
-                <Pagination
-                    count={pageCount}
-                    page={page}
-                    onChange={handleChange}
-                />
-            </Stack>
         </Wrapper>
     );
 };
