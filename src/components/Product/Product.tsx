@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import {
     useDeleteProductMutation,
@@ -21,22 +21,7 @@ interface Props {
     data: ProductType;
 }
 
-// carousel left, right content paper
-// grid
-const InnerProductContent = ({ data }: Props) => {
-    return (
-        <>
-            <img src={data.images[0]} alt={data.title} />
-            <div>
-                <h3>{data.title}</h3>
-                <p>{data.description}</p>
-                <h3>${data.price}</h3>
-            </div>
-        </>
-    );
-};
-
-const InnerProductContent1 = ({ data }: Props) => {
+const Content = ({ data }: Props) => {
     const [editProduct, editResult] = useEditProductMutation();
     const [deleteProduct, deleteResult] = useDeleteProductMutation();
     const navigate = useNavigate();
@@ -76,11 +61,19 @@ const InnerProductContent1 = ({ data }: Props) => {
             </Grid>
             <Grid item xs={6}>
                 <div>
-                    <h3>{data.title}</h3>
-                    <p>{data.description}</p>
-                    <h3>${data.price}</h3>
+                    <Typography variant="h3" color="text.primary">
+                        {data.title}
+                    </Typography>
+
+                    <Typography variant="body1" color="text.secondary">
+                        {data.description}
+                    </Typography>
+
+                    <Typography variant="h5" color="text.primary" pt={2}>
+                        ${data.price}
+                    </Typography>
                 </div>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} pt={2}>
                     <Button
                         color="error"
                         variant="outlined"
@@ -106,7 +99,7 @@ const InnerProductContent1 = ({ data }: Props) => {
 const InnerProduct = ({ data }: Props) => {
     return (
         <>
-            <InnerProductContent1 data={data} />
+            <Content data={data} />
         </>
     );
 };
@@ -118,7 +111,7 @@ interface CartProductProps {
 export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
     return (
         <Wrapper>
-            <InnerProductContent data={data} />
+            <Content data={data} />
             <Button onClick={() => handleAddToCart(data)}>add to cart</Button>
         </Wrapper>
     );
