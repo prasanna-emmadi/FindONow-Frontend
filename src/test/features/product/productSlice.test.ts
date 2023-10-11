@@ -5,7 +5,7 @@ import {
     searchBy,
     sortByTitle,
     sortByPrice,
-} from "../../../features/product/productSlice";
+} from "../../../redux/product/productSlice";
 import products from "../../data/productData";
 
 describe("cart slice reducer", () => {

@@ -3,7 +3,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useAppDispatch } from "../../app/hooks";
-import { sortByTitle, SortOrder, sortByPrice, searchBy } from "../../features/product/productSlice";
+import {
+    sortByTitle,
+    SortOrder,
+    sortByPrice,
+    searchBy,
+} from "../../redux/product/productSlice";
 import { useDebounce } from "../hooks/useDebounce";
 
 const options: any = [

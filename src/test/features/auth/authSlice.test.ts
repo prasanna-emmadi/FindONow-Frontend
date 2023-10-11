@@ -3,7 +3,7 @@ import {
     AuthState,
     addToken,
     removeToken,
-} from "../../../features/auth/authSlice";
+} from "../../../redux/auth/authSlice";
 
 describe("auth slice reducer", () => {
     const state: AuthState = {

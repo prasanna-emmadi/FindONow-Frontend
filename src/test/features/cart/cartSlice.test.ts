@@ -1,5 +1,5 @@
 import createStore from "../../../app/store";
-import { addToCart, removeFromCart } from "../../../features/cart/cartSlice";
+import { addToCart, removeFromCart } from "../../../redux/cart/cartSlice";
 import { CategoryType, ProductType } from "../../../types/productType";
 
 describe("cart slice reducer", () => {

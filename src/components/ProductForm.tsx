@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import {
     useAddNewProductMutation,
     useGetCategoriesQuery,
-} from "../features/api/apiSlice";
+} from "../redux/api/apiSlice";
 import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
 import Select from "react-select";
@@ -79,7 +79,12 @@ const InnerProductForm = ({ data }: Props) => {
                         control={control}
                         rules={{ required: true }}
                         render={({ field }) => (
-                            <TextField {...field} fullWidth label="Price" type="number" />
+                            <TextField
+                                {...field}
+                                fullWidth
+                                label="Price"
+                                type="number"
+                            />
                         )}
                     />
                     <Controller

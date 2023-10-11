@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { useAddNewUserMutation } from "../features/api/apiSlice";
+import { useAddNewUserMutation } from "../redux/api/apiSlice";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from "../../features/api/apiSlice";
+import { useGetProductQuery } from "../../redux/api/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";

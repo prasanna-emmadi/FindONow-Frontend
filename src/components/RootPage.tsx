@@ -18,7 +18,7 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Person2Icon from "@mui/icons-material/Person2";
 import { useAuthContext } from "../context/AuthContext";
 import { useAppDispatch } from "../app/hooks";
-import { removeToken } from "../features/auth/authSlice";
+import { removeToken } from "../redux/auth/authSlice";
 
 const NavOptions = () => {
     const { token } = useAuthContext();

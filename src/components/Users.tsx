@@ -1,5 +1,5 @@
 import { List } from "@mui/material";
-import { useGetUsersQuery } from "../features/api/apiSlice";
+import { useGetUsersQuery } from "../redux/api/apiSlice";
 import { Link } from "react-router-dom";
 import { UserType } from "../types/userType";
 import Suspense from "./Suspense";

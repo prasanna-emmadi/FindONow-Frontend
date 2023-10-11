@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetUserQuery } from "../features/api/apiSlice";
+import { useGetUserQuery } from "../redux/api/apiSlice";
 import { UserType } from "../types/userType";
 import Suspense from "./Suspense";
 

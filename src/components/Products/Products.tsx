@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "../../features/api/apiSlice";
+import { useGetProductsQuery } from "../../redux/api/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { CartProduct } from "../Product/Product";
@@ -15,9 +15,9 @@ import { Wrapper, StyledButton } from "./Products.styles";
 import { useEffect, useState } from "react";
 import { AddShoppingCart } from "@mui/icons-material";
 import Cart from "../Cart/Cart";
-import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
+import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addProducts, setPage } from "../../features/product/productSlice";
+import { addProducts, setPage } from "../../redux/product/productSlice";
 import Options from "./Options";
 
 interface Props {

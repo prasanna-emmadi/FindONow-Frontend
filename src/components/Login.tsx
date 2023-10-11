@@ -1,8 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
-import { useAddLoginMutation } from "../features/api/apiSlice";
+import { useAddLoginMutation } from "../redux/api/apiSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "../app/hooks";
-import { addToken } from "../features/auth/authSlice";
+import { addToken } from "../redux/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, Paper, TextField } from "@mui/material";
 
