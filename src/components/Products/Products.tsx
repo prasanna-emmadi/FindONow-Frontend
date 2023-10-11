@@ -29,7 +29,7 @@ import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
-import logo from "./logo.jpg";
+import logo from "./logo.png";
 
 interface ActualProductListProps {
     products: ProductType[];
@@ -189,13 +189,7 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     return (
         <>
             <Box sx={{ width: "100%" }}>
-                <Box
-                    sx={{
-                        borderBottom: 1,
-                        borderTop: 1,
-                        borderColor: "divider",
-                    }}
-                >
+                <Box>
                     <Tabs
                         value={value}
                         onChange={handleChange}
@@ -245,13 +239,7 @@ const ProductList = () => {
 
     return (
         <section className="products-list">
-            <Grid
-                alignItems="center"
-                justifyContent="center"
-                style={{ textAlign: "center" }}
-            >
-                <img src={logo} alt="Logo" height={1000} width={1200} />
-            </Grid>
+            <img src={logo} alt="Logo" height={400} width={1100} />
             {content}
         </section>
     );
