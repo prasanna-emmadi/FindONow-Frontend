@@ -1,4 +1,4 @@
-import { Button, Grid, Paper } from "@mui/material";
+import { Button, Grid, Paper, Stack } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,11 @@ import { addToken } from "../redux/auth/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 import FieldController from "./custom/FieldController";
 import { paperStyle } from "./styles";
+
+const loginPaperStyle = {
+    ...paperStyle,
+    width: 600,
+};
 
 const Login = () => {
     const { handleSubmit, control } = useForm({
@@ -34,9 +39,13 @@ const Login = () => {
         }
     };
 
+    const onSignUp = () => {
+        navigate("/signup");
+    };
+
     return (
         <Grid>
-            <Paper elevation={20} style={paperStyle}>
+            <Paper elevation={2} style={loginPaperStyle}>
                 <Grid
                     alignItems="center"
                     justifyContent="center"
@@ -57,9 +66,26 @@ const Login = () => {
                         type="password"
                         control={control}
                     />
-                    <Button type="submit" variant="contained" color="primary">
-                        Login
-                    </Button>
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        justifyContent={"center"}
+                    >
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Login
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={onSignUp}
+                        >
+                            SignUp
+                        </Button>
+                    </Stack>
                 </form>
             </Paper>
         </Grid>

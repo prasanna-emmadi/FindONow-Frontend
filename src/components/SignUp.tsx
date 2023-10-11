@@ -18,6 +18,11 @@ const options = [
     },
 ];
 
+const signupPaperStyle = {
+    ...paperStyle,
+    width: 600,
+};
+
 const SignUp = () => {
     const { handleSubmit, control } = useForm({
         defaultValues: {
@@ -47,7 +52,7 @@ const SignUp = () => {
 
     return (
         <Grid>
-            <Paper elevation={20} style={paperStyle}>
+            <Paper elevation={2} style={signupPaperStyle}>
                 <Grid
                     alignItems="center"
                     justifyContent="center"
@@ -84,7 +89,7 @@ const SignUp = () => {
                             fieldState: { error },
                             formState,
                         }) => (
-                            <RadioGroup value={value} onChange={onChange}>
+                            <RadioGroup row value={value} onChange={onChange}>
                                 {generateRadioOptions()}
                             </RadioGroup>
                         )}
