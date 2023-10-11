@@ -57,10 +57,11 @@ const NavOptions = () => {
         ];
     }
 
-    const optionsComponent = allOptions.map((option) => {
+    const optionsComponent = allOptions.map((option, index) => {
         const { path, name, icon } = option;
         return (
             <Link
+                key={index}
                 to={path}
                 style={{ textDecoration: "none", color: "inherit" }}
             >

@@ -7,6 +7,8 @@ import {
     Grid,
     Pagination,
     Stack,
+    Tab,
+    Tabs,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
@@ -14,7 +16,12 @@ import {
     useGetProductsQuery,
 } from "../../redux/api/apiSlice";
 import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
-import { addProducts } from "../../redux/product/productSlice";
+import {
+    addProducts,
+    allCategoryProducts,
+    productsOfCategory,
+} from "../../redux/product/productSlice";
+import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
 import Cart from "../Cart/Cart";
@@ -23,11 +30,9 @@ import Suspense from "../Suspense";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
 
-interface Props {
-    data: {
-        products: ProductType[];
-        categories: CategoryType[];
-    };
+interface ActualProductListProps {
+    products: ProductType[];
+    dispatch: AppDispatch;
 }
 
 const ProductCountPerPage = 20;
@@ -40,20 +45,12 @@ const getSlice = (page: number, products: ProductType[]) => {
     return products.slice(adjust, page * ProductCountPerPage);
 };
 
-const InnerProductList = (props: Props) => {
-    const dispatch = useAppDispatch();
+const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     const cart = useAppSelector((state) => state.cart);
-    const { products } = useAppSelector((state) => state.product);
     const [cartOpen, setCartOpen] = useState(false);
     const [page, setPage] = useState(1);
     const pageCount = getPageCount(products.length);
     const productsSlice = getSlice(page, products);
-
-    // onMount adding Products to the productSlice
-    useEffect(() => {
-        dispatch(addProducts(props.data.products));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     const handleChange = (
         _event: React.ChangeEvent<unknown>,
@@ -112,6 +109,84 @@ const InnerProductList = (props: Props) => {
         </Wrapper>
     );
 };
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`,
+    };
+}
+
+interface CategoryProductsProps {
+    data: {
+        products: ProductType[];
+        categories: CategoryType[];
+    };
+}
+
+const CategoryProducts = (props: CategoryProductsProps) => {
+    // create tab for each product categories
+    // filter categories with text or other
+    const [value, setValue] = useState(0);
+    const dispatch = useAppDispatch();
+    const categoryProducts = useAppSelector((state) => state.product.products);
+    const { categories, products } = props.data;
+    // limited categories
+    const categoriesSlice = categories.slice(0, 6);
+
+    // onMount adding Products to the productSlice
+    useEffect(() => {
+        dispatch(addProducts(products));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+        console.log("newValue", newValue);
+        if (newValue === 0) {
+            dispatch(allCategoryProducts());
+        } else {
+            const indexOfCategory = newValue + 1;
+            if (categoriesSlice.length > indexOfCategory) {
+                const category = categoriesSlice[indexOfCategory];
+                dispatch(productsOfCategory(category.id));
+            }
+        }
+        setValue(newValue);
+    };
+
+    // all - 0
+    // specific category
+    // pass the products down the line
+    let allCategoriesTab = <Tab label={"all"} {...a11yProps(0)} key={0} />;
+    let categoryTabs = categoriesSlice.map((category, index) => {
+        return <Tab label={category.name} {...a11yProps(0)} key={index + 1} />;
+    });
+    categoryTabs = [allCategoriesTab, ...categoryTabs];
+
+    return (
+        <>
+            <Box sx={{ width: "100%" }}>
+                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="basic tabs example"
+                        variant="scrollable"
+                        scrollButtons
+                        allowScrollButtonsMobile
+                    >
+                        {categoryTabs}
+                    </Tabs>
+                </Box>
+            </Box>
+            <ActualProductList
+                products={categoryProducts}
+                dispatch={dispatch}
+            />
+        </>
+    );
+};
+
 const ProductList = () => {
     const productsResult = useGetProductsQuery();
     const categoriesResult = useGetCategoriesQuery();
@@ -135,7 +210,7 @@ const ProductList = () => {
             isSuccess={isSuccess}
             isError={isError}
             error={error}
-            Component={InnerProductList}
+            Component={CategoryProducts}
         />
     );
 

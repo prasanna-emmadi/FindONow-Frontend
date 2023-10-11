@@ -12,7 +12,6 @@ export interface ProductsState {
     productsSlice: ProductType[];
     sortOrder: SortOrder;
     originalProducts: ProductType[];
-    categoryProducts: ProductType[];
 }
 
 const initialState: ProductsState = {
@@ -20,7 +19,6 @@ const initialState: ProductsState = {
     productsSlice: [],
     sortOrder: SortOrder.NoOrder,
     originalProducts: [],
-    categoryProducts: [],
 };
 
 const sortProductsByTitle = (p1: ProductType, p2: ProductType) => {
@@ -96,14 +94,23 @@ export const productSlice = createSlice({
         },
         productsOfCategory: (state, action: PayloadAction<number>) => {
             const categoryId = action.payload;
-            state.categoryProducts = state.originalProducts.filter(
+            state.products = state.originalProducts.filter(
                 (product) => product.category.id === categoryId,
             );
+        },
+        allCategoryProducts: (state) => {
+            state.products = state.originalProducts.map((product) => product);
         },
     },
 });
 
-export const { addProducts, sortByTitle, sortByPrice, searchBy } =
-    productSlice.actions;
+export const {
+    addProducts,
+    sortByTitle,
+    sortByPrice,
+    searchBy,
+    productsOfCategory,
+    allCategoryProducts,
+} = productSlice.actions;
 
 export default productSlice;
