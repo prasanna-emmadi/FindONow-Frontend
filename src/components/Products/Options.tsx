@@ -1,4 +1,5 @@
 import { Grid, TextField } from "@mui/material";
+
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import {
@@ -23,8 +24,6 @@ const SortOptions = () => {
         <Select
             options={options}
             onChange={(newValue: any) => {
-                console.log("newValue", newValue);
-
                 switch (newValue.value) {
                     case "title_increasing": {
                         dispatch(sortByTitle(SortOrder.Increasing));

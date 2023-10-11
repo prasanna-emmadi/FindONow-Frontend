@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import {
     useDeleteProductMutation,
@@ -14,11 +15,14 @@ import {
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";
+import ProductCarousel from "./ProductCarousel";
 
 interface Props {
     data: ProductType;
 }
 
+// carousel left, right content paper
+// grid
 const InnerProductContent = ({ data }: Props) => {
     return (
         <>
@@ -32,7 +36,7 @@ const InnerProductContent = ({ data }: Props) => {
     );
 };
 
-const InnerProduct = ({ data }: Props) => {
+const InnerProductContent1 = ({ data }: Props) => {
     const [editProduct, editResult] = useEditProductMutation();
     const [deleteProduct, deleteResult] = useDeleteProductMutation();
     const navigate = useNavigate();
@@ -66,28 +70,43 @@ const InnerProduct = ({ data }: Props) => {
     }, [editResult.isSuccess, navigate]);
 
     return (
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <ProductCarousel images={data.images} />
+            </Grid>
+            <Grid item xs={6}>
+                <div>
+                    <h3>{data.title}</h3>
+                    <p>{data.description}</p>
+                    <h3>${data.price}</h3>
+                </div>
+                <Stack direction="row" spacing={2}>
+                    <Button
+                        color="error"
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        onClick={onDeleteClick}
+                    >
+                        Delete
+                    </Button>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        endIcon={<UpdateIcon />}
+                        onClick={onUpdateClick}
+                    >
+                        Update
+                    </Button>
+                </Stack>
+            </Grid>
+        </Grid>
+    );
+};
+
+const InnerProduct = ({ data }: Props) => {
+    return (
         <>
-            <Wrapper>
-                <InnerProductContent data={data} />
-            </Wrapper>
-            <Stack direction="row" spacing={2}>
-                <Button
-                    color="error"
-                    variant="outlined"
-                    startIcon={<DeleteIcon />}
-                    onClick={onDeleteClick}
-                >
-                    Delete
-                </Button>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    endIcon={<UpdateIcon />}
-                    onClick={onUpdateClick}
-                >
-                    Send
-                </Button>
-            </Stack>
+            <InnerProductContent1 data={data} />
         </>
     );
 };
