@@ -102,6 +102,7 @@ const RootPage = () => {
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 enableColorOnDark
                 color="secondary"
+                style={{ background: "#2E3B55" }}
             >
                 <Toolbar>
                     <Typography

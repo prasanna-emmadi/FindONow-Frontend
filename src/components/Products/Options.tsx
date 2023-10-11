@@ -1,5 +1,4 @@
-import SearchIcon from "@mui/icons-material/Search";
-import { Grid, IconButton, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import {
@@ -71,14 +70,11 @@ const SearchBar = () => {
                         setQuery(e.target.value);
                     }
                 }}
-                label="Enter a product name"
+                label="Search a product name"
                 variant="outlined"
                 placeholder="Search..."
                 size="small"
             />
-            <IconButton type="submit" aria-label="search">
-                <SearchIcon style={{ fill: "blue" }} />
-            </IconButton>
         </form>
     );
 };
