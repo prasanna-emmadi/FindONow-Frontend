@@ -7,24 +7,19 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/auth/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 
 const NavOptions = () => {
     const { token, isAdmin } = useAuthContext();
+    const navigate = useNavigate();
 
-    let allOptions = useMemo(() => {
+    const allOptions = useMemo(() => {
         const options = [
             {
                 path: "/home",
@@ -74,25 +69,21 @@ const NavOptions = () => {
         return allOptions;
     }, [token, isAdmin]);
 
-    const optionsComponent = allOptions.map((option, index) => {
+    const optionComponents = allOptions.map((option, index) => {
         const { path, name, icon } = option;
         return (
-            <Link
+            <Button
                 key={index}
-                to={path}
-                style={{ textDecoration: "none", color: "inherit" }}
+                color="inherit"
+                onClick={() => {
+                    navigate(path);
+                }}
             >
-                <ListItem key={name} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>{icon}</ListItemIcon>
-                        <ListItemText primary={name} />
-                    </ListItemButton>
-                </ListItem>
-            </Link>
+                {name}
+            </Button>
         );
     });
-
-    return <List>{optionsComponent}</List>;
+    return <>{optionComponents}</>;
 };
 
 const drawerWidth = 240;
@@ -130,27 +121,13 @@ const RootPage = () => {
                     >
                         Find'O Now
                     </Typography>
+                    <NavOptions />
                     <Button color="inherit" onClick={onLoginClick}>
                         {loginButtonText}
                     </Button>
                 </Toolbar>
             </AppBar>
-            <Drawer
-                variant="permanent"
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: {
-                        width: drawerWidth,
-                        boxSizing: "border-box",
-                    },
-                }}
-            >
-                <Toolbar />
-                <Box sx={{ overflow: "auto" }}>
-                    <NavOptions />
-                </Box>
-            </Drawer>
+
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
                 <Outlet />
