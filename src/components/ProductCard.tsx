@@ -1,7 +1,7 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Stack } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -37,18 +37,19 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                 <Typography variant="body2" color="text.secondary">
                     {product.description}
                 </Typography>
-                <Typography variant="h5" color="text.primary" pt={2}>
-                    ${product.price}
-                </Typography>
+                <Stack direction="row" spacing={4}>
+                    <Typography variant="h5" color="text.primary" pt={2}>
+                        ${product.price}
+                    </Typography>
+                    <IconButton
+                        aria-label="share"
+                        onClick={() => handleAddToCart(product)}
+                        style={{ marginTop: "12px" }}
+                    >
+                        <AddShoppingCartIcon />
+                    </IconButton>
+                </Stack>
             </CardContent>
-            <CardActions disableSpacing>
-                <IconButton
-                    aria-label="share"
-                    onClick={() => handleAddToCart(product)}
-                >
-                    <AddShoppingCartIcon />
-                </IconButton>
-            </CardActions>
         </Card>
     );
 };
