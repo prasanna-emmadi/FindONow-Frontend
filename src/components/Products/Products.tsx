@@ -238,8 +238,15 @@ const ProductList = () => {
 
     return (
         <section className="products-list">
-            <img src={logo} alt="Logo" height={400} width={1100} />
-            {content}
+            <Grid
+                alignItems="center"
+                justifyContent="center"
+                style={{ textAlign: "center" }}
+            >
+                <img src={logo} alt="Logo" height={400} width={1100} />
+
+                {content}
+            </Grid>
         </section>
     );
 };
