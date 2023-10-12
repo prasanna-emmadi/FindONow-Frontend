@@ -1,3 +1,4 @@
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import GroupIcon from "@mui/icons-material/Group";
 import HomeIcon from "@mui/icons-material/Home";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -52,6 +53,11 @@ const NavOptions = () => {
                         path: "/admin",
                         name: "Admin Dashboard",
                         icon: <InventoryIcon />,
+                    },
+                    {
+                        path: "/products/create",
+                        name: "Create Product",
+                        icon: <AddToPhotosIcon />,
                     },
                 ];
             }
