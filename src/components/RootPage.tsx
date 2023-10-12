@@ -92,6 +92,7 @@ const RootPage = () => {
     const dispatch = useAppDispatch();
     const isLoggedIn = token !== undefined;
     const loginButtonText = isLoggedIn ? "Logout" : "Login";
+    //const loginIcon = isLoggedIn ? <LogoutIcon /> : <LoginIcon />;
 
     const onLoginClick = () => {
         if (!isLoggedIn) {

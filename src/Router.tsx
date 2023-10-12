@@ -3,7 +3,6 @@ import AdminProducts from "./components/AdminProducts/AdminProducts";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
 import ProductForm from "./components/ProductForm";
@@ -29,14 +28,6 @@ const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />,
-            },
-            {
-                path: "logout",
-                element: (
-                    <ProtectedRoute>
-                        <Logout />
-                    </ProtectedRoute>
-                ),
             },
             {
                 path: "products",
