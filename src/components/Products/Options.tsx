@@ -59,29 +59,27 @@ const SearchBar = () => {
     }, [dispatch, searchQuery]);
 
     return (
-        <form>
-            <TextField
-                id="search-bar"
-                className="text"
-                onInput={(e: any) => {
-                    const { target } = e;
-                    if (target) {
-                        setQuery(e.target.value);
-                    }
-                }}
-                label="Search a product name"
-                variant="outlined"
-                placeholder="Search..."
-                size="small"
-            />
-        </form>
+        <TextField
+            id="search-bar"
+            className="text"
+            onInput={(e: any) => {
+                const { target } = e;
+                if (target) {
+                    setQuery(e.target.value);
+                }
+            }}
+            label="Search a product name"
+            variant="outlined"
+            placeholder="Search..."
+            size="small"
+        />
     );
 };
 
 const Options = () => {
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={6} display={"flex"}>
                 <SearchBar />
             </Grid>
             <Grid item xs={6}>
