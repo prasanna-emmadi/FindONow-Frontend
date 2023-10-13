@@ -52,42 +52,20 @@ Launches the test runner in the interactive watch mode
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-├── public
-|
-├── src
-| |── components
-| ├── context
-| ├── redux
-| | ├── store
-| | ├── api.slice.ts
-| | ├── auth.slice.ts
-| | ├── cart.slice.ts
-| | ├── product.slice.ts
-| ├── test
-| | ├── data
-| | ├── reducers
-| | ├── shared
-| ├── types
-| | ├── ...
-| ├──App.styles.tsx
-| ├──App.tsx
-| ├──Router.tsx
-| ├──index.tsx
-├── .gitignore
-├── .prettierrc
-├── README.md
-├── package.json
-├── .tsconfig
 
+### Folder structure
 
-.
-├── build                   # Compiled files (alternatively `dist`)
-├── docs                    # Documentation files (alternatively `doc`)
-├── src                     # Source files (alternatively `lib` or `app`)
-├── test                    # Automated tests (alternatively `spec` or `tests`)
-├── tools                   # Tools and utilities
-├── LICENSE
-└── README.md
+    .
+    ├── ...
+    ├── public                  # public html and other assets are here
+    ├── src                    
+    │   ├── components          # All the UI components are here
+    │   ├── context             # Application wide contexts are defined here, currently only authContext is available
+    │   ├── redux               # Application wide state management is done here
+    │   └── tests               # Unit tests
+    │   └── types               # All types are here
+    └── ...
+    
 ## Deployment
 
 Deployed with netlify at [https://superb-rolypoly-2600af.netlify.app/]
