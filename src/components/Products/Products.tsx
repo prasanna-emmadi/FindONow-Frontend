@@ -92,7 +92,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
             </StyledButton>
             <Box pt={1} />
             <Options />
-            <Box pt={3} flex="end" justifyContent={"right"}>
+            <Box pt={3} display={"flex"} justifyContent={"right"}>
                 <Pagination
                     count={pageCount}
                     page={page}
