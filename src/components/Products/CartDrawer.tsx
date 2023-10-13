@@ -1,25 +1,27 @@
-import { Drawer } from "@mui/material";
+import { AddShoppingCart } from "@mui/icons-material";
+import { Badge, Drawer } from "@mui/material";
+import { useState } from "react";
 import { addToCart, removeFromCart } from "../../redux/cartSlice";
 import { AppDispatch } from "../../redux/store/configureStore";
-import { CartItemType } from "../../types/cartType";
+import { useAppSelector } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
 import Cart from "../Cart/Cart";
+import { StyledButton } from "./Products.styles";
 
 interface Props {
     dispatch: AppDispatch;
     setSnackOpen: (arg0: boolean) => void;
-    cartItems: CartItemType[];
-    setCartOpen: (arg0: boolean) => void;
-    cartOpen: boolean;
 }
 
 const CartDrawer = ({
     setSnackOpen,
-    dispatch,
-    cartItems,
-    cartOpen,
-    setCartOpen,
-}: Props) => {
+    dispatch, //cartItems,
+} //cartOpen,
+//setCartOpen,
+: Props) => {
+    const cart = useAppSelector((state) => state.cart);
+    const [cartOpen, setCartOpen] = useState(false);
+
     const handleAddToCart = (clickedItem: ProductType) => {
         setSnackOpen(true);
         dispatch(addToCart(clickedItem));
@@ -30,17 +32,24 @@ const CartDrawer = ({
     };
 
     return (
-        <Drawer
-            anchor="right"
-            open={cartOpen}
-            onClose={() => setCartOpen(false)}
-        >
-            <Cart
-                cartItems={cartItems}
-                addToCart={handleAddToCart}
-                removeFromCart={handleRemoveFromCart}
-            />
-        </Drawer>
+        <>
+            <Drawer
+                anchor="right"
+                open={cartOpen}
+                onClose={() => setCartOpen(false)}
+            >
+                <Cart
+                    cartItems={cart.cartItems}
+                    addToCart={handleAddToCart}
+                    removeFromCart={handleRemoveFromCart}
+                />
+            </Drawer>
+            <StyledButton onClick={() => setCartOpen(true)}>
+                <Badge badgeContent={cart.totalItems} color="error">
+                    <AddShoppingCart />
+                </Badge>
+            </StyledButton>
+        </>
     );
 };
 

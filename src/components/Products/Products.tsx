@@ -1,7 +1,5 @@
-import { AddShoppingCart } from "@mui/icons-material";
 import {
     Alert,
-    Badge,
     Box,
     Grid,
     Pagination,
@@ -27,7 +25,7 @@ import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import CartDrawer from "./CartDrawer";
 import Options from "./Options";
-import { StyledButton, Wrapper } from "./Products.styles";
+import { Wrapper } from "./Products.styles";
 import logo from "./logo.png";
 
 interface ActualProductListProps {
@@ -47,8 +45,6 @@ const getSlice = (page: number, products: ProductType[]) => {
 
 const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     const [snackOpen, setSnackOpen] = useState(false);
-    const cart = useAppSelector((state) => state.cart);
-    const [cartOpen, setCartOpen] = useState(false);
     const [page, setPage] = useState(1);
     const pageCount = getPageCount(products.length);
     const productsSlice = getSlice(page, products);
@@ -78,21 +74,10 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
 
     return (
         <Wrapper data-testid="products">
-            <CartDrawer
-                setSnackOpen={setSnackOpen}
-                dispatch={dispatch}
-                cartItems={cart.cartItems}
-                cartOpen={cartOpen}
-                setCartOpen={setCartOpen}
-            />
-            <StyledButton onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={cart.totalItems} color="error">
-                    <AddShoppingCart />
-                </Badge>
-            </StyledButton>
+            <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Options />
-            <Box pt={3} display={"flex"} justifyContent={"right"}>
+            <Box pt={3} pb={5} display={"flex"} justifyContent={"right"}>
                 <Pagination
                     count={pageCount}
                     page={page}
@@ -100,7 +85,6 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
                     color="secondary"
                 />
             </Box>
-            <Box pb={5} />
             <Grid container spacing={3}>
                 {productsSlice.map((product) => (
                     <Grid item key={product.id} xs={12} sm={4}>
