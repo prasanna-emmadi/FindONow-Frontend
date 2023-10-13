@@ -55,7 +55,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 ├── public
 |
 ├── src
-| ├── components
+| |── components
 | ├── context
 | ├── redux
 | | ├── store
