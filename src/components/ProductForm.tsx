@@ -6,7 +6,7 @@ import Select from "react-select";
 import {
     useAddNewProductMutation,
     useGetCategoriesQuery,
-} from "../redux/api/apiSlice";
+} from "../redux/apiSlice";
 import { CategoryType } from "../types/productType";
 import Suspense from "./Suspense";
 import FieldController from "./custom/FieldController";

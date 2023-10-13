@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { UserType } from "../../types/userType";
+import { UserType } from "../types/userType";
 
 interface Token {
     access_token?: string;

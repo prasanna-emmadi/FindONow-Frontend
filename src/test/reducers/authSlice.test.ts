@@ -1,4 +1,4 @@
-import { AuthState, addToken, removeToken } from "../../redux/auth/authSlice";
+import { AuthState, addToken, removeToken } from "../../redux/authSlice";
 import createStore from "../../redux/store/store";
 
 describe("auth slice reducer", () => {

@@ -1,5 +1,5 @@
 import fetchMock from "jest-fetch-mock";
-import { API_URL, apiSlice } from "../../redux/api/apiSlice";
+import { API_URL, apiSlice } from "../../redux/apiSlice";
 import categories from "../data/categoryData";
 import products from "../data/productData";
 import userData from "../data/userData";

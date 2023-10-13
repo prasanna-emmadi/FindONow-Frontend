@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import { removeToken } from "../redux/auth/authSlice";
+import { removeToken } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 
 const NavOptions = () => {

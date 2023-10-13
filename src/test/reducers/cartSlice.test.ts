@@ -1,4 +1,4 @@
-import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
+import { addToCart, removeFromCart } from "../../redux/cartSlice";
 import createStore from "../../redux/store/store";
 import { CategoryType, ProductType } from "../../types/productType";
 

@@ -7,7 +7,7 @@ import {
     searchBy,
     sortByPrice,
     sortByTitle,
-} from "../../redux/product/productSlice";
+} from "../../redux/productSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { useDebounce } from "../hooks/useDebounce";
 

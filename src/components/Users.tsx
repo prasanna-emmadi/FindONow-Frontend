@@ -8,7 +8,7 @@ import {
     TableRow,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useGetUsersQuery } from "../redux/api/apiSlice";
+import { useGetUsersQuery } from "../redux/apiSlice";
 import { UserType } from "../types/userType";
 import Suspense from "./Suspense";
 

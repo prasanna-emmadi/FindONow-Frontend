@@ -4,7 +4,7 @@ import {
     searchBy,
     sortByPrice,
     sortByTitle,
-} from "../../redux/product/productSlice";
+} from "../../redux/productSlice";
 import createStore from "../../redux/store/store";
 import products from "../data/productData";
 

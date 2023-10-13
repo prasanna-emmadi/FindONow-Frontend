@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductType } from "../../types/productType";
+import { ProductType } from "../types/productType";
 
 export enum SortOrder {
     Increasing,

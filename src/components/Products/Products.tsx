@@ -14,13 +14,13 @@ import { useEffect, useState } from "react";
 import {
     useGetCategoriesQuery,
     useGetProductsQuery,
-} from "../../redux/api/apiSlice";
-import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
+} from "../../redux/apiSlice";
+import { addToCart, removeFromCart } from "../../redux/cartSlice";
 import {
     addProducts,
     allCategoryProducts,
     productsOfCategory,
-} from "../../redux/product/productSlice";
+} from "../../redux/productSlice";
 import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";

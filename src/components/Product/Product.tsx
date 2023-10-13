@@ -11,7 +11,7 @@ import {
     useDeleteProductMutation,
     useGetProductQuery,
     useUpdateProductMutation,
-} from "../../redux/api/apiSlice";
+} from "../../redux/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";
