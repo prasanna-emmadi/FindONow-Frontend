@@ -97,11 +97,14 @@ const Product = () => {
         },
     );
 
-    let content = (
+    const productSucess = product ? true : isSuccess;
+    const productLoading = product ? false : isLoading;
+
+    const content = (
         <Suspense
             data={product || data}
-            isLoading={isLoading}
-            isSuccess={isSuccess}
+            isLoading={productLoading}
+            isSuccess={productSucess}
             isError={isError}
             error={error}
             Component={InnerProduct}
