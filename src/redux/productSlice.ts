@@ -108,6 +108,7 @@ export const {
     searchBy,
     productsOfCategory,
     allCategoryProducts,
+    reset,
 } = productSlice.actions;
 
 export default productSlice;

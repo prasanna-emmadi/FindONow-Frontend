@@ -1,6 +1,9 @@
 import {
     SortOrder,
     addProducts,
+    allCategoryProducts,
+    productsOfCategory,
+    reset,
     searchBy,
     sortByPrice,
     sortByTitle,
@@ -47,5 +50,26 @@ describe("cart slice reducer", () => {
         expect(store?.getState().product.products[0].title).toBe(
             "Incredible Metal Hat",
         );
+    });
+
+    test("productsOfCategory", () => {
+        store?.dispatch(addProducts(products));
+        store?.dispatch(productsOfCategory(4));
+        expect(store?.getState().product.originalProducts.length).toBe(2);
+        expect(store?.getState().product.products.length).toBe(1);
+        expect(store?.getState().product.products[0].title).toBe(
+            "Elegant Bronze Mouse",
+        );
+        store?.dispatch(allCategoryProducts());
+        expect(store?.getState().product.originalProducts.length).toBe(2);
+        expect(store?.getState().product.products.length).toBe(2);
+    });
+    test("reset", () => {
+        store?.dispatch(addProducts(products));
+        expect(store?.getState().product.originalProducts.length).toBe(2);
+        store?.dispatch(productsOfCategory(4));
+        store?.dispatch(reset());
+        expect(store?.getState().product.products.length).toBe(2);
+        expect(store?.getState().product.originalProducts.length).toBe(2);
     });
 });
