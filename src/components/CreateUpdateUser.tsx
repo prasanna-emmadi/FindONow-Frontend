@@ -23,15 +23,33 @@ const signupPaperStyle = {
     width: 600,
 };
 
-const SignUp = () => {
+interface DefaultValues {
+    email?: string;
+    password?: string;
+    name?: string;
+    role?: "admin" | "customer";
+    avatar?: string;
+}
+
+interface Props {
+    defaultValues?: DefaultValues;
+}
+
+const newUserDefaultValues: DefaultValues = {
+    email: "",
+    password: "",
+    name: "",
+    role: "admin",
+    avatar: "",
+};
+
+const CreateUpdateUser = (props: Props) => {
+    const defaultValues = props.defaultValues
+        ? props.defaultValues
+        : newUserDefaultValues;
+
     const { handleSubmit, control } = useForm({
-        defaultValues: {
-            email: "",
-            password: "",
-            name: "",
-            role: "admin",
-            avatar: "",
-        },
+        defaultValues: defaultValues,
     });
     const [updateUser] = useAddNewUserMutation();
 
@@ -109,4 +127,4 @@ const SignUp = () => {
         </Grid>
     );
 };
-export default SignUp;
+export default CreateUpdateUser;

@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import AdminProducts from "./components/AdminProducts/AdminProducts";
 import AdminRoute from "./components/AdminRoute";
 import CreateProduct from "./components/CreateProduct";
+import CreateUpdateUser from "./components/CreateUpdateUser";
+import EditUser from "./components/EditUser";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import EditProduct from "./components/Product/EditProduct";
@@ -10,7 +12,6 @@ import Products from "./components/Products/Products";
 import Profile from "./components/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RootPage from "./components/RootPage";
-import SignUp from "./components/SignUp";
 import User from "./components/User";
 import Users from "./components/Users";
 
@@ -75,8 +76,16 @@ const router = createBrowserRouter([
                 element: <User />,
             },
             {
+                path: "users/edit",
+                element: (
+                    <ProtectedRoute>
+                        <EditUser />
+                    </ProtectedRoute>
+                ),
+            },
+            {
                 path: "signup",
-                element: <SignUp />,
+                element: <CreateUpdateUser />,
             },
             {
                 path: "profile",
