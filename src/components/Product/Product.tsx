@@ -1,17 +1,13 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import UpdateIcon from "@mui/icons-material/Update";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Grid, Typography } from "@mui/material";
-import { useEffect } from "react";
-import {
-    useDeleteProductMutation,
-    useGetProductQuery,
-    useUpdateProductMutation,
-} from "../../redux/apiSlice";
+import { useGetProductQuery } from "../../redux/apiSlice";
+import { addToCart } from "../../redux/cartSlice";
+import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
 import { Wrapper } from "./Product.styles";
@@ -22,37 +18,13 @@ interface Props {
 }
 
 const Content = ({ data }: Props) => {
-    const [updateProduct, editResult] = useUpdateProductMutation();
-    const [deleteProduct, deleteResult] = useDeleteProductMutation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-    const onDeleteClick = async () => {
-        try {
-            await deleteProduct(data.id);
-        } catch {
-            console.error("error in delete product");
-        }
+    const handleAddToCart = async () => {
+        dispatch(addToCart(data));
+        navigate("/products");
     };
-
-    const onUpdateClick = async () => {
-        try {
-            await updateProduct(data.id);
-        } catch {
-            console.error("error in Update product");
-        }
-    };
-
-    useEffect(() => {
-        if (deleteResult.isSuccess) {
-            navigate("/products");
-        }
-    }, [deleteResult.isSuccess, navigate]);
-
-    useEffect(() => {
-        if (editResult.isSuccess) {
-            navigate("/products");
-        }
-    }, [editResult.isSuccess, navigate]);
 
     return (
         <Grid container spacing={2}>
@@ -78,17 +50,9 @@ const Content = ({ data }: Props) => {
                         color="error"
                         variant="outlined"
                         startIcon={<DeleteIcon />}
-                        onClick={onDeleteClick}
+                        onClick={handleAddToCart}
                     >
-                        Delete
-                    </Button>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        endIcon={<UpdateIcon />}
-                        onClick={onUpdateClick}
-                    >
-                        Update
+                        Add To Cart
                     </Button>
                 </Stack>
             </Grid>

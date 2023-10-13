@@ -22,7 +22,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
         navigate("/products/" + product.id);
     };
     return (
-        <Card sx={{ maxWidth: 345 }} onClick={onClick}>
+        <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -31,12 +31,14 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                 }
                 title={product.title}
                 subheader={product.category.name}
+                onClick={onClick}
             />
             <CardMedia
                 component="img"
                 height="400"
                 image={product.images[0]}
                 alt={product.title}
+                onClick={onClick}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
