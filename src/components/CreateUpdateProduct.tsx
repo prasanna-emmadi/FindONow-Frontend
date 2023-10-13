@@ -114,7 +114,7 @@ const InnerProductForm = ({ data }: Props) => {
     );
 };
 
-const ProductForm = () => {
+const CreateUpdateProduct = () => {
     const { data, isLoading, isSuccess, isError, error } =
         useGetCategoriesQuery();
 
@@ -130,4 +130,4 @@ const ProductForm = () => {
     );
 };
 
-export default ProductForm;
+export default CreateUpdateProduct;
