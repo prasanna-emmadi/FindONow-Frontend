@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminProducts from "./components/AdminProducts/AdminProducts";
 import AdminRoute from "./components/AdminRoute";
+import CreateProduct from "./components/CreateProduct";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
-import ProductForm from "./components/ProductForm";
 import Products from "./components/Products/Products";
 import Profile from "./components/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
                 path: "products/create",
                 element: (
                     <AdminRoute>
-                        <ProductForm />
+                        <CreateProduct />
                     </AdminRoute>
                 ),
             },
