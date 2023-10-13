@@ -8,6 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 import { ProductType } from "../types/productType";
 
 interface Props {
@@ -16,8 +17,12 @@ interface Props {
 }
 
 const ProductCard = ({ product, handleAddToCart }: Props) => {
+    const navigate = useNavigate();
+    const onClick = () => {
+        navigate("/products/" + product.id);
+    };
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345 }} onClick={onClick}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
