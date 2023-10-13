@@ -1,6 +1,6 @@
-import { addToCart, removeFromCart } from "../../../redux/cart/cartSlice";
-import createStore from "../../../redux/store/store";
-import { CategoryType, ProductType } from "../../../types/productType";
+import { addToCart, removeFromCart } from "../../redux/cart/cartSlice";
+import createStore from "../../redux/store/store";
+import { CategoryType, ProductType } from "../../types/productType";
 
 describe("cart slice reducer", () => {
     const category: CategoryType = {

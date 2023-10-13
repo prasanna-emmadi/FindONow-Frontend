@@ -4,9 +4,9 @@ import {
     searchBy,
     sortByPrice,
     sortByTitle,
-} from "../../../redux/product/productSlice";
-import createStore from "../../../redux/store/store";
-import products from "../../data/productData";
+} from "../../redux/product/productSlice";
+import createStore from "../../redux/store/store";
+import products from "../data/productData";
 
 describe("cart slice reducer", () => {
     let store: any;
