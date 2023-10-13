@@ -79,6 +79,15 @@ It correctly bundles React in production mode and optimizes the build for the be
 ├── package.json
 ├── .tsconfig
 
+
+.
+├── build                   # Compiled files (alternatively `dist`)
+├── docs                    # Documentation files (alternatively `doc`)
+├── src                     # Source files (alternatively `lib` or `app`)
+├── test                    # Automated tests (alternatively `spec` or `tests`)
+├── tools                   # Tools and utilities
+├── LICENSE
+└── README.md
 ## Deployment
 
 Deployed with netlify at [https://superb-rolypoly-2600af.netlify.app/]
