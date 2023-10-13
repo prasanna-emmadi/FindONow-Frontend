@@ -3,17 +3,21 @@ import { CategoryType, ProductType } from "../../types/productType";
 import { UserType } from "../../types/userType";
 import { RootState } from "../store/configureStore";
 
+export const API_URL = "https://api.escuelajs.co/api/v1/";
+
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://api.escuelajs.co/api/v1/",
+        baseUrl: API_URL,
         prepareHeaders: (headers, { getState }) => {
-            const auth = (getState() as RootState).auth;
-            const token = auth.token.access_token;
-            const isAdmin = auth.user?.role === "admin";
-            // If we have a token set in state, let's assume that we should be passing it.
-            if (token && !isAdmin) {
-                headers.set("Authorization", `Bearer ${token}`);
+            const auth = (getState() as RootState)?.auth;
+            if (auth) {
+                const token = auth.token.access_token;
+                const isAdmin = auth.user?.role === "admin";
+                // If we have a token set in state, let's assume that we should be passing it.
+                if (token && !isAdmin) {
+                    headers.set("Authorization", `Bearer ${token}`);
+                }
             }
             return headers;
         },

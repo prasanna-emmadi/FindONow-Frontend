@@ -1,44 +1,66 @@
-import { render, renderHook, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import Products from "../../components/Products/Products";
-import { useGetProductsQuery } from "../../redux/api/apiSlice";
-import createStore from "../../redux/store/store";
-import server from "../shared/userServer";
+import fetchMock from "jest-fetch-mock";
+import { apiSlice } from "../../redux/api/apiSlice";
+import products from "../data/productData";
+import userData from "../data/userData";
+import { setupApiStore } from "../shared/testUtils";
 
-let store = createStore();
+fetchMock.enableMocks();
 
-beforeEach(() => {
-    store = createStore();
+beforeEach((): void => {
+    fetchMock.resetMocks();
 });
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
 
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-    return <Provider store={store}>{children}</Provider>;
-};
+describe("getProducts", () => {
+    test("request is correct", () => {
+        const storeRef = setupApiStore(apiSlice, {});
+        fetchMock.mockResponse(JSON.stringify(products));
 
-describe("Test apiSlice async actions", () => {
-    test("Should fetch all products", async () => {
-        render(
-            <Provider store={store}>
-                <Products />
-            </Provider>,
-        );
-        await screen.findByTestId("products", undefined, { timeout: 60000 });
-        const getProducts: any =
-            store.getState().api.queries["getProducts(undefined)"];
-        expect(getProducts.data.length).toBeGreaterThan(0);
-    }, 30000);
+        return storeRef.store
+            .dispatch<any>(apiSlice.endpoints.getProducts.initiate(undefined))
+            .then(() => {
+                expect(fetchMock).toBeCalledTimes(1);
+                const { method } = fetchMock.mock.calls[0][0] as Request;
+                expect(method).toBe("GET");
+            });
+    });
 
-    test.only("Should fetch all products", async () => {
-        let { result, rerender } = renderHook(() => useGetProductsQuery(), {
-            wrapper: AllTheProviders,
-        });
+    test("getProducts successful response", () => {
+        const storeRef = setupApiStore(apiSlice, {});
+        fetchMock.mockResponse(JSON.stringify(products));
 
-        console.log("result.current.data", result.current.data);
-        rerender();
+        return storeRef.store
+            .dispatch<any>(apiSlice.endpoints.getProducts.initiate(undefined))
+            .then((action: any) => {
+                const { status, data, isSuccess } = action;
+                expect(status).toBe("fulfilled");
+                expect(isSuccess).toBe(true);
+                expect(data).toStrictEqual(products);
+            });
+    });
+    test("getUsers successful response", () => {
+        const storeRef = setupApiStore(apiSlice, {});
+        fetchMock.mockResponse(JSON.stringify(userData));
 
-        expect(result.current.data?.length).toBeGreaterThan(0);
-    }, 30000);
+        return storeRef.store
+            .dispatch<any>(apiSlice.endpoints.getUsers.initiate(undefined))
+            .then((action: any) => {
+                const { status, data, isSuccess } = action;
+                expect(status).toBe("fulfilled");
+                expect(isSuccess).toBe(true);
+                expect(data).toStrictEqual(userData);
+            });
+    });
+    test("getUser successful response", () => {
+        const storeRef = setupApiStore(apiSlice, {});
+        fetchMock.mockResponse(JSON.stringify(userData[0]));
+
+        return storeRef.store
+            .dispatch<any>(apiSlice.endpoints.getUser.initiate(undefined))
+            .then((action: any) => {
+                const { status, data, isSuccess } = action;
+                expect(status).toBe("fulfilled");
+                expect(isSuccess).toBe(true);
+                expect(data).toStrictEqual(userData[0]);
+            });
+    });
 });
