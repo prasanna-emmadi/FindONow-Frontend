@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Grid, Typography } from "@mui/material";
-import { useGetProductQuery } from "../../redux/apiSlice";
+import { useGetProductQuery, useGetProductsQuery } from "../../redux/apiSlice";
 import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
@@ -82,12 +82,24 @@ export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
 };
 const Product = () => {
     const { id } = useParams();
-    const { data, isLoading, isSuccess, isError, error } =
-        useGetProductQuery(id);
+    // getting the product from api cache query
+    const { product } = useGetProductsQuery(undefined, {
+        selectFromResult: ({ data }) => ({
+            product: data?.find((product) =>
+                id ? product.id === parseInt(id) : undefined,
+            ),
+        }),
+    });
+    const { data, isLoading, isSuccess, isError, error } = useGetProductQuery(
+        id,
+        {
+            skip: product === undefined,
+        },
+    );
 
     let content = (
         <Suspense
-            data={data}
+            data={product || data}
             isLoading={isLoading}
             isSuccess={isSuccess}
             isError={isError}
