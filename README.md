@@ -73,6 +73,7 @@ Deployed with netlify at [https://superb-rolypoly-2600af.netlify.app/]
 ## Screenshot
 
 [!Screenshot](readme_images/folder_structure.png)
+
 [!Screenshot](readme_images/main_page.png)
 
 
