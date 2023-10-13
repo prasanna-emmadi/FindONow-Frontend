@@ -175,4 +175,19 @@ describe("getProducts", () => {
                 expect(data).toStrictEqual(loginResponse);
             });
     });
+
+    test("getProfile successful response", () => {
+        const accessToken = "access_token";
+        const storeRef = setupApiStore(apiSlice, {});
+        fetchMock.mockResponse(JSON.stringify(userData[0]));
+
+        return storeRef.store
+            .dispatch<any>(apiSlice.endpoints.getProfile.initiate(accessToken))
+            .then((action: any) => {
+                const { status, data, isSuccess } = action;
+                expect(status).toBe("fulfilled");
+                expect(isSuccess).toBe(true);
+                expect(data).toStrictEqual(userData[0]);
+            });
+    });
 });
