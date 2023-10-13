@@ -25,7 +25,7 @@ import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import CartDrawer from "./CartDrawer";
 import Options from "./Options";
-import { Wrapper } from "./Products.styles";
+import { ProductsStyles } from "./Products.styles";
 import logo from "./logo.png";
 
 interface ActualProductListProps {
@@ -73,7 +73,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     };
 
     return (
-        <Wrapper data-testid="products">
+        <ProductsStyles data-testid="products">
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Options />
@@ -104,7 +104,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
                     Item added to cart
                 </Alert>
             </Snackbar>
-        </Wrapper>
+        </ProductsStyles>
     );
 };
 

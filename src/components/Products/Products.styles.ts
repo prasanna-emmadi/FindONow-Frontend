@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const ProductsStyles = styled.div`
     margin: 40px;
 `;
 

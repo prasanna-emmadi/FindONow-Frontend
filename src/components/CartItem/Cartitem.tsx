@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
-import { Wrapper } from "./Cartitem.styles";
+import { CartStyles } from "./Cartitem.styles";
 
 type Props = {
     item: CartItemType;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
-    <Wrapper>
+    <CartStyles>
         <div>
             <h3>{item.product.title}</h3>
             <div className="information">
@@ -39,7 +39,7 @@ const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
             </div>
         </div>
         <img src={item.product.images[0]} alt={item.product.title} />
-    </Wrapper>
+    </CartStyles>
 );
 
 export default CartItem;

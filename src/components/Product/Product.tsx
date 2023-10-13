@@ -10,7 +10,7 @@ import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
-import { Wrapper } from "./Product.styles";
+import { ProductStyles } from "./Product.styles";
 import ProductCarousel from "./ProductCarousel";
 
 interface Props {
@@ -74,10 +74,10 @@ interface CartProductProps {
 
 export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
     return (
-        <Wrapper>
+        <ProductStyles>
             <Content data={data} />
             <Button onClick={() => handleAddToCart(data)}>add to cart</Button>
-        </Wrapper>
+        </ProductStyles>
     );
 };
 const Product = () => {

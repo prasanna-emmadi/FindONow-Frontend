@@ -1,4 +1,4 @@
-import { Wrapper } from "../../App.styles";
+import { AppStyles } from "../../App.styles";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
 import CartItem from "../CartItem/Cartitem";
@@ -16,7 +16,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart }: Props) => {
             0,
         );
     return (
-        <Wrapper>
+        <AppStyles>
             <h2> Your Shopping Cart</h2>
             {cartItems.length === 0 ? <p> No items in Cart.</p> : null}
             {cartItems.map((item) => (
@@ -28,7 +28,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart }: Props) => {
                 />
             ))}
             <h2> Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
-        </Wrapper>
+        </AppStyles>
     );
 };
 

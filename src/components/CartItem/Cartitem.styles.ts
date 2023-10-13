@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.aside`
+export const CartStyles = styled.aside`
     display: flex;
     justify-content: space-between;
     font-family: Arial, Helvetica, sans-serif;
