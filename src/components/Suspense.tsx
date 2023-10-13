@@ -11,6 +11,11 @@ interface Props<T> {
     Component: WithFetchingProps<T>;
 }
 
+// Suspense is a Wrapper component which takes the result of hook from apiSlice
+// it behaves as follows in the following cases
+// in error case renders error
+// in loading case shows loading indicator
+// in success case renders the Component passed
 const Suspense = <T,>({
     data,
     isLoading,
