@@ -113,10 +113,11 @@ export const apiSlice = createApi({
             }),
             editCategory: builder.mutation({
                 query: (category) => ({
-                    url: `/users/${category.id}`,
+                    url: `/categories/${category.id}`,
                     method: "PUT",
                     body: category,
                 }),
+                invalidatesTags: ["Category"],
             }),
             refereshToken: builder.mutation({
                 query: (body) => ({
