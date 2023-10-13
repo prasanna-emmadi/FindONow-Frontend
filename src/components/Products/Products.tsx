@@ -3,7 +3,6 @@ import {
     Alert,
     Badge,
     Box,
-    Drawer,
     Grid,
     Pagination,
     Snackbar,
@@ -15,7 +14,7 @@ import {
     useGetCategoriesQuery,
     useGetProductsQuery,
 } from "../../redux/apiSlice";
-import { addToCart, removeFromCart } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
 import {
     addProducts,
     allCategoryProducts,
@@ -24,9 +23,9 @@ import {
 import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
-import Cart from "../Cart/Cart";
 import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
+import CartDrawer from "./CartDrawer";
 import Options from "./Options";
 import { StyledButton, Wrapper } from "./Products.styles";
 import logo from "./logo.png";
@@ -66,10 +65,6 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
         dispatch(addToCart(clickedItem));
     };
 
-    const handleRemoveFromCart = (id: number) => {
-        dispatch(removeFromCart(id));
-    };
-
     const handleClose = (
         event: React.SyntheticEvent | Event,
         reason?: string,
@@ -83,17 +78,13 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
 
     return (
         <Wrapper data-testid="products">
-            <Drawer
-                anchor="right"
-                open={cartOpen}
-                onClose={() => setCartOpen(false)}
-            >
-                <Cart
-                    cartItems={cart.cartItems}
-                    addToCart={handleAddToCart}
-                    removeFromCart={handleRemoveFromCart}
-                />
-            </Drawer>
+            <CartDrawer
+                setSnackOpen={setSnackOpen}
+                dispatch={dispatch}
+                cartItems={cart.cartItems}
+                cartOpen={cartOpen}
+                setCartOpen={setCartOpen}
+            />
             <StyledButton onClick={() => setCartOpen(true)}>
                 <Badge badgeContent={cart.totalItems} color="error">
                     <AddShoppingCart />
