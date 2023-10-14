@@ -6,12 +6,12 @@ import CreateUpdateUser from "./components/CreateUpdateUser";
 import EditUser from "./components/EditUser";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
-import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
 import Products from "./components/Products/Products";
 import Profile from "./components/Profile/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RootPage from "./components/RootPage";
+import UpdateProduct from "./components/UpdateProduct";
 import User from "./components/User";
 import Users from "./components/Users";
 
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                 path: "products/edit/:id",
                 element: (
                     <AdminRoute>
-                        <EditProduct />
+                        <UpdateProduct />
                     </AdminRoute>
                 ),
             },

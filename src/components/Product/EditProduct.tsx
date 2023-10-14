@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import {
     useDeleteProductMutation,
     useGetProductQuery,
-    useUpdateProductMutation,
 } from "../../redux/apiSlice";
 import { ProductType } from "../../types/productType";
 import Suspense from "../Suspense";
@@ -21,7 +20,6 @@ interface Props {
 }
 
 const Content = ({ data }: Props) => {
-    const [updateProduct, editResult] = useUpdateProductMutation();
     const [deleteProduct, deleteResult] = useDeleteProductMutation();
     const navigate = useNavigate();
 
@@ -34,11 +32,7 @@ const Content = ({ data }: Props) => {
     };
 
     const onUpdateClick = async () => {
-        try {
-            await updateProduct(data.id);
-        } catch {
-            console.error("error in Update product");
-        }
+        navigate("/products/edit" + data.id);
     };
 
     useEffect(() => {
@@ -46,12 +40,6 @@ const Content = ({ data }: Props) => {
             navigate("/products");
         }
     }, [deleteResult.isSuccess, navigate]);
-
-    useEffect(() => {
-        if (editResult.isSuccess) {
-            navigate("/products");
-        }
-    }, [editResult.isSuccess, navigate]);
 
     return (
         <Grid container spacing={2}>
