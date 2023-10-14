@@ -58,8 +58,6 @@ const UpdateProduct = () => {
               }
             : undefined;
 
-    console.log("UpdateProduct", data);
-
     return (
         <Suspense
             data={data}
