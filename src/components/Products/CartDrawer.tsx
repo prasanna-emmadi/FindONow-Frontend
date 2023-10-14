@@ -13,12 +13,7 @@ interface Props {
     setSnackOpen: (arg0: boolean) => void;
 }
 
-const CartDrawer = ({
-    setSnackOpen,
-    dispatch, //cartItems,
-} //cartOpen,
-//setCartOpen,
-: Props) => {
+const CartDrawer = ({ setSnackOpen, dispatch }: Props) => {
     const cart = useAppSelector((state) => state.cart);
     const [cartOpen, setCartOpen] = useState(false);
 
