@@ -6,6 +6,7 @@ import CreateUpdateUser from "./components/CreateUpdateUser";
 import EditUser from "./components/EditUser";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
+import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
 import Products from "./components/Products/Products";
 import Profile from "./components/Profile/Profile";
@@ -50,10 +51,19 @@ const router = createBrowserRouter([
                 path: "products/edit/:id",
                 element: (
                     <AdminRoute>
+                        <EditProduct />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "products/update/:id",
+                element: (
+                    <AdminRoute>
                         <UpdateProduct />
                     </AdminRoute>
                 ),
             },
+
             {
                 path: "admin",
                 element: (

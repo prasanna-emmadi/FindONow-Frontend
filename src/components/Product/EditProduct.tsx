@@ -32,7 +32,7 @@ const Content = ({ data }: Props) => {
     };
 
     const onUpdateClick = async () => {
-        navigate("/products/edit" + data.id);
+        navigate("/products/update/" + data.id);
     };
 
     useEffect(() => {
@@ -46,38 +46,42 @@ const Content = ({ data }: Props) => {
             <Grid item xs={6}>
                 <ProductCarousel images={data.images} />
             </Grid>
-            <Grid item xs={6}>
-                <div>
-                    <Typography variant="h3" color="text.primary">
-                        {data.title}
-                    </Typography>
+            <Grid item xs={6} sm container pt={2}>
+                <Grid item xs={8} container direction="column" spacing={2}>
+                    <Grid item xs>
+                        <Typography variant="h3" color="text.primary">
+                            {data.title}
+                        </Typography>
 
-                    <Typography variant="body1" color="text.secondary">
-                        {data.description}
-                    </Typography>
+                        <Typography variant="body1" color="text.secondary">
+                            {data.description}
+                        </Typography>
 
-                    <Typography variant="h5" color="text.primary" pt={2}>
-                        ${data.price}
-                    </Typography>
-                </div>
-                <Stack direction="row" spacing={2} pt={2}>
-                    <Button
-                        color="error"
-                        variant="outlined"
-                        startIcon={<DeleteIcon />}
-                        onClick={onDeleteClick}
-                    >
-                        Delete
-                    </Button>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        endIcon={<UpdateIcon />}
-                        onClick={onUpdateClick}
-                    >
-                        Update
-                    </Button>
-                </Stack>
+                        <Typography variant="h5" color="text.primary" pt={2}>
+                            ${data.price}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs>
+                        <Stack direction="row" spacing={2} pt={2}>
+                            <Button
+                                color="error"
+                                variant="outlined"
+                                startIcon={<DeleteIcon />}
+                                onClick={onDeleteClick}
+                            >
+                                Delete
+                            </Button>
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                endIcon={<UpdateIcon />}
+                                onClick={onUpdateClick}
+                            >
+                                Update
+                            </Button>
+                        </Stack>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     );
