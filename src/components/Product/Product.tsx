@@ -3,7 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { useGetProductQuery, useGetProductsQuery } from "../../redux/apiSlice";
 import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
@@ -26,14 +26,14 @@ const Content = ({ data }: Props) => {
     };
 
     return (
-        <Grid container spacing={4}>
+        <Grid container spacing={4} pt={2}>
             <Grid item xs={6}>
                 <ProductCarousel images={data.images} />
             </Grid>
             <Grid item xs={6} sm container pt={2}>
                 <Grid item xs={8} container direction="column" spacing={2}>
                     <Grid item xs>
-                        <Typography variant="h3" color="text.primary">
+                        <Typography variant="h4" color="text.primary">
                             {data.title}
                         </Typography>
 
@@ -115,7 +115,15 @@ const Product = () => {
 
     return (
         <section className="products-list">
-            <h2>product</h2>
+            <Typography
+                variant="h3"
+                color="text.primary"
+                style={{ textAlign: "center" }}
+                pb={2}
+            >
+                Product Details
+            </Typography>
+            <Divider />
             {content}
         </section>
     );

@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Grid } from "@mui/material";
+import { Box, Button, FormLabel, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -92,7 +92,14 @@ const ProductForm = (props: Props) => {
                 justifyContent="center"
                 style={{ textAlign: "center" }}
             >
-                <h2>New Product </h2>
+                <Typography
+                    variant="h3"
+                    color="text.primary"
+                    style={{ textAlign: "center" }}
+                    pb={2}
+                >
+                    New Product
+                </Typography>
             </Grid>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldController
