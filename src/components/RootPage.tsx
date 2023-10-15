@@ -104,7 +104,7 @@ const NavOptions = () => {
     return <>{optionComponents}</>;
 };
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 const RootPage = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();
