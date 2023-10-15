@@ -2,7 +2,7 @@ import { useGetCategoriesQuery } from "../redux/apiSlice";
 import ProductForm from "./ProductForm";
 import Suspense from "./Suspense";
 
-const CreateUpdateProduct = () => {
+const CreateProduct = () => {
     const { data, isLoading, isSuccess, isError, error } =
         useGetCategoriesQuery();
 
@@ -18,4 +18,4 @@ const CreateUpdateProduct = () => {
     );
 };
 
-export default CreateUpdateProduct;
+export default CreateProduct;

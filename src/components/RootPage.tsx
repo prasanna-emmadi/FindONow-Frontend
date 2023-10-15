@@ -27,7 +27,6 @@ import { useAppDispatch } from "../redux/store/hooks";
 
 const NavOptions = () => {
     const { token, isAdmin } = useAuthContext();
-    //const navigate = useNavigate();
 
     const allOptions = useMemo(() => {
         const options = [

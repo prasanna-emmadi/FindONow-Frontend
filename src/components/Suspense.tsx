@@ -2,6 +2,10 @@ import { LinearProgress } from "@mui/material";
 
 type WithFetchingProps<T> = ({ data }: { data: NonNullable<T> }) => JSX.Element;
 
+// Usage of generics here
+// since we do not know the type of the props being passed, we need to use a generic T
+// props being passed, need to have a data which the Component would expect
+// thus we generalize the Props for all the components
 interface Props<T> {
     data: T;
     isLoading: boolean;

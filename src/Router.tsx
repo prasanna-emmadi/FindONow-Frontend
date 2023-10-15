@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminProducts from "./components/AdminProducts/AdminProducts";
 import AdminRoute from "./components/AdminRoute";
-import CreateUpdateProduct from "./components/CreateUpdateProduct";
+import CreateProduct from "./components/CreateProduct";
 import CreateUpdateUser from "./components/CreateUpdateUser";
 import EditUser from "./components/EditUser";
 import ErrorPage from "./components/ErrorPage";
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 path: "products/create",
                 element: (
                     <AdminRoute>
-                        <CreateUpdateProduct />
+                        <CreateProduct />
                     </AdminRoute>
                 ),
             },

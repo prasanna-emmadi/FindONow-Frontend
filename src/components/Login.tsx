@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAddLoginMutation, useGetProfileQuery } from "../redux/apiSlice";
 import { addToken, addUser } from "../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
+import { paperStyle } from "./common/paperStyles";
 import FieldController from "./custom/FieldController";
-import { paperStyle } from "./styles";
 
 const loginPaperStyle = {
     ...paperStyle,
