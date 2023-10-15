@@ -68,7 +68,7 @@ It correctly bundles React in production mode and optimizes the build for the be
     
 ## Deployment
 
-Deployed with netlify at [https://superb-rolypoly-2600af.netlify.app/]
+Deployed with netlify at [https://golden-shortbread-d18aff.netlify.app/]
 
 ## Screenshot
 
