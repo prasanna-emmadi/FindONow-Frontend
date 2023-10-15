@@ -1,3 +1,20 @@
 .root-container {
   display: flex;
 }
+
+.root-filter-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 993px) {
+  .root-filter-container.l {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 601px) {
+  .root-filter-container.m {
+    grid-template-columns: 1fr 1fr;
+  }
+}

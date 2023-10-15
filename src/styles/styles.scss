@@ -1,5 +1,16 @@
+@use 'root';
 @use 'products';
 
 .container {
   display: flex;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-text {
+  text-align: center;
 }

@@ -111,11 +111,11 @@ const Options = ({ categories }: OptionProps) => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={4} display={"flex"}>
+            <Grid item xs={4}>
                 <Select options={categoryOptions} onChange={onChange} />
             </Grid>
 
-            <Grid item xs={4} display={"flex"}>
+            <Grid item xs={4} className="center-div">
                 <SearchBar />
             </Grid>
             <Grid item xs={4}>
