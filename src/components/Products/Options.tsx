@@ -1,14 +1,17 @@
 import { Grid, TextField } from "@mui/material";
 
-import { useEffect, useState } from "react";
-import Select from "react-select";
+import { useEffect, useMemo, useState } from "react";
+import Select, { ActionMeta } from "react-select";
 import {
     SortOrder,
+    allCategoryProducts,
+    productsOfCategory,
     searchBy,
     sortByPrice,
     sortByTitle,
 } from "../../redux/productSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
+import { CategoryType } from "../../types/productType";
 import { useDebounce } from "../hooks/useDebounce";
 
 const options: any = [
@@ -76,13 +79,46 @@ const SearchBar = () => {
     );
 };
 
-const Options = () => {
+interface OptionProps {
+    categories: CategoryType[];
+}
+
+const Options = ({ categories }: OptionProps) => {
+    const dispatch = useAppDispatch();
+
+    const categoryOptions = useMemo(() => {
+        let allCategoryOption = { value: "0", label: "All" };
+        let categoryOptions = categories.map(({ name, id }) => {
+            const index = id;
+            return {
+                value: index.toString(),
+                label: name,
+            };
+        });
+
+        return [allCategoryOption, ...categoryOptions];
+    }, [categories]);
+
+    const onChange = (option: any, actionMeta: ActionMeta<any>) => {
+        console.log("option ", option);
+        if (option.value === "0") {
+            dispatch(allCategoryProducts());
+        } else {
+            const categoryId = parseInt(option.value);
+            dispatch(productsOfCategory(categoryId));
+        }
+    };
+
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6} display={"flex"}>
+            <Grid item xs={4} display={"flex"}>
+                <Select options={categoryOptions} onChange={onChange} />
+            </Grid>
+
+            <Grid item xs={4} display={"flex"}>
                 <SearchBar />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
                 <SortOptions />
             </Grid>
         </Grid>

@@ -1,23 +1,11 @@
-import {
-    Alert,
-    Box,
-    Grid,
-    Pagination,
-    Snackbar,
-    Tab,
-    Tabs,
-} from "@mui/material";
+import { Alert, Box, Grid, Pagination, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
     useGetCategoriesQuery,
     useGetProductsQuery,
 } from "../../redux/apiSlice";
 import { addToCart } from "../../redux/cartSlice";
-import {
-    addProducts,
-    allCategoryProducts,
-    productsOfCategory,
-} from "../../redux/productSlice";
+import { addProducts } from "../../redux/productSlice";
 import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
@@ -30,6 +18,7 @@ import logo from "./logo.png";
 
 interface ActualProductListProps {
     products: ProductType[];
+    categories: CategoryType[];
     dispatch: AppDispatch;
 }
 
@@ -43,7 +32,11 @@ const getSlice = (page: number, products: ProductType[]) => {
     return products.slice(adjust, page * ProductCountPerPage);
 };
 
-const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
+const ActualProductList = ({
+    products,
+    categories,
+    dispatch,
+}: ActualProductListProps) => {
     const [snackOpen, setSnackOpen] = useState(false);
     const [page, setPage] = useState(1);
     const pageCount = getPageCount(products.length);
@@ -76,7 +69,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
         <ProductsStyles data-testid="products">
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
-            <Options />
+            <Options categories={categories} />
             <Box pt={3} pb={5} display={"flex"} justifyContent={"right"}>
                 <Pagination
                     count={pageCount}
@@ -108,13 +101,6 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     );
 };
 
-function a11yProps(index: number) {
-    return {
-        id: `simple-tab-${index}`,
-        "aria-controls": `simple-tabpanel-${index}`,
-    };
-}
-
 interface CategoryProductsProps {
     data: {
         products: ProductType[];
@@ -125,7 +111,6 @@ interface CategoryProductsProps {
 const CategoryProducts = (props: CategoryProductsProps) => {
     // create tab for each product categories
     // filter categories with text or other
-    const [value, setValue] = useState(0);
     const dispatch = useAppDispatch();
     const categoryProducts = useAppSelector((state) => state.product.products);
     const { categories, products } = props.data;
@@ -138,49 +123,12 @@ const CategoryProducts = (props: CategoryProductsProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-        if (newValue === 0) {
-            dispatch(allCategoryProducts());
-        } else {
-            const indexOfCategory = newValue + 1;
-            if (categoriesSlice.length > indexOfCategory) {
-                const category = categoriesSlice[indexOfCategory];
-                dispatch(productsOfCategory(category.id));
-            }
-        }
-        setValue(newValue);
-    };
-
-    // all - 0
-    // specific category
-    // pass the products down the line
-    let allCategoriesTab = <Tab label={"all"} {...a11yProps(0)} key={0} />;
-    let categoryTabs = categoriesSlice.map((category, index) => {
-        return <Tab label={category.name} {...a11yProps(0)} key={index + 1} />;
-    });
-    categoryTabs = [allCategoriesTab, ...categoryTabs];
-
     return (
-        <>
-            <Box sx={{ width: "100%" }}>
-                <Box>
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        aria-label="basic tabs example"
-                        variant="scrollable"
-                        scrollButtons
-                        allowScrollButtonsMobile
-                    >
-                        {categoryTabs}
-                    </Tabs>
-                </Box>
-            </Box>
-            <ActualProductList
-                products={categoryProducts}
-                dispatch={dispatch}
-            />
-        </>
+        <ActualProductList
+            products={categoryProducts}
+            dispatch={dispatch}
+            categories={categoriesSlice}
+        />
     );
 };
 
