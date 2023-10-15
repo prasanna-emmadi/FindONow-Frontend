@@ -85,10 +85,12 @@ const Product = () => {
         }),
     });
 
+    console.log({ product, id });
+
     let content = <div />;
 
     if (product) {
-        <Content data={product} />;
+        content = <Content data={product} />;
     }
 
     return (

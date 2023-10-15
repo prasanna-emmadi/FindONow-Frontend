@@ -78,16 +78,15 @@ const ActualProductList = ({
                     color="secondary"
                 />
             </Box>
-            <Grid container spacing={3}>
-                {productsSlice.map((product) => (
-                    <Grid item key={product.id} xs={12} sm={4}>
-                        <ProductCard
-                            product={product}
-                            handleAddToCart={handleAddToCart}
-                        />
-                    </Grid>
+            <Box className="products-container l m">
+                {productsSlice.map((product, index) => (
+                    <ProductCard
+                        key={index}
+                        product={product}
+                        handleAddToCart={handleAddToCart}
+                    />
                 ))}
-            </Grid>
+            </Box>
             <Snackbar
                 open={snackOpen}
                 autoHideDuration={6000}
