@@ -4,11 +4,10 @@ import Button from "@mui/material/Button";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Divider, Grid, Typography } from "@mui/material";
-import { useGetProductQuery, useGetProductsQuery } from "../../redux/apiSlice";
+import { useGetProductsQuery } from "../../redux/apiSlice";
 import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
-import Suspense from "../Suspense";
 import { ProductStyles } from "./Product.styles";
 import ProductCarousel from "./ProductCarousel";
 
@@ -62,13 +61,6 @@ const Content = ({ data }: Props) => {
     );
 };
 
-const InnerProduct = ({ data }: Props) => {
-    return (
-        <>
-            <Content data={data} />
-        </>
-    );
-};
 interface CartProductProps {
     data: ProductType;
     handleAddToCart: (clickedItem: ProductType) => void;
@@ -92,26 +84,12 @@ const Product = () => {
             ),
         }),
     });
-    const { data, isLoading, isSuccess, isError, error } = useGetProductQuery(
-        id,
-        {
-            skip: product === undefined,
-        },
-    );
 
-    const productSucess = product ? true : isSuccess;
-    const productLoading = product ? false : isLoading;
+    let content = <div />;
 
-    const content = (
-        <Suspense
-            data={product || data}
-            isLoading={productLoading}
-            isSuccess={productSucess}
-            isError={isError}
-            error={error}
-            Component={InnerProduct}
-        />
-    );
+    if (product) {
+        <Content data={product} />;
+    }
 
     return (
         <section className="products-list">
