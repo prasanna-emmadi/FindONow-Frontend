@@ -7,14 +7,25 @@
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 993px) {
-  .root-filter-container.l {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+.root-banner-container {
+  display: none;
 }
+
 
 @media (min-width: 601px) {
   .root-filter-container.m {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+@media (min-width: 993px) {
+  .root-filter-container.l {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .root-banner-container.l {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }  
 }

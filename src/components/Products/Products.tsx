@@ -1,4 +1,4 @@
-import { Alert, Box, Grid, Pagination, Snackbar } from "@mui/material";
+import { Alert, Box, Pagination, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
     useGetCategoriesQuery,
@@ -70,7 +70,7 @@ const ActualProductList = ({
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Options categories={categories} />
-            <Box pt={3} pb={5} display={"flex"} justifyContent={"right"}>
+            <Box pt={3} pb={5} className="products-pagination l">
                 <Pagination
                     count={pageCount}
                     page={page}
@@ -78,13 +78,14 @@ const ActualProductList = ({
                     color="secondary"
                 />
             </Box>
-            <Box className="products-container l m">
+            <Box className="products-grid-container l m">
                 {productsSlice.map((product, index) => (
-                    <ProductCard
-                        key={index}
-                        product={product}
-                        handleAddToCart={handleAddToCart}
-                    />
+                    <Box className="products-grid-item" key={index}>
+                        <ProductCard
+                            product={product}
+                            handleAddToCart={handleAddToCart}
+                        />
+                    </Box>
                 ))}
             </Box>
             <Snackbar
@@ -160,15 +161,10 @@ const ProductList = () => {
 
     return (
         <section className="products-list">
-            <Grid
-                alignItems="center"
-                justifyContent="center"
-                style={{ textAlign: "center" }}
-            >
+            <Box className="root-banner-container l">
                 <img src={logo} alt="Logo" height={400} width={1100} />
-
-                {content}
-            </Grid>
+            </Box>
+            {content}
         </section>
     );
 };
