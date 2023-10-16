@@ -5,15 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useAddLoginMutation, useGetProfileQuery } from "../redux/apiSlice";
 import { addToken, addUser } from "../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
-import { paperStyle } from "./common/paperStyles";
 import FieldController from "./custom/FieldController";
-
-const loginPaperStyle = {
-    ...paperStyle,
-    width: 600,
-};
+import useFormStyle from "./hooks/useFormStyle";
+import { useIsDesktop } from "./hooks/useIsDesktop";
 
 const Login = () => {
+    const matches = useIsDesktop();
     const { handleSubmit, control } = useForm({
         defaultValues: {
             email: "",
@@ -27,6 +24,7 @@ const Login = () => {
     });
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const loginPaperStyle = useFormStyle();
 
     useEffect(() => {
         if (result.isSuccess) {

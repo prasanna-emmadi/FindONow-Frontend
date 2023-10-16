@@ -13,7 +13,7 @@ import {
 import { useAppDispatch } from "../../redux/store/hooks";
 import { CategoryType } from "../../types/productType";
 import { useDebounce } from "../hooks/useDebounce";
-import { useShowCategoryTabsHooks } from "./hooks/useShowCategoryTabsHook";
+import { useIsDesktop } from "../hooks/useIsDesktop";
 
 const options: any = [
     { value: "title_increasing", label: "Title ↑" },
@@ -86,7 +86,7 @@ interface OptionProps {
 
 const Options = ({ categories }: OptionProps) => {
     const dispatch = useAppDispatch();
-    const show = useShowCategoryTabsHooks();
+    const show = useIsDesktop();
 
     const categoryOptions = useMemo(() => {
         let allCategoryOption = { value: "0", label: "All" };

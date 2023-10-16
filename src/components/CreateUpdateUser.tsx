@@ -4,8 +4,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Controller, useForm } from "react-hook-form";
 import { useAddNewUserMutation } from "../redux/apiSlice";
-import { paperStyle } from "./common/paperStyles";
 import FieldController from "./custom/FieldController";
+import useFormStyle from "./hooks/useFormStyle";
 
 const options = [
     {
@@ -17,11 +17,6 @@ const options = [
         value: "customer",
     },
 ];
-
-const signupPaperStyle = {
-    ...paperStyle,
-    width: 600,
-};
 
 interface DefaultValues {
     email?: string;
@@ -52,6 +47,7 @@ const CreateUpdateUser = (props: Props) => {
         defaultValues: defaultValues,
     });
     const [updateUser] = useAddNewUserMutation();
+    const signupPaperStyle = useFormStyle();
 
     const onSubmit = (d: any) => {
         updateUser(d);

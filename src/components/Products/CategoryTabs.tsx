@@ -6,7 +6,7 @@ import {
 } from "../../redux/productSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { CategoryType } from "../../types/productType";
-import { useShowCategoryTabsHooks } from "./hooks/useShowCategoryTabsHook";
+import { useIsDesktop } from "../hooks/useIsDesktop";
 
 const a11yProps = (index: number) => {
     return {
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const CategoryTabs = ({ categories }: Props) => {
-    const show = useShowCategoryTabsHooks();
+    const show = useIsDesktop();
     const [value, setValue] = useState(0);
     const dispatch = useAppDispatch();
 
