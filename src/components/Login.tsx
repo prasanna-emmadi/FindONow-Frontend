@@ -7,10 +7,8 @@ import { addToken, addUser } from "../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
 import FieldController from "./custom/FieldController";
 import useFormStyle from "./hooks/useFormStyle";
-import { useIsDesktop } from "./hooks/useIsDesktop";
 
 const Login = () => {
-    const matches = useIsDesktop();
     const { handleSubmit, control } = useForm({
         defaultValues: {
             email: "",
