@@ -1,4 +1,4 @@
-import { Alert, Box, Pagination, Snackbar } from "@mui/material";
+import { Alert, Box, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
     useGetCategoriesQuery,
@@ -14,6 +14,7 @@ import Suspense from "../Suspense";
 import CartDrawer from "./CartDrawer";
 import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
+import ProductsPagination from "./ProductsPagination";
 import logo from "./logo.png";
 
 interface ActualProductListProps {
@@ -70,14 +71,11 @@ const ActualProductList = ({
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Options categories={categories} />
-            <Box pt={3} pb={5} className="products-pagination l">
-                <Pagination
-                    count={pageCount}
-                    page={page}
-                    onChange={handleChange}
-                    color="secondary"
-                />
-            </Box>
+            <ProductsPagination
+                pageCount={pageCount}
+                page={page}
+                handleChange={handleChange}
+            />
             <Box className="products-grid-container l m">
                 {productsSlice.map((product, index) => (
                     <Box className="products-grid-item" key={index}>
