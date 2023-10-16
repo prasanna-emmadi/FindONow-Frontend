@@ -13,6 +13,7 @@ import {
 import { useAppDispatch } from "../../redux/store/hooks";
 import { CategoryType } from "../../types/productType";
 import { useDebounce } from "../hooks/useDebounce";
+import { useShowCategoryTabsHooks } from "./hooks/useShowCategoryTabsHook";
 
 const options: any = [
     { value: "title_increasing", label: "Title ↑" },
@@ -85,6 +86,7 @@ interface OptionProps {
 
 const Options = ({ categories }: OptionProps) => {
     const dispatch = useAppDispatch();
+    const show = useShowCategoryTabsHooks();
 
     const categoryOptions = useMemo(() => {
         let allCategoryOption = { value: "0", label: "All" };
@@ -109,20 +111,33 @@ const Options = ({ categories }: OptionProps) => {
         }
     };
 
-    return (
-        <Grid container spacing={2}>
-            <Grid item xs={4}>
-                <Select options={categoryOptions} onChange={onChange} />
+    if (show) {
+        return (
+            <Grid container spacing={2}>
+                <Grid item xs={6} className="center-div">
+                    <SearchBar />
+                </Grid>
+                <Grid item xs={6}>
+                    <SortOptions />
+                </Grid>
             </Grid>
+        );
+    } else {
+        return (
+            <Grid container spacing={2}>
+                <Grid item xs={4}>
+                    <Select options={categoryOptions} onChange={onChange} />
+                </Grid>
 
-            <Grid item xs={4} className="center-div">
-                <SearchBar />
+                <Grid item xs={4} className="center-div">
+                    <SearchBar />
+                </Grid>
+                <Grid item xs={4}>
+                    <SortOptions />
+                </Grid>
             </Grid>
-            <Grid item xs={4}>
-                <SortOptions />
-            </Grid>
-        </Grid>
-    );
+        );
+    }
 };
 
 export default Options;

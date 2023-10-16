@@ -12,6 +12,7 @@ import { CategoryType, ProductType } from "../../types/productType";
 import ProductCard from "../ProductCard";
 import Suspense from "../Suspense";
 import CartDrawer from "./CartDrawer";
+import CategoryTabs from "./CategoryTabs";
 import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
@@ -122,11 +123,14 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     }, []);
 
     return (
-        <ActualProductList
-            products={categoryProducts}
-            dispatch={dispatch}
-            categories={categoriesSlice}
-        />
+        <>
+            <CategoryTabs categories={categoriesSlice} />
+            <ActualProductList
+                products={categoryProducts}
+                dispatch={dispatch}
+                categories={categoriesSlice}
+            />
+        </>
     );
 };
 
