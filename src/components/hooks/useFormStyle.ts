@@ -1,4 +1,4 @@
-import { paperStyle } from "../Common/paperStyles";
+import { paperStyle } from "../common/paperStyles";
 import { useIsDesktop } from "./useIsDesktop";
 
 const useFormStyle = () => {

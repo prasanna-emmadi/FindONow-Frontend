@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "../../redux/apiSlice";
 import { UserType } from "../../types/userType";
-import Suspense from "../Common/Suspense";
+import Suspense from "../common/Suspense";
 
 interface Props {
     data: UserType[];

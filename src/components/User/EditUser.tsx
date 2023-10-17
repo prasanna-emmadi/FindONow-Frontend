@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../redux/store/hooks";
-import ErrorPage from "../Common/ErrorPage";
+import ErrorPage from "../common/ErrorPage";
 import SignUp from "./SignUp";
 
 const EditUser = () => {

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Controller, useForm } from "react-hook-form";
 import { useAddNewUserMutation } from "../../redux/apiSlice";
-import FieldController from "../Common/FieldController";
+import FieldController from "../common/FieldController";
 import useFormStyle from "../hooks/useFormStyle";
 
 const options = [

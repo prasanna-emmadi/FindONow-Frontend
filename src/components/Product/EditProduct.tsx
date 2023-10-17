@@ -10,7 +10,7 @@ import {
     useGetProductQuery,
 } from "../../redux/apiSlice";
 import { ProductType } from "../../types/productType";
-import Suspense from "../Common/Suspense";
+import Suspense from "../common/Suspense";
 import ProductCarousel from "./ProductCarousel";
 
 interface Props {

@@ -4,7 +4,7 @@ import {
     useGetProductsQuery,
 } from "../../redux/apiSlice";
 import { CategoryType } from "../../types/productType";
-import Suspense from "../Common/Suspense";
+import Suspense from "../common/Suspense";
 import ProductForm, { toDefaultValues } from "./ProductForm";
 
 interface DataType {

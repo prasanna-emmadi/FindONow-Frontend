@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminProducts from "./components/AdminComponents/AdminProducts";
 import Login from "./components/Auth/Login";
-import ErrorPage from "./components/Common/ErrorPage";
 import CreateProduct from "./components/Product/CreateProduct";
 import EditProduct from "./components/Product/EditProduct";
 import Product from "./components/Product/Product";
@@ -15,6 +14,7 @@ import Profile from "./components/User/Profile";
 import SignUp from "./components/User/SignUp";
 import User from "./components/User/User";
 import Users from "./components/User/Users";
+import ErrorPage from "./components/common/ErrorPage";
 
 const router = createBrowserRouter([
     {
