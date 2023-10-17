@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAddLoginMutation, useGetProfileQuery } from "../../redux/apiSlice";
 import { addToken, addUser } from "../../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import FieldController from "../custom/FieldController";
+import FieldController from "../Common/FieldController";
 import useFormStyle from "../hooks/useFormStyle";
 
 const Login = () => {

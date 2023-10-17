@@ -1,12 +1,10 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import UpdateIcon from "@mui/icons-material/Update";
+import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useNavigate, useParams } from "react-router-dom";
-
-import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
     useDeleteProductMutation,
     useGetProductQuery,

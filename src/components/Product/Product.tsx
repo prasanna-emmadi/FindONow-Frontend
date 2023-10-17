@@ -8,7 +8,6 @@ import { useGetProductsQuery } from "../../redux/apiSlice";
 import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
-import { ProductStyles } from "./Product.styles";
 import ProductCarousel from "./ProductCarousel";
 
 interface Props {
@@ -61,19 +60,6 @@ const Content = ({ data }: Props) => {
     );
 };
 
-interface CartProductProps {
-    data: ProductType;
-    handleAddToCart: (clickedItem: ProductType) => void;
-}
-
-export const CartProduct = ({ data, handleAddToCart }: CartProductProps) => {
-    return (
-        <ProductStyles>
-            <Content data={data} />
-            <Button onClick={() => handleAddToCart(data)}>add to cart</Button>
-        </ProductStyles>
-    );
-};
 const Product = () => {
     const { id } = useParams();
     // getting the product from api cache query
@@ -84,8 +70,6 @@ const Product = () => {
             ),
         }),
     });
-
-    console.log({ product, id });
 
     let content = <div />;
 
