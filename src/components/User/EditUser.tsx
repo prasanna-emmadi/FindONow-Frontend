@@ -1,6 +1,6 @@
-import { useAppSelector } from "../redux/store/hooks";
+import { useAppSelector } from "../../redux/store/hooks";
+import ErrorPage from "../ErrorPage";
 import CreateUpdateUser from "./CreateUpdateUser";
-import ErrorPage from "./ErrorPage";
 
 const EditUser = () => {
     const auth = useAppSelector((state) => state.auth);

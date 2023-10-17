@@ -9,7 +9,7 @@ import { addProducts } from "../../redux/productSlice";
 import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CategoryType, ProductType } from "../../types/productType";
-import ProductCard from "../ProductCard";
+import ProductCard from "../Product/ProductCard";
 import Suspense from "../Suspense";
 import CartDrawer from "./CartDrawer";
 import CategoryTabs from "./CategoryTabs";
@@ -63,7 +63,6 @@ const ActualProductList = ({
         if (reason === "clickaway") {
             return;
         }
-
         setSnackOpen(false);
     };
 

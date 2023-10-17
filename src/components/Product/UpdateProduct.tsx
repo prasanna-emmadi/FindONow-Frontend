@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useGetCategoriesQuery, useGetProductsQuery } from "../redux/apiSlice";
-import { CategoryType } from "../types/productType";
+import {
+    useGetCategoriesQuery,
+    useGetProductsQuery,
+} from "../../redux/apiSlice";
+import { CategoryType } from "../../types/productType";
+import Suspense from "../Suspense";
 import ProductForm, { toDefaultValues } from "./ProductForm";
-import Suspense from "./Suspense";
 
 interface DataType {
     categories: CategoryType[];

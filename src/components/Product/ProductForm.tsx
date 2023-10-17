@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { useAddNewProductMutation } from "../redux/apiSlice";
-import { CategoryType, ProductType } from "../types/productType";
-import FieldController from "./custom/FieldController";
+import { useAddNewProductMutation } from "../../redux/apiSlice";
+import { CategoryType, ProductType } from "../../types/productType";
+import FieldController from "../custom/FieldController";
 
 type optionType = { value: string; label: string };
 const defaultOption = { value: "", label: "" };

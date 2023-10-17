@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useGetUserQuery } from "../redux/apiSlice";
-import { UserType } from "../types/userType";
-import Suspense from "./Suspense";
+import { useGetUserQuery } from "../../redux/apiSlice";
+import { UserType } from "../../types/userType";
+import Suspense from "../Suspense";
 
 interface Props {
     data: UserType | undefined;
