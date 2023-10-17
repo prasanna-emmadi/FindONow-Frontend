@@ -1,5 +1,5 @@
 import { useGetCategoriesQuery } from "../../redux/apiSlice";
-import Suspense from "../Suspense";
+import Suspense from "../Common/Suspense";
 import ProductForm from "./ProductForm";
 
 const CreateProduct = () => {

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/store/hooks";
-import { paperStyle } from "../common/paperStyles";
+import { paperStyle } from "../Common/paperStyles";
 
 const loginPaperStyle = {
     ...paperStyle,

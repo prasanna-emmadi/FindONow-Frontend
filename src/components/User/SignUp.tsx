@@ -38,7 +38,7 @@ const newUserDefaultValues: DefaultValues = {
     avatar: "",
 };
 
-const CreateUpdateUser = (props: Props) => {
+const SignUp = (props: Props) => {
     const defaultValues = props.defaultValues
         ? props.defaultValues
         : newUserDefaultValues;
@@ -123,4 +123,4 @@ const CreateUpdateUser = (props: Props) => {
         </Grid>
     );
 };
-export default CreateUpdateUser;
+export default SignUp;

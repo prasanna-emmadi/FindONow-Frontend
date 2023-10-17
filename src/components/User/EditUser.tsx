@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../redux/store/hooks";
-import ErrorPage from "../ErrorPage";
-import CreateUpdateUser from "./CreateUpdateUser";
+import ErrorPage from "../Common/ErrorPage";
+import SignUp from "./SignUp";
 
 const EditUser = () => {
     const auth = useAppSelector((state) => state.auth);
@@ -8,7 +8,7 @@ const EditUser = () => {
         return <ErrorPage />;
     }
 
-    return <CreateUpdateUser defaultValues={{ ...auth.user }} />;
+    return <SignUp defaultValues={{ ...auth.user }} />;
 };
 
 export default EditUser;
