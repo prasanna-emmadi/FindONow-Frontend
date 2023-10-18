@@ -70,6 +70,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Deployed with netlify at [https://golden-shortbread-d18aff.netlify.app/]
 
+- Customer login credentials: 
+  - username: admin2@gmail.com
+  - password: 12345
+- Admin login credentials:
+  - username: john@mail.com
+  - password: changeme
+
 ## Screenshots
 1. Main page
   <img src="readme_images/main_page.png" />
