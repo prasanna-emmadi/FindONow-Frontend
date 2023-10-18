@@ -113,7 +113,7 @@ const Login = () => {
                 autoHideDuration={6000}
                 onClose={handleClose}
             >
-                <Alert severity="success" sx={{ width: "100%" }}>
+                <Alert severity="error" sx={{ width: "100%" }}>
                     Login failed
                 </Alert>
             </Snackbar>
