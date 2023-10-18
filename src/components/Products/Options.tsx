@@ -1,3 +1,4 @@
+import TuneIcon from "@mui/icons-material/Tune";
 import {
     Box,
     Button,
@@ -113,7 +114,12 @@ const FilterDrawer = ({ children }: FilterDrawerProps) => {
     return (
         <>
             <Box sx={{ textAlign: "center", pt: 1 }}>
-                <Button onClick={() => toggleDrawer(true)}>Filters</Button>
+                <Button
+                    startIcon={<TuneIcon />}
+                    onClick={() => toggleDrawer(true)}
+                >
+                    Filters
+                </Button>
             </Box>
             <SwipeableDrawer
                 anchor="right"

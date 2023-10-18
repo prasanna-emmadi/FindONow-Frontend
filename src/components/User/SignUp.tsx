@@ -52,7 +52,6 @@ const SignUp = (props: Props) => {
     const navigate = useNavigate();
 
     const onSubmit = async (d: any) => {
-        console.log("signup submit", d);
         try {
             await updateUser(d).unwrap();
             navigate("/home");
