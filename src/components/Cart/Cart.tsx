@@ -1,7 +1,7 @@
 import { AppStyles } from "../../App.styles";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
-import CartItem from "./CartItem/Cartitem";
+import CartItem from "./cartItem/Cartitem";
 
 type Props = {
     cartItems: CartItemType[];
