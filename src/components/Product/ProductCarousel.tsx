@@ -7,10 +7,10 @@ export interface Props {
 
 const ProductCarousel = ({ images }: Props) => {
     return (
-        <Carousel useKeyboardArrows centerMode={true}>
+        <Carousel useKeyboardArrows>
             {images.map((image, index) => {
                 return (
-                    <div className="slide" key={index}>
+                    <div key={index}>
                         <img alt="sample_file" src={image} key={index} />
                     </div>
                 );

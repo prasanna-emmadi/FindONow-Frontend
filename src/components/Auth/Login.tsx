@@ -1,5 +1,5 @@
-import { Button, Grid, Paper, Stack } from "@mui/material";
-import { useEffect } from "react";
+import { Alert, Button, Grid, Paper, Snackbar, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAddLoginMutation, useGetProfileQuery } from "../../redux/apiSlice";
@@ -22,6 +22,7 @@ const Login = () => {
     });
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const [snackOpen, setSnackOpen] = useState(false);
     const loginPaperStyle = useFormStyle();
 
     useEffect(() => {
@@ -41,8 +42,19 @@ const Login = () => {
         try {
             await login(d).unwrap();
         } catch {
+            setSnackOpen(true);
             console.error("error in login ");
         }
+    };
+
+    const handleClose = (
+        _event: React.SyntheticEvent | Event,
+        reason?: string,
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackOpen(false);
     };
 
     const onSignUp = () => {
@@ -50,51 +62,62 @@ const Login = () => {
     };
 
     return (
-        <Grid>
-            <Paper elevation={2} style={loginPaperStyle}>
-                <Grid
-                    alignItems="center"
-                    justifyContent="center"
-                    style={{ textAlign: "center" }}
-                >
-                    <h2>Login </h2>
-                </Grid>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FieldController
-                        name="email"
-                        label="Email"
-                        type="email"
-                        control={control}
-                    />
-                    <FieldController
-                        name="password"
-                        label="Password"
-                        type="password"
-                        control={control}
-                    />
-                    <Stack
-                        direction="row"
-                        spacing={2}
-                        justifyContent={"center"}
+        <>
+            <Grid>
+                <Paper elevation={2} style={loginPaperStyle}>
+                    <Grid
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ textAlign: "center" }}
                     >
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
+                        <h2>Login </h2>
+                    </Grid>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <FieldController
+                            name="email"
+                            label="Email"
+                            type="email"
+                            control={control}
+                        />
+                        <FieldController
+                            name="password"
+                            label="Password"
+                            type="password"
+                            control={control}
+                        />
+                        <Stack
+                            direction="row"
+                            spacing={2}
+                            justifyContent={"center"}
                         >
-                            Login
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={onSignUp}
-                        >
-                            SignUp
-                        </Button>
-                    </Stack>
-                </form>
-            </Paper>
-        </Grid>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                            >
+                                Login
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={onSignUp}
+                            >
+                                SignUp
+                            </Button>
+                        </Stack>
+                    </form>
+                </Paper>
+            </Grid>
+            <Snackbar
+                open={snackOpen}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity="success" sx={{ width: "100%" }}>
+                    Login failed
+                </Alert>
+            </Snackbar>
+        </>
     );
 };
 export default Login;
