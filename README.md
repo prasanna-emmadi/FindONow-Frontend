@@ -76,6 +76,12 @@ Deployed with netlify at [https://golden-shortbread-d18aff.netlify.app/]
 2. Folder structure
   <img src="readme_images/folder_structure.png" />
 
+## Sequence Diagrams
+1. Login Page 
+   <img src="readme_images/login_page_sequence_diagram.png" />
+2. Products Page
+   <img src="readme_images/products_page_sequence_diagram.png" />
+
 
 
 
