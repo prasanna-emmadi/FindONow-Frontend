@@ -172,10 +172,11 @@ const Options = ({ categories }: OptionProps) => {
     if (isDesktop) {
         return (
             <Grid container spacing={2}>
-                <Grid item xs={6} className="center-div">
+                <Grid item xs={6}>
                     <SearchBar showLabel={true} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={2} />
+                <Grid item xs={4}>
                     <SortOptions />
                 </Grid>
             </Grid>
