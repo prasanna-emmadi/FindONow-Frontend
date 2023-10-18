@@ -18,7 +18,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useMemo, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
@@ -125,6 +124,10 @@ const RootPage = () => {
             navigate("/");
         }
     };
+
+    const onHomeClick = () => {
+        navigate("/");
+    };
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -146,14 +149,13 @@ const RootPage = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1 }}
+                    <Button
+                        color="inherit"
+                        onClick={onHomeClick}
+                        style={{ justifyContent: "flex-start", flexGrow: 1 }}
                     >
                         Find'O Now
-                    </Typography>
+                    </Button>
                     <Button color="inherit" onClick={onLoginClick}>
                         {loginButtonText}
                     </Button>
