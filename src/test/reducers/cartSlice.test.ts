@@ -1,4 +1,4 @@
-import { addToCart, removeFromCart } from "../../redux/cartSlice";
+import { addToCart, removeFromCart, resetCart } from "../../redux/cartSlice";
 import createStore from "../../redux/store/store";
 import { CategoryType, ProductType } from "../../types/productType";
 
@@ -36,5 +36,12 @@ describe("cart slice reducer", () => {
         store?.dispatch(removeFromCart(product.id));
         expect(store?.getState().cart.cartItems.length).toBe(1);
         expect(store?.getState().cart.totalItems).toBe(1);
+    });
+
+    test("resetCart", () => {
+        store?.dispatch(addToCart(product));
+        store?.dispatch(resetCart());
+        expect(store?.getState().cart.cartItems.length).toBe(0);
+        expect(store?.getState().cart.totalItems).toBe(0);
     });
 });

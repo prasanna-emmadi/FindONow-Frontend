@@ -107,11 +107,9 @@ const FilterDrawer = ({ children }: FilterDrawerProps) => {
     const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => {
-        console.log("toggleDrawer", newOpen);
         setOpen(newOpen);
     };
 
-    console.log("filters ", open);
     return (
         <>
             <Box sx={{ textAlign: "center", pt: 1 }}>
@@ -157,7 +155,6 @@ const Options = ({ categories }: OptionProps) => {
     }, [categories]);
 
     const onChange = (option: any, actionMeta: ActionMeta<any>) => {
-        console.log("option ", option);
         if (option.value === "0") {
             dispatch(allCategoryProducts());
         } else {

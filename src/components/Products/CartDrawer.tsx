@@ -14,7 +14,7 @@ interface Props {
 }
 
 const CartDrawer = ({ setSnackOpen, dispatch }: Props) => {
-    const cart = useAppSelector((state) => state.cart);
+    const totalItems = useAppSelector((state) => state.cart.totalItems);
     const [cartOpen, setCartOpen] = useState(false);
 
     const handleAddToCart = (clickedItem: ProductType) => {
@@ -34,13 +34,12 @@ const CartDrawer = ({ setSnackOpen, dispatch }: Props) => {
                 onClose={() => setCartOpen(false)}
             >
                 <Cart
-                    cartItems={cart.cartItems}
                     addToCart={handleAddToCart}
                     removeFromCart={handleRemoveFromCart}
                 />
             </Drawer>
             <StyledButton onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={cart.totalItems} color="error">
+                <Badge badgeContent={totalItems} color="error">
                     <AddShoppingCart />
                 </Badge>
             </StyledButton>

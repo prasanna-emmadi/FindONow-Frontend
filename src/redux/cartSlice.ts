@@ -48,8 +48,12 @@ const cartSlice = createSlice({
                 0,
             );
         },
+        resetCart: (state) => {
+            state.cartItems = [];
+            state.totalItems = 0;
+        },
     },
 });
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
 
 export default cartSlice;
