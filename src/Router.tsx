@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminProducts from "./components/AdminComponents/AdminProducts";
+import Login from "./components/Auth/Login";
+import CreateProduct from "./components/Product/CreateProduct";
+import EditProduct from "./components/Product/EditProduct";
+import Product from "./components/Product/Product";
+import UpdateProduct from "./components/Product/UpdateProduct";
+import Products from "./components/Products/Products";
 import RootPage from "./components/RootPage";
-import AdminProducts from "./components/adminComponents/AdminProducts";
-import Login from "./components/auth/Login";
+import AdminRoute from "./components/Routes/AdminRoute";
+import ProtectedRoute from "./components/Routes/ProtectedRoute";
+import EditUser from "./components/User/EditUser";
+import Profile from "./components/User/Profile";
+import SignUp from "./components/User/SignUp";
+import User from "./components/User/User";
+import Users from "./components/User/Users";
 import ErrorPage from "./components/common/ErrorPage";
-import CreateProduct from "./components/product/CreateProduct";
-import EditProduct from "./components/product/EditProduct";
-import Product from "./components/product/Product";
-import UpdateProduct from "./components/product/UpdateProduct";
-import Products from "./components/products/Products";
-import AdminRoute from "./components/routes/AdminRoute";
-import ProtectedRoute from "./components/routes/ProtectedRoute";
-import EditUser from "./components/user/EditUser";
-import Profile from "./components/user/Profile";
-import SignUp from "./components/user/SignUp";
-import User from "./components/user/User";
-import Users from "./components/user/Users";
 
 const router = createBrowserRouter([
     {

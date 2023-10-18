@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from "../../redux/cartSlice";
 import { AppDispatch } from "../../redux/store/configureStore";
 import { useAppSelector } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
-import Cart from "../cart/Cart";
+import Cart from "../Cart/Cart";
 import { StyledButton } from "./Products.styles";
 
 interface Props {
