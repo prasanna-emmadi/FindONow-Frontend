@@ -21,7 +21,6 @@ const Cart = ({ addToCart, removeFromCart }: Props) => {
             0,
         );
     const onBuy = () => {
-        debugger;
         dispatch(resetCart());
     };
     return (
