@@ -4,7 +4,7 @@ import { resetCart } from "../../redux/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
-import CartItem from "./cartItem/Cartitem";
+import CartItem from "./CartItem/Cartitem";
 
 type Props = {
     addToCart: (clickedItem: ProductType) => void;
