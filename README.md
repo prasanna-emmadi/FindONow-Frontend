@@ -71,9 +71,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 Deployed with netlify at [https://golden-shortbread-d18aff.netlify.app/]
 
 ## Screenshot
+[!Screenshot](/readme_images/folder_structure.png)
 
-[!Screenshot](readme_images/folder_structure.png)
-
-[!Screenshot](readme_images/main_page.png)
+[!Screenshot](/readme_images/main_page.png)
 
 
