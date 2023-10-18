@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "../../redux/apiSlice";
 import FieldController from "../common/FieldController";
 import useFormStyle from "../hooks/useFormStyle";
@@ -48,9 +49,16 @@ const SignUp = (props: Props) => {
     });
     const [updateUser] = useAddNewUserMutation();
     const signupPaperStyle = useFormStyle();
+    const navigate = useNavigate();
 
-    const onSubmit = (d: any) => {
-        updateUser(d);
+    const onSubmit = async (d: any) => {
+        console.log("signup submit", d);
+        try {
+            await updateUser(d).unwrap();
+            navigate("/home");
+        } catch {
+            console.error("error in signup");
+        }
     };
 
     const generateRadioOptions = () => {
@@ -113,6 +121,7 @@ const SignUp = (props: Props) => {
                         label="Avatar"
                         type="url"
                         control={control}
+                        required={false}
                     />
 
                     <Button type="submit" variant="contained" color="primary">

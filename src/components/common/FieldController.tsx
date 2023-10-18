@@ -6,6 +6,7 @@ export interface FieldControllerProps {
     label: string;
     type: string;
     control: any;
+    required?: boolean;
 }
 
 const FieldController = ({
@@ -13,12 +14,13 @@ const FieldController = ({
     name,
     label,
     type,
+    required,
 }: FieldControllerProps) => {
     return (
         <Controller
             name={name}
             control={control}
-            rules={{ required: true }}
+            rules={{ required: required === undefined ? true : required }}
             render={({ field }) => (
                 <>
                     <TextField
