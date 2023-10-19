@@ -28,7 +28,13 @@ const Content = ({ data }: Props) => {
 
     if (product) {
         const defaultValues = toDefaultValues(product);
-        return <ProductForm data={categories} defaultValues={defaultValues} />;
+        return (
+            <ProductForm
+                data={categories}
+                defaultValues={defaultValues}
+                newProduct={false}
+            />
+        );
     }
     return <div />;
 };

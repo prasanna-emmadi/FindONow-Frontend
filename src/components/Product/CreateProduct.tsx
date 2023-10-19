@@ -1,6 +1,15 @@
 import { useGetCategoriesQuery } from "../../redux/apiSlice";
+import { CategoryType } from "../../types/productType";
 import Suspense from "../common/Suspense";
 import ProductForm from "./ProductForm";
+
+interface Props {
+    data: CategoryType[];
+}
+
+const NewProduct = ({ data }: Props) => {
+    return <ProductForm data={data} newProduct={true} />;
+};
 
 const CreateProduct = () => {
     const { data, isLoading, isSuccess, isError, error } =
@@ -13,7 +22,7 @@ const CreateProduct = () => {
             isSuccess={isSuccess}
             isError={isError}
             error={error}
-            Component={ProductForm}
+            Component={NewProduct}
         />
     );
 };

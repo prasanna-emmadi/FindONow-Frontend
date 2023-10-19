@@ -3,7 +3,10 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
-import { useAddNewProductMutation } from "../../redux/apiSlice";
+import {
+    useAddNewProductMutation,
+    useUpdateProductMutation,
+} from "../../redux/apiSlice";
 import { CategoryType, ProductType } from "../../types/productType";
 import FieldController from "../common/FieldController";
 
@@ -21,6 +24,7 @@ interface DefaultValues {
 interface Props {
     data: CategoryType[];
     defaultValues?: DefaultValues;
+    newProduct: boolean;
 }
 
 export const toDefaultValues = (product: ProductType) => {
@@ -62,6 +66,7 @@ const ProductForm = (props: Props) => {
         defaultValues: defaultValues,
     });
     const [addProduct, result] = useAddNewProductMutation();
+    const [updateProduct, updateProductResult] = useUpdateProductMutation();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -71,6 +76,13 @@ const ProductForm = (props: Props) => {
         }
     }, [result.isSuccess, result.data, navigate]);
 
+    useEffect(() => {
+        if (updateProductResult.isSuccess) {
+            const id = updateProductResult.data.id;
+            navigate("/products/" + id);
+        }
+    }, [updateProductResult.isSuccess, updateProductResult.data, navigate]);
+
     const onSubmit = async (d: any) => {
         try {
             // the shape of  option is {value, label} where value is assigned category.id
@@ -79,7 +91,11 @@ const ProductForm = (props: Props) => {
             d.categoryId = Number(d.categoryId.value);
             d.images = [d.images];
             // async
-            await addProduct(d).unwrap();
+            if (props.newProduct) {
+                await addProduct(d).unwrap();
+            } else {
+                await updateProduct(d).unwrap();
+            }
         } catch {
             console.error("error in add product");
         }
