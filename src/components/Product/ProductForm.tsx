@@ -97,7 +97,7 @@ const ProductForm = (props: Props) => {
                 await updateProduct(d).unwrap();
             }
         } catch {
-            console.error("error in add product");
+            console.error("error in add/update product");
         }
     };
 
