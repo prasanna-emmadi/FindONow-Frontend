@@ -1,5 +1,6 @@
 const products = [
     {
+        _id: "29",
         id: 29,
         title: "Elegant Bronze Mouse",
         price: 794,
@@ -22,6 +23,7 @@ const products = [
         },
     },
     {
+        _id: "31",
         id: 31,
         title: "Incredible Metal Hat",
         price: 902,

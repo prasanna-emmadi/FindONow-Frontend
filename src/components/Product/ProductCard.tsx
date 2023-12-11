@@ -19,7 +19,7 @@ interface Props {
 const ProductCard = ({ product, handleAddToCart }: Props) => {
     const navigate = useNavigate();
     const onClick = () => {
-        navigate("/products/" + product.id);
+        navigate("/products/" + product._id);
     };
     return (
         <Card sx={{ maxWidth: 345 }}>

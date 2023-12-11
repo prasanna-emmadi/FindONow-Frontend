@@ -40,7 +40,7 @@ const InnerAdminProducts = ({ data }: Props) => {
                                 },
                             }}
                             onClick={() => {
-                                navigate("/products/edit/" + product.id);
+                                navigate("/products/edit/" + product._id);
                             }}
                         >
                             <TableCell component="th" scope="row">

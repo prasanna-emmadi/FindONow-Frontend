@@ -71,14 +71,14 @@ const ProductForm = (props: Props) => {
 
     useEffect(() => {
         if (result.isSuccess) {
-            const id = result.data.id;
+            const id = result.data._id;
             navigate("/products/" + id);
         }
     }, [result.isSuccess, result.data, navigate]);
 
     useEffect(() => {
         if (updateProductResult.isSuccess) {
-            const id = updateProductResult.data.id;
+            const id = updateProductResult.data._id;
             navigate("/products/" + id);
         }
     }, [updateProductResult.isSuccess, updateProductResult.data, navigate]);

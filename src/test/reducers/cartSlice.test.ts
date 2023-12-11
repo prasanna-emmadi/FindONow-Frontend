@@ -10,7 +10,7 @@ describe("cart slice reducer", () => {
         image: "https://category-image.url.com",
     };
     const product: ProductType = {
-        id: 1,
+        _id: "1",
         title: "title",
         description: "description",
         category: category,
@@ -34,7 +34,7 @@ describe("cart slice reducer", () => {
         store?.dispatch(addToCart(product));
         store?.dispatch(addToCart(product));
         expect(store?.getState().cart.totalItems).toBe(2);
-        store?.dispatch(removeFromCart(product.id));
+        store?.dispatch(removeFromCart(product._id));
         expect(store?.getState().cart.cartItems.length).toBe(1);
         expect(store?.getState().cart.totalItems).toBe(1);
     });

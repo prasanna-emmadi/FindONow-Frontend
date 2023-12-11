@@ -21,7 +21,7 @@ const Content = ({ data }: Props) => {
     const { product } = useGetProductsQuery(undefined, {
         selectFromResult: ({ data }) => ({
             product: data?.find((product) =>
-                id ? product.id === parseInt(id) : undefined,
+                id ? product._id === id : undefined,
             ),
         }),
     });

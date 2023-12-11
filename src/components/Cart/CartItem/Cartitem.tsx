@@ -6,7 +6,7 @@ import { CartStyles } from "./Cartitem.styles";
 type Props = {
     item: CartItemType;
     addToCart: (clickedItem: ProductType) => void;
-    removeFromCart: (id: number) => void;
+    removeFromCart: (id: string) => void;
 };
 
 const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
@@ -22,7 +22,7 @@ const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
                     size="small"
                     disableElevation
                     variant="contained"
-                    onClick={() => removeFromCart(item.product.id)}
+                    onClick={() => removeFromCart(item.product._id)}
                 >
                     -
                 </Button>

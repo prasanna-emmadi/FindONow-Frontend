@@ -62,11 +62,12 @@ const Content = ({ data }: Props) => {
 
 const Product = () => {
     const { id } = useParams();
+    
     // getting the product from api cache query
     const { product } = useGetProductsQuery(undefined, {
         selectFromResult: ({ data }) => ({
             product: data?.find((product) =>
-                id ? product.id === parseInt(id) : undefined,
+                id ? product._id === id : undefined,
             ),
         }),
     });

@@ -22,7 +22,7 @@ const CartDrawer = ({ setSnackOpen, dispatch }: Props) => {
         dispatch(addToCart(clickedItem));
     };
 
-    const handleRemoveFromCart = (id: number) => {
+    const handleRemoveFromCart = (id: string) => {
         dispatch(removeFromCart(id));
     };
 

@@ -23,14 +23,14 @@ const Content = ({ data }: Props) => {
 
     const onDeleteClick = async () => {
         try {
-            await deleteProduct(data.id).unwrap();
+            await deleteProduct(data._id).unwrap();
         } catch {
             console.error("error in delete product");
         }
     };
 
     const onUpdateClick = () => {
-        navigate("/products/update/" + data.id);
+        navigate("/products/update/" + data._id);
     };
 
     useEffect(() => {

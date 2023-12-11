@@ -8,7 +8,7 @@ import CartItem from "./CartItem/Cartitem";
 
 type Props = {
     addToCart: (clickedItem: ProductType) => void;
-    removeFromCart: (id: number) => void;
+    removeFromCart: (id: string) => void;
 };
 
 const Cart = ({ addToCart, removeFromCart }: Props) => {
@@ -29,7 +29,7 @@ const Cart = ({ addToCart, removeFromCart }: Props) => {
             {cartItems.length === 0 ? <p> No items in Cart.</p> : null}
             {cartItems.map((item) => (
                 <CartItem
-                    key={item.product.id}
+                    key={item.product._id}
                     item={item}
                     addToCart={addToCart}
                     removeFromCart={removeFromCart}
