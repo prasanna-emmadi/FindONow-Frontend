@@ -8,7 +8,7 @@ interface Props {
 }
 
 const NewProduct = ({ data }: Props) => {
-    return <ProductForm data={data} newProduct={true} />;
+    return <ProductForm categories={data} newProduct={true} />;
 };
 
 const CreateProduct = () => {

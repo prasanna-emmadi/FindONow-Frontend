@@ -41,7 +41,6 @@ const Login = () => {
     const onSubmit = async (d: any) => {
         try {
             await login(d).unwrap();
-            navigate("/home");
         } catch {
             setSnackOpen(true);
             console.error("error in login ");

@@ -30,7 +30,7 @@ const Content = ({ data }: Props) => {
         const defaultValues = toDefaultValues(product);
         return (
             <ProductForm
-                data={categories}
+                categories={categories}
                 defaultValues={defaultValues}
                 newProduct={false}
             />

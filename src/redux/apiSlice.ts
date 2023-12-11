@@ -14,9 +14,9 @@ export const apiSlice = createApi({
             const auth = (getState() as RootState)?.auth;
             if (auth) {
                 const token = auth.token.access_token;
-                const isAdmin = auth.user?.role === "ADMIN";
+                //const isAdmin = auth.user?.role === "ADMIN";
                 // If we have a token set in state, let's assume that we should be passing it.
-                if (token && !isAdmin) {
+                if (token) {
                     headers.set("Authorization", `Bearer ${token}`);
                 }
             }

@@ -22,7 +22,7 @@ interface DefaultValues {
 }
 
 interface Props {
-    data: CategoryType[];
+    categories: CategoryType[];
     defaultValues?: DefaultValues;
     newProduct: boolean;
 }
@@ -46,9 +46,9 @@ const newProductDefaultValues: DefaultValues = {
 const ProductForm = (props: Props) => {
     //react-select expects the options to be in the form of {value:string, label:string}
     // hence converting category options to the above form
-    const data = props.data;
-    let categoryOptions = data.map(({ name, id }) => ({
-        value: id.toString(),
+    const categories = props.categories;
+    let categoryOptions = categories.map(({ name, _id }) => ({
+        value: _id,
         label: name,
     }));
 
@@ -88,8 +88,11 @@ const ProductForm = (props: Props) => {
             // the shape of  option is {value, label} where value is assigned category.id
             // and it is converted to string
             // API expects category id to be number hence the conversion to number
-            d.categoryId = Number(d.categoryId.value);
+            console.log({ d });
+            d.category = d.categoryId.value;
             d.images = [d.images];
+            d.price = Number(d.price);
+            console.log({ finalD: d });
             // async
             if (props.newProduct) {
                 await addProduct(d).unwrap();
