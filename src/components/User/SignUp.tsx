@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAddNewUserMutation } from "../../redux/apiSlice";
+import { useSignUpMutation } from "../../redux/apiSlice";
 import FieldController from "../common/FieldController";
 import useFormStyle from "../hooks/useFormStyle";
 
@@ -23,7 +23,7 @@ interface DefaultValues {
     email?: string;
     password?: string;
     name?: string;
-    role?: "admin" | "customer";
+    role?: "ADMIN" | "USER";
     avatar?: string;
 }
 
@@ -35,7 +35,7 @@ const newUserDefaultValues: DefaultValues = {
     email: "",
     password: "",
     name: "",
-    role: "admin",
+    role: "ADMIN",
     avatar: "",
 };
 
@@ -47,13 +47,13 @@ const SignUp = (props: Props) => {
     const { handleSubmit, control } = useForm({
         defaultValues: defaultValues,
     });
-    const [updateUser] = useAddNewUserMutation();
+    const [signup] = useSignUpMutation();
     const signupPaperStyle = useFormStyle();
     const navigate = useNavigate();
 
     const onSubmit = async (d: any) => {
         try {
-            await updateUser(d).unwrap();
+            await signup(d).unwrap();
             navigate("/home");
         } catch {
             console.error("error in signup");

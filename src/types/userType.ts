@@ -3,6 +3,6 @@ export interface UserType {
     email: string;
     password: string;
     name: string;
-    role: "admin" | "customer";
+    role: "ADMIN" | "USER";
     avatar: string;
 }

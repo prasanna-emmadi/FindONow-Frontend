@@ -19,7 +19,7 @@ const AuthContextProvider = (props: Props) => {
     const auth = useAppSelector((state) => state.auth);
     const value: AuthContextType = {
         token: auth.token.access_token,
-        isAdmin: auth.user?.role === "admin",
+        isAdmin: auth.user?.role === "ADMIN",
     };
     return (
         <AuthContext.Provider value={value}>

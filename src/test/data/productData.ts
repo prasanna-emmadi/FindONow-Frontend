@@ -13,6 +13,7 @@ const products = [
         creationAt: "2023-10-07T19:16:30.000Z",
         updatedAt: "2023-10-07T19:16:30.000Z",
         category: {
+            _id: "4",
             id: 4,
             name: "Shoes",
             image: "https://i.imgur.com/imQx3Az.jpeg",
@@ -34,6 +35,7 @@ const products = [
         creationAt: "2023-10-07T19:16:30.000Z",
         updatedAt: "2023-10-07T19:16:30.000Z",
         category: {
+            _id: "5",
             id: 5,
             name: "Others",
             image: "https://i.imgur.com/0KlqHu9.jpeg",

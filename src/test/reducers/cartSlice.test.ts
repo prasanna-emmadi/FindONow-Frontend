@@ -4,6 +4,7 @@ import { CategoryType, ProductType } from "../../types/productType";
 
 describe("cart slice reducer", () => {
     const category: CategoryType = {
+        _id: "1",
         id: 1,
         name: "category-name",
         image: "https://category-image.url.com",

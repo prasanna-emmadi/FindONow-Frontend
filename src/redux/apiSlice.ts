@@ -3,7 +3,8 @@ import { CategoryType, ProductType } from "../types/productType";
 import { UserType } from "../types/userType";
 import { RootState } from "./store/configureStore";
 
-export const API_URL = "https://api.escuelajs.co/api/v1/";
+//export const API_URL = "https://api.escuelajs.co/api/v1/";
+export const API_URL = "http://localhost:8080/api/v1/";
 
 export const apiSlice = createApi({
     reducerPath: "api",
@@ -13,7 +14,7 @@ export const apiSlice = createApi({
             const auth = (getState() as RootState)?.auth;
             if (auth) {
                 const token = auth.token.access_token;
-                const isAdmin = auth.user?.role === "admin";
+                const isAdmin = auth.user?.role === "ADMIN";
                 // If we have a token set in state, let's assume that we should be passing it.
                 if (token && !isAdmin) {
                     headers.set("Authorization", `Bearer ${token}`);
@@ -25,6 +26,15 @@ export const apiSlice = createApi({
     tagTypes: ["User", "Product", "Category", "Auth"],
     endpoints: (builder) => {
         return {
+            signUp: builder.mutation({
+                query: (initialUser) => ({
+                    url: "/auth/signup",
+                    method: "POST",
+                    body: initialUser,
+                }),
+                invalidatesTags: ["Auth"],
+            }),
+
             addLogin: builder.mutation({
                 query: (initialUser) => ({
                     url: "/auth/login",
@@ -148,6 +158,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+    useSignUpMutation,
     useAddLoginMutation,
     useGetUsersQuery,
     useGetUserQuery,
