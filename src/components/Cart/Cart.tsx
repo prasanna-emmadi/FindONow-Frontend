@@ -6,6 +6,7 @@ import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
 import CartItem from "./CartItem/Cartitem";
 import { useAddNewOrderMutation } from "../../redux/apiSlice";
+import { OrderType } from "../../types/orderType";
 
 type Props = {
     addToCart: (clickedItem: ProductType) => void;
@@ -17,7 +18,7 @@ const Cart = ({ addToCart, removeFromCart }: Props) => {
     const dispatch = useAppDispatch();
     const [addOrder] = useAddNewOrderMutation();
 
-    const calculateTotal = (items: CartItemType[]) =>
+    const calculateTotal = (items: CartItemType[]): number =>
         items.reduce(
             (ack: number, item) => ack + item.amount * item.product.price,
             0,
@@ -34,9 +35,9 @@ const Cart = ({ addToCart, removeFromCart }: Props) => {
             }
         })
         const date = new Date();
-        const order = {
+        const order: OrderType = {
             date: date.toISOString(),
-            totalAmount: calculateTotal(cartItems).toFixed(2),
+            totalAmount: parseFloat(calculateTotal(cartItems).toFixed(2)),
             orderItems: orderItems
         };
         await addOrder(order);

@@ -8,7 +8,7 @@ interface Props {
 
 const Content = ({ data }: Props) => {
     console.log(data);
-    if (data.length == 0) {
+    if (data.length === 0) {
         return <p>No orders found</p>;
     } else {
         const orders = data.map((order) => {
