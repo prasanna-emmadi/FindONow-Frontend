@@ -1,6 +1,6 @@
 export interface OrderItemType {
     _id?: string;
-    productId: string;
+    product: string;
     quantity: number;
     priceAtPurchase: number;
 }

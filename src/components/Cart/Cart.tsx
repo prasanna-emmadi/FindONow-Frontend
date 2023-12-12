@@ -26,22 +26,22 @@ const Cart = ({ addToCart, removeFromCart }: Props) => {
     const onBuy = async () => {
         // add order to the backend
         // cartItem -> orderItem
-        const orderItems = cartItems.map(cartItem => {
-            const {product, amount} = cartItem;
+        const orderItems = cartItems.map((cartItem) => {
+            const { product, amount } = cartItem;
             return {
-                productId: product._id,
+                product: product._id,
                 quantity: amount,
-                priceAtPurchase: product.price
-            }
-        })
+                priceAtPurchase: product.price,
+            };
+        });
         const date = new Date();
         const order: OrderType = {
             date: date.toISOString(),
             totalAmount: parseFloat(calculateTotal(cartItems).toFixed(2)),
-            orderItems: orderItems
+            orderItems: orderItems,
         };
         await addOrder(order);
-        // show snack 
+        // show snack
 
         dispatch(resetCart());
     };
