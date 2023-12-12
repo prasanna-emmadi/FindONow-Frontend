@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CategoryType, ProductType } from "../types/productType";
+import { OrderType, OrderItemType } from "../types/orderType";
 import { UserType } from "../types/userType";
 import { RootState } from "./store/configureStore";
 
@@ -23,7 +24,7 @@ export const apiSlice = createApi({
             return headers;
         },
     }),
-    tagTypes: ["User", "Product", "Category", "Auth"],
+    tagTypes: ["User", "Product", "Category", "Auth", "Order", "OrderItem"],
     endpoints: (builder) => {
         return {
             signUp: builder.mutation({
@@ -43,6 +44,14 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ["Auth"],
             }),
+            addLogout: builder.mutation({
+                query: () => ({
+                    url: "/auth/logout",
+                    method: "POST",
+                }),
+                invalidatesTags: ["Auth"],
+            }),
+
             getProfile: builder.query<UserType, string>({
                 query: (token) => {
                     return {
@@ -131,6 +140,69 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ["Category"],
             }),
+            getOrders: builder.query<OrderType[], void>({
+                query: () => "/orders",
+                providesTags: ["Order"],
+            }),
+
+            getOrder: builder.query({
+                query: (orderId) => `/orders/${orderId}`,
+            }),
+
+            addNewOrder: builder.mutation({
+                query: (initialOrder) => ({
+                    url: "/orders",
+                    method: "POST",
+                    body: initialOrder,
+                }),
+                invalidatesTags: ["Order"],
+            }),
+            editOrder: builder.mutation({
+                query: (order) => ({
+                    url: `/orders/${order.id}`,
+                    method: "PUT",
+                    body: order,
+                }),
+                invalidatesTags: ["Order"],
+            }),
+            deleteOrder: builder.mutation({
+                query: (orderId) => ({
+                    url: `/orders/${orderId}`,
+                    method: "DELETE",
+                }),
+                invalidatesTags: ["Order"],
+            }),
+            getOrderItems: builder.query<OrderItemType[], void>({
+                query: () => "/orderItems",
+                providesTags: ["OrderItem"],
+            }),
+
+            getOrderItem: builder.query({
+                query: (orderItemId) => `/orderItems/${orderItemId}`,
+            }),
+            addNewOrderItem: builder.mutation({
+                query: (initialOrderItem) => ({
+                    url: "/orderItems",
+                    method: "POST",
+                    body: initialOrderItem,
+                }),
+                invalidatesTags: ["OrderItem"],
+            }),
+            editOrderItem: builder.mutation({
+                query: (orderItem) => ({
+                    url: `/orderItems/${orderItem.id}`,
+                    method: "PUT",
+                    body: orderItem,
+                }),
+                invalidatesTags: ["OrderItem"],
+            }),
+            deleteOrderItem: builder.mutation({
+                query: (orderItemId) => ({
+                    url: `/orderItems/${orderItemId}`,
+                    method: "DELETE",
+                }),
+                invalidatesTags: ["OrderItem"],
+            }),
             refereshToken: builder.mutation({
                 query: (body) => ({
                     url: "/auth/refresh-token",
@@ -160,6 +232,7 @@ export const apiSlice = createApi({
 export const {
     useSignUpMutation,
     useAddLoginMutation,
+    useAddLogoutMutation,
     useGetUsersQuery,
     useGetUserQuery,
     useAddNewUserMutation,
@@ -174,6 +247,16 @@ export const {
     useAddNewCategoryMutation,
     useEditCategoryMutation,
     useGetProfileQuery,
+    useGetOrderQuery,
+    useGetOrdersQuery,
+    useAddNewOrderMutation,
+    useEditOrderMutation,
+    useDeleteOrderMutation,
+    useGetOrderItemQuery,
+    useGetOrderItemsQuery,
+    useAddNewOrderItemMutation,
+    useEditOrderItemMutation,
+    useDeleteOrderItemMutation,
     useRefereshTokenMutation,
     useUploadFileMutation,
 } = apiSlice;

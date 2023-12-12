@@ -15,6 +15,7 @@ import SignUp from "./components/User/SignUp";
 import User from "./components/User/User";
 import Users from "./components/User/Users";
 import ErrorPage from "./components/common/ErrorPage";
+import Orders from "./components/Orders/Orders";
 
 const router = createBrowserRouter([
     {
@@ -102,6 +103,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Profile />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "users/orders",
+                element: (
+                    <ProtectedRoute>
+                        <Orders />
                     </ProtectedRoute>
                 ),
             },

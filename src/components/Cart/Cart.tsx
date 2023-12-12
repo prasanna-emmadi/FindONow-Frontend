@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { CartItemType } from "../../types/cartType";
 import { ProductType } from "../../types/productType";
 import CartItem from "./CartItem/Cartitem";
+import { useAddNewOrderMutation } from "../../redux/apiSlice";
 
 type Props = {
     addToCart: (clickedItem: ProductType) => void;
@@ -14,13 +15,33 @@ type Props = {
 const Cart = ({ addToCart, removeFromCart }: Props) => {
     const cartItems = useAppSelector((state) => state.cart.cartItems);
     const dispatch = useAppDispatch();
+    const [addOrder] = useAddNewOrderMutation();
 
     const calculateTotal = (items: CartItemType[]) =>
         items.reduce(
             (ack: number, item) => ack + item.amount * item.product.price,
             0,
         );
-    const onBuy = () => {
+    const onBuy = async () => {
+        // add order to the backend
+        // cartItem -> orderItem
+        const orderItems = cartItems.map(cartItem => {
+            const {product, amount} = cartItem;
+            return {
+                productId: product._id,
+                quantity: amount,
+                priceAtPurchase: product.price
+            }
+        })
+        const date = new Date();
+        const order = {
+            date: date.toISOString(),
+            totalAmount: calculateTotal(cartItems).toFixed(2),
+            orderItems: orderItems
+        };
+        await addOrder(order);
+        // show snack 
+
         dispatch(resetCart());
     };
     return (

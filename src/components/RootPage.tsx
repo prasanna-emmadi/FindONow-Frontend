@@ -50,6 +50,11 @@ const NavOptions = () => {
                     name: "Profile",
                     icon: <Person2Icon />,
                 },
+                {
+                    path: "/users/orders",
+                    name: "Orders",
+                    icon: <Person2Icon />,
+                },
             ];
 
             allOptions = allOptions.concat(loggedInOptions);
