@@ -5,6 +5,7 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
+import ApiIcon from "@mui/icons-material/Api";
 import {
     IconButton,
     ListItem,
@@ -24,6 +25,8 @@ import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 
+const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
+
 const NavOptions = () => {
     const { token, isAdmin } = useAuthContext();
 
@@ -33,6 +36,11 @@ const NavOptions = () => {
                 path: "/home",
                 name: "Home",
                 icon: <HomeIcon />,
+            },
+            {
+                path: API_DOCUMENTATION_URL,
+                name: "Swagger API Documentation",
+                icon: <ApiIcon />,
             },
         ];
 
