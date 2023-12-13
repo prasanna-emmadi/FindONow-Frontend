@@ -7,7 +7,6 @@ import {
     TableHead,
     TableRow,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useGetOrdersQuery } from "../../redux/apiSlice";
 import { OrderType } from "../../types/orderType";
 import Suspense from "../common/Suspense";
@@ -18,7 +17,6 @@ interface Props {
 
 const Content = ({ data }: Props) => {
     const orders = data;
-    //const navigate = useNavigate();
     return (
         <TableContainer component={Paper}>
             <Table
