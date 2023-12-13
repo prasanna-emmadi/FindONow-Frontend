@@ -4,8 +4,7 @@ import { OrderType, OrderItemType } from "../types/orderType";
 import { UserType } from "../types/userType";
 import { RootState } from "./store/configureStore";
 
-//export const API_URL = "https://api.escuelajs.co/api/v1/";
-export const API_URL = "http://localhost:8080/api/v1/";
+export const API_URL = process.env.REACT_APP_SERVER_URL;
 
 export const apiSlice = createApi({
     reducerPath: "api",
