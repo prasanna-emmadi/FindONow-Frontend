@@ -6,13 +6,14 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
 import ApiIcon from "@mui/icons-material/Api";
+import LockIcon from "@mui/icons-material/Lock";
 import {
+    Drawer,
     IconButton,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    SwipeableDrawer,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -36,11 +37,6 @@ const NavOptions = () => {
                 path: "/home",
                 name: "Home",
                 icon: <HomeIcon />,
-            },
-            {
-                path: API_DOCUMENTATION_URL,
-                name: "Swagger API Documentation",
-                icon: <ApiIcon />,
             },
         ];
 
@@ -78,6 +74,11 @@ const NavOptions = () => {
                         path: "/products/create",
                         name: "Create Product",
                         icon: <AddToPhotosIcon />,
+                    },
+                    {
+                        path: API_DOCUMENTATION_URL,
+                        name: "Swagger API Documentation",
+                        icon: <ApiIcon />,
                     },
                 ];
             }
@@ -120,7 +121,7 @@ const RootPage = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     const handleDrawerToggle = () => {
         setOpen(!open);
@@ -174,10 +175,8 @@ const RootPage = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <SwipeableDrawer
+            <Drawer
                 open={open}
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
@@ -186,12 +185,14 @@ const RootPage = () => {
                         boxSizing: "border-box",
                     },
                 }}
+                variant="persistent"
+                anchor="left"
             >
                 <Toolbar />
                 <Box sx={{ overflow: "auto" }}>
                     <NavOptions />
                 </Box>
-            </SwipeableDrawer>
+            </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
                 <Outlet />

@@ -7,7 +7,7 @@ const useFormStyle = () => {
     if (isDesktop) {
         formStyle = {
             ...paperStyle,
-            width: 600,
+            width: 800,
         };
     } else {
         formStyle = paperStyle;

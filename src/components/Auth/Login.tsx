@@ -1,4 +1,13 @@
-import { Alert, Button, Grid, Paper, Snackbar, Stack } from "@mui/material";
+import {
+    Alert,
+    Box,
+    Button,
+    CssBaseline,
+    Grid,
+    Paper,
+    Snackbar,
+    Stack,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +16,26 @@ import { addToken, addUser } from "../../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import FieldController from "../common/FieldController";
 import useFormStyle from "../hooks/useFormStyle";
+import BoldH4Text from "../common/BoldH4Text";
+import CenterColumnDiv from "../common/CenterColumnDiv";
+import CenterDiv from "../common/CenterDiv";
+
+const SignupInfo = () => {
+    const navigate = useNavigate();
+
+    const onClick = () => {
+        navigate("/signup");
+    };
+    return (
+        <CenterColumnDiv backgroundColor="text.secondary">
+            <BoldH4Text text="Don't have an account?" />
+            <CssBaseline />
+            <Button variant="contained" color="primary" onClick={onClick}>
+                SignUp
+            </Button>
+        </CenterColumnDiv>
+    );
+};
 
 const Login = () => {
     const { handleSubmit, control } = useForm({
@@ -61,51 +90,49 @@ const Login = () => {
         navigate("/signup");
     };
 
+    const form = (
+        <Box>
+            <Grid
+                alignItems="center"
+                justifyContent="center"
+                style={{ textAlign: "center" }}
+            >
+                <h2>Login </h2>
+            </Grid>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FieldController
+                    name="email"
+                    label="Email"
+                    type="email"
+                    control={control}
+                />
+                <FieldController
+                    name="password"
+                    label="Password"
+                    type="password"
+                    control={control}
+                />
+                <CenterDiv>
+                    <Button type="submit" variant="contained" color="primary">
+                        Login
+                    </Button>
+                </CenterDiv>
+            </form>
+        </Box>
+    );
+
     return (
         <>
             <Grid>
                 <Paper elevation={2} style={loginPaperStyle}>
-                    <Grid
-                        alignItems="center"
-                        justifyContent="center"
-                        style={{ textAlign: "center" }}
-                    >
-                        <h2>Login </h2>
+                    <Grid container spacing={2}>
+                        <Grid item xs={8}>
+                            {form}
+                        </Grid>
+                        <Grid item xs={4}>
+                            <SignupInfo />
+                        </Grid>
                     </Grid>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <FieldController
-                            name="email"
-                            label="Email"
-                            type="email"
-                            control={control}
-                        />
-                        <FieldController
-                            name="password"
-                            label="Password"
-                            type="password"
-                            control={control}
-                        />
-                        <Stack
-                            direction="row"
-                            spacing={2}
-                            justifyContent={"center"}
-                        >
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            >
-                                Login
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={onSignUp}
-                            >
-                                SignUp
-                            </Button>
-                        </Stack>
-                    </form>
                 </Paper>
             </Grid>
             <Snackbar
