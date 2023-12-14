@@ -1,9 +1,9 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
-import { Grid, Typography } from "@mui/material";
+import { Alert, Grid, Typography, Snackbar } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
     useDeleteProductMutation,
@@ -19,12 +19,14 @@ interface Props {
 
 const Content = ({ data }: Props) => {
     const [deleteProduct, deleteResult] = useDeleteProductMutation();
+    const [snackOpen, setSnackOpen] = useState(false);
     const navigate = useNavigate();
 
     const onDeleteClick = async () => {
         try {
             await deleteProduct(data._id).unwrap();
         } catch {
+            setSnackOpen(true);
             console.error("error in delete product");
         }
     };
@@ -36,52 +38,79 @@ const Content = ({ data }: Props) => {
     useEffect(() => {
         if (deleteResult.isSuccess) {
             navigate("/products");
+        } else {
         }
     }, [deleteResult.isSuccess, navigate]);
 
+    const handleClose = (
+        _event: React.SyntheticEvent | Event,
+        reason?: string,
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackOpen(false);
+    };
+
+
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={6}>
-                <ProductCarousel images={data.images} />
-            </Grid>
-            <Grid item xs={6} sm container pt={2}>
-                <Grid item xs={8} container direction="column" spacing={2}>
-                    <Grid item xs>
-                        <Typography variant="h3" color="text.primary">
-                            {data.title}
-                        </Typography>
+        <>
+            <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <ProductCarousel images={data.images} />
+                </Grid>
+                <Grid item xs={6} sm container pt={2}>
+                    <Grid item xs={8} container direction="column" spacing={2}>
+                        <Grid item xs>
+                            <Typography variant="h3" color="text.primary">
+                                {data.title}
+                            </Typography>
 
-                        <Typography variant="body1" color="text.secondary">
-                            {data.description}
-                        </Typography>
+                            <Typography variant="body1" color="text.secondary">
+                                {data.description}
+                            </Typography>
 
-                        <Typography variant="h5" color="text.primary" pt={2}>
-                            ${data.price}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs>
-                        <Stack direction="row" spacing={2} pt={2}>
-                            <Button
-                                color="error"
-                                variant="outlined"
-                                startIcon={<DeleteIcon />}
-                                onClick={onDeleteClick}
+                            <Typography
+                                variant="h5"
+                                color="text.primary"
+                                pt={2}
                             >
-                                Delete
-                            </Button>
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                endIcon={<UpdateIcon />}
-                                onClick={onUpdateClick}
-                            >
-                                Update
-                            </Button>
-                        </Stack>
+                                ${data.price}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs>
+                            <Stack direction="row" spacing={2} pt={2}>
+                                <Button
+                                    color="error"
+                                    variant="outlined"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={onDeleteClick}
+                                >
+                                    Delete
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    endIcon={<UpdateIcon />}
+                                    onClick={onUpdateClick}
+                                >
+                                    Update
+                                </Button>
+                            </Stack>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+            <Snackbar
+                open={snackOpen}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <Alert severity="error" sx={{ width: "100%" }}>
+                    Delete failed
+                </Alert>
+            </Snackbar>
+        </>
     );
 };
 

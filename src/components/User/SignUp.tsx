@@ -11,11 +11,11 @@ import useFormStyle from "../hooks/useFormStyle";
 const options = [
     {
         label: "Admin",
-        value: "admin",
+        value: "ADMIN",
     },
     {
-        label: "Customer",
-        value: "customer",
+        label: "User",
+        value: "USER",
     },
 ];
 
