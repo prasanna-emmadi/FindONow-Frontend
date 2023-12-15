@@ -1,11 +1,8 @@
-import {
-    Box,
-    CssBaseline,
-} from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../redux/apiSlice";
 import FieldController from "../common/FieldController";
@@ -13,17 +10,6 @@ import useFormStyle from "../hooks/useFormStyle";
 import CenterDiv from "../common/CenterDiv";
 import BoldH4Text from "../common/BoldH4Text";
 import CenterColumnDiv from "../common/CenterColumnDiv";
-
-const options = [
-    {
-        label: "Admin",
-        value: "ADMIN",
-    },
-    {
-        label: "User",
-        value: "USER",
-    },
-];
 
 interface DefaultValues {
     email?: string;
@@ -83,7 +69,6 @@ const SignUp = (props: Props) => {
         }
     };
 
-
     const form = (
         <Box>
             <Grid
@@ -112,7 +97,7 @@ const SignUp = (props: Props) => {
                     type="text"
                     control={control}
                 />
-               
+
                 <FieldController
                     name="avatar"
                     label="Avatar"
