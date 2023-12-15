@@ -6,7 +6,6 @@ import {
     Grid,
     Paper,
     Snackbar,
-    Stack,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -86,9 +85,6 @@ const Login = () => {
         setSnackOpen(false);
     };
 
-    const onSignUp = () => {
-        navigate("/signup");
-    };
 
     const form = (
         <Box>

@@ -25,6 +25,7 @@ const CategoryTabs = ({ categories }: Props) => {
     const dispatch = useAppDispatch();
 
     if (!show) {
+        
         return null;
     }
 

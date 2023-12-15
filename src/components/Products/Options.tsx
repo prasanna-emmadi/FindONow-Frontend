@@ -7,22 +7,19 @@ import {
     ListItem,
     Stack,
     SwipeableDrawer,
-    TextField,
 } from "@mui/material";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Select, { ActionMeta } from "react-select";
 import {
     SortOrder,
     allCategoryProducts,
     productsOfCategory,
-    searchBy,
     sortByPrice,
     sortByTitle,
 } from "../../redux/productSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { CategoryType } from "../../types/productType";
-import { useDebounce } from "../hooks/useDebounce";
 import { useIsDesktop } from "../hooks/useIsDesktop";
 import { useIsMobile } from "../hooks/useIsMobile";
 
@@ -65,8 +62,6 @@ const SortOptions = () => {
         />
     );
 };
-
-
 
 interface OptionProps {
     categories: CategoryType[];
@@ -143,11 +138,7 @@ const Options = ({ categories }: OptionProps) => {
     };
 
     if (isDesktop) {
-        return (
-            <Grid container spacing={2}>
-                    <SortOptions />
-            </Grid>
-        );
+        return <SortOptions />;
     } else if (isMobile) {
         const items = [
             <Select options={categoryOptions} onChange={onChange} />,

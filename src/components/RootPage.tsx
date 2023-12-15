@@ -1,12 +1,12 @@
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
+import ApiIcon from "@mui/icons-material/Api";
 import GroupIcon from "@mui/icons-material/Group";
 import HomeIcon from "@mui/icons-material/Home";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
-import ApiIcon from "@mui/icons-material/Api";
-import LockIcon from "@mui/icons-material/Lock";
+import SearchIcon from "@mui/icons-material/Search";
 import {
     Drawer,
     Grid,
@@ -15,19 +15,20 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    TextField,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
+import InputBase from "@mui/material/InputBase";
+import Paper from "@mui/material/Paper";
 import Toolbar from "@mui/material/Toolbar";
 import { useEffect, useMemo, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/authSlice";
-import { useAppDispatch } from "../redux/store/hooks";
 import { searchBy } from "../redux/productSlice";
+import { useAppDispatch } from "../redux/store/hooks";
 import { useDebounce } from "./hooks/useDebounce";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
@@ -120,10 +121,7 @@ const NavOptions = () => {
     return <>{optionComponents}</>;
 };
 
-interface SearchBarProps {
-    showLabel: boolean;
-}
-const SearchBar = ({ showLabel }: SearchBarProps) => {
+const SearchBar = () => {
     const [query, setQuery] = useState("");
     const searchQuery = useDebounce(query, 2000);
     const dispatch = useAppDispatch();
@@ -132,21 +130,30 @@ const SearchBar = ({ showLabel }: SearchBarProps) => {
     }, [dispatch, searchQuery]);
 
     return (
-        <TextField
-            id="search-bar"
-            className="text"
-            onInput={(e: any) => {
-                const { target } = e;
-                if (target) {
-                    setQuery(e.target.value);
-                }
+        <Paper
+            component="form"
+            sx={{
+                p: "2px 4px",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
             }}
-            label={showLabel ? "Search a product name" : ""}
-            variant="outlined"
-            placeholder="Search..."
-            size="small"
-            style={{ width: "100%" }}
-        />
+        >
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon />
+            </IconButton>
+            <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search Products"
+                inputProps={{ "aria-label": "search products" }}
+                onInput={(e: any) => {
+                    const { target } = e;
+                    if (target) {
+                        setQuery(e.target.value);
+                    }
+                }}
+            />
+        </Paper>
     );
 };
 
@@ -183,7 +190,6 @@ const RootPage = () => {
                 position="fixed"
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 enableColorOnDark
-                //color="secondary"
                 style={{
                     background: "#ffffff",
                     height: "100px",
@@ -200,7 +206,11 @@ const RootPage = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Grid container spacing={2}>
+                    <Grid
+                        container
+                        spacing={2}
+                        style={{ justifyContent: "center", paddingTop: "8px" }}
+                    >
                         <Grid item xs={3}>
                             <Button
                                 color="inherit"
@@ -216,15 +226,11 @@ const RootPage = () => {
                         <Grid
                             item
                             xs={6}
-                            style={{ flexGrow: 1, justifyContent: "center" }}
+                            style={{ flexGrow: 1, paddingTop: "-2px" }}
                         >
-                            <SearchBar showLabel={true} />
+                            <SearchBar />
                         </Grid>
-                        <Grid
-                            item
-                            xs={3}
-                            style={{ display: "flex" }}
-                        >
+                        <Grid item xs={3} style={{ display: "flex" }}>
                             <Button
                                 color="inherit"
                                 onClick={onLoginClick}
@@ -242,6 +248,7 @@ const RootPage = () => {
                     width: drawerWidth,
                     flexShrink: 0,
                     [`& .MuiDrawer-paper`]: {
+                        top: "40px",
                         width: drawerWidth,
                         boxSizing: "border-box",
                     },
@@ -256,7 +263,6 @@ const RootPage = () => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
-                
                 <Outlet />
             </Box>
         </Box>
