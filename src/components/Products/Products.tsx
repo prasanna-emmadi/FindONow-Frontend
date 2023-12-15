@@ -12,7 +12,6 @@ import { CategoryType, ProductType } from "../../types/productType";
 import ProductCard from "../Product/ProductCard";
 import Suspense from "../common/Suspense";
 import CartDrawer from "./CartDrawer";
-import CategoryTabs from "./CategoryTabs";
 import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
@@ -124,6 +123,7 @@ const CategoryProducts = (props: CategoryProductsProps) => {
         dispatch(addProducts(products));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     return (
         <Box sx={{paddingTop: "10px"}}>

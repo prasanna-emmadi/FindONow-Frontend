@@ -25,10 +25,10 @@ import { useIsMobile } from "../hooks/useIsMobile";
 import CategoryTabs from "./CategoryTabs";
 
 const options: any = [
-    { value: "title_increasing", label: "Title ↑" },
-    { value: "title_decreasing", label: "Title ↓" },
-    { value: "price_increasing", label: "Price ↑" },
-    { value: "price_decreasing", label: "Price ↓" },
+    { value: "title_increasing", label: "A-Z" },
+    { value: "title_decreasing", label: "Z-A" },
+    { value: "price_increasing", label: "Low-High" },
+    { value: "price_decreasing", label: "High-Low" },
 ];
 
 const SortOptions = () => {
