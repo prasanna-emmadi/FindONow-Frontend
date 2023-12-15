@@ -38,6 +38,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                 image={product.images[0]}
                 alt={product.title}
                 onClick={onClick}
+                className="products-grid-item-image"
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">

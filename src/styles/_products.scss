@@ -20,10 +20,12 @@
   border-radius: 3.5em;
 }
 
-/*.products-grid-item:hover .products-grid-item-price-cart {
-  opacity: 1;
-  transform: all ease 0.5s;
-}*/
+.products-grid-item-image {
+  transition: transform 0.8s;
+}
+.products-grid-item-image:hover {
+  transform: rotateY(180deg);
+}
 
 .products-pagination {
   display: flex;
