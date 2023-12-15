@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
 import {
+    Avatar,
     Drawer,
     Grid,
     IconButton,
@@ -15,6 +16,10 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    Menu,
+    MenuItem,
+    Tooltip,
+    Typography,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -30,6 +35,7 @@ import { removeToken } from "../redux/authSlice";
 import { searchBy } from "../redux/productSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 import { useDebounce } from "./hooks/useDebounce";
+import { useIsDesktop } from "./hooks/useIsDesktop";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
@@ -157,12 +163,62 @@ const SearchBar = () => {
     );
 };
 
+const Profile = () => {
+    const settings = ["Profile", "Account", "Dashboard", "Logout"];
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+    const profile = (
+        <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open Profile">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/2.jpg"
+                    />
+                </IconButton>
+            </Tooltip>
+            <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+            >
+                {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                ))}
+            </Menu>
+        </Box>
+    );
+
+    return profile;
+};
+
 const drawerWidth = 200;
 const RootPage = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
+    const isDesktop = useIsDesktop();
 
     const handleDrawerToggle = () => {
         setOpen(!open);
@@ -183,6 +239,53 @@ const RootPage = () => {
     const onHomeClick = () => {
         navigate("/");
     };
+
+    const drawer = (
+        <Drawer
+            open={open}
+            sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                [`& .MuiDrawer-paper`]: {
+                    top: "40px",
+                    width: drawerWidth,
+                    boxSizing: "border-box",
+                },
+            }}
+            variant="persistent"
+            anchor="left"
+        >
+            <Toolbar />
+            <Box sx={{ overflow: "auto" }}>
+                <NavOptions />
+            </Box>
+        </Drawer>
+    );
+
+    const menuButton = (
+        <IconButton
+            size="large"
+            edge="start"
+            aria-label="menu"
+            sx={{ mr: 2, color: "black" }}
+            onClick={handleDrawerToggle}
+        >
+            <MenuIcon />
+        </IconButton>
+    );
+
+    const loginButton = (
+        <Button
+            color="inherit"
+            onClick={onLoginClick}
+            style={{ color: "black", fontWeight: "500" }}
+        >
+            {loginButtonText}
+        </Button>
+    );
+
+    const loginOrProfile = isLoggedIn? <Profile /> : loginButton;
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -197,15 +300,7 @@ const RootPage = () => {
                 }}
             >
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        aria-label="menu"
-                        sx={{ mr: 2, color: "black" }}
-                        onClick={handleDrawerToggle}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {!isDesktop && menuButton}
                     <Grid
                         container
                         spacing={2}
@@ -230,37 +325,20 @@ const RootPage = () => {
                         >
                             <SearchBar />
                         </Grid>
-                        <Grid item xs={3} style={{ display: "flex" }}>
-                            <Button
-                                color="inherit"
-                                onClick={onLoginClick}
-                                style={{ color: "black", fontWeight: "500" }}
-                            >
-                                {loginButtonText}
-                            </Button>
+                        <Grid
+                            item
+                            xs={3}
+                            style={{
+                                display: "flex",
+                                justifyContent: "end",
+                            }}
+                        >
+                            {loginOrProfile}
                         </Grid>
                     </Grid>
                 </Toolbar>
             </AppBar>
-            <Drawer
-                open={open}
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: {
-                        top: "40px",
-                        width: drawerWidth,
-                        boxSizing: "border-box",
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-            >
-                <Toolbar />
-                <Box sx={{ overflow: "auto" }}>
-                    <NavOptions />
-                </Box>
-            </Drawer>
+            {!isDesktop && drawer}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
                 <Outlet />

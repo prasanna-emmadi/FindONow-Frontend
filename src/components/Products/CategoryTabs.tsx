@@ -23,9 +23,18 @@ const CategoryTabs = ({ categories }: Props) => {
     const show = useIsDesktop();
     const [value, setValue] = useState(0);
     const dispatch = useAppDispatch();
+    // prune the categories to limited
+    const filteredCategories = categories.filter((category) => {
+        const categoryName = category.name.toLocaleLowerCase();
+        return (
+            categoryName === "clothes" ||
+            categoryName === "electronics" ||
+            categoryName === "furniture" ||
+            categoryName === "shoes"
+        );
+    });
 
     if (!show) {
-        
         return null;
     }
 
@@ -42,7 +51,7 @@ const CategoryTabs = ({ categories }: Props) => {
     // specific category
     // pass the products down the line
     let allCategoriesTab = <Tab label={"all"} {...a11yProps(0)} key={0} />;
-    let categoryTabs = categories.map((category, index) => {
+    let categoryTabs = filteredCategories.map((category, index) => {
         return <Tab label={category.name} {...a11yProps(0)} key={index + 1} />;
     });
     categoryTabs = [allCategoriesTab, ...categoryTabs];
