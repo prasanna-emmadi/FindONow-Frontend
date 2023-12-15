@@ -9,7 +9,7 @@ interface Props {
 const ProductsPagination = ({ pageCount, page, handleChange }: Props) => {
     const matches = useMediaQuery("(min-width:993px)");
 
-    let siblingCount: number | undefined = 0;
+    let siblingCount: number | undefined = 10;
     if (!matches) {
         siblingCount = undefined;
     }
@@ -18,10 +18,13 @@ const ProductsPagination = ({ pageCount, page, handleChange }: Props) => {
         <Box pt={3} pb={5} className="products-pagination l">
             <Pagination
                 count={pageCount}
+                shape="rounded"
                 page={page}
                 onChange={handleChange}
                 color="secondary"
                 siblingCount={siblingCount}
+                size="large"
+                className="products-pagination-element"
             />
         </Box>
     );

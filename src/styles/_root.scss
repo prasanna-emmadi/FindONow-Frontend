@@ -11,6 +11,10 @@
   display: none;
 }
 
+.root-appbar-grid-last-item {
+  justify-content: flex-end;
+}
+
 @media (min-width: 601px) {
   .root-filter-container.m {
     grid-template-columns: 1fr 1fr;

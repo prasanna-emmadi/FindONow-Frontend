@@ -9,22 +9,26 @@ import ApiIcon from "@mui/icons-material/Api";
 import LockIcon from "@mui/icons-material/Lock";
 import {
     Drawer,
+    Grid,
     IconButton,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    TextField,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
+import { searchBy } from "../redux/productSlice";
+import { useDebounce } from "./hooks/useDebounce";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
@@ -116,6 +120,36 @@ const NavOptions = () => {
     return <>{optionComponents}</>;
 };
 
+interface SearchBarProps {
+    showLabel: boolean;
+}
+const SearchBar = ({ showLabel }: SearchBarProps) => {
+    const [query, setQuery] = useState("");
+    const searchQuery = useDebounce(query, 2000);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(searchBy(searchQuery));
+    }, [dispatch, searchQuery]);
+
+    return (
+        <TextField
+            id="search-bar"
+            className="text"
+            onInput={(e: any) => {
+                const { target } = e;
+                if (target) {
+                    setQuery(e.target.value);
+                }
+            }}
+            label={showLabel ? "Search a product name" : ""}
+            variant="outlined"
+            placeholder="Search..."
+            size="small"
+            style={{ width: "100%" }}
+        />
+    );
+};
+
 const drawerWidth = 200;
 const RootPage = () => {
     const { token } = useAuthContext();
@@ -149,30 +183,57 @@ const RootPage = () => {
                 position="fixed"
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 enableColorOnDark
-                color="secondary"
-                style={{ background: "#2E3B55" }}
+                //color="secondary"
+                style={{
+                    background: "#ffffff",
+                    height: "100px",
+                    justifyContent: "center",
+                }}
             >
                 <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
-                        color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 2, color: "black" }}
                         onClick={handleDrawerToggle}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Button
-                        color="inherit"
-                        onClick={onHomeClick}
-                        style={{ justifyContent: "flex-start", flexGrow: 1 }}
-                    >
-                        Find'O Now
-                    </Button>
-                    <Button color="inherit" onClick={onLoginClick}>
-                        {loginButtonText}
-                    </Button>
+                    <Grid container spacing={2}>
+                        <Grid item xs={3}>
+                            <Button
+                                color="inherit"
+                                onClick={onHomeClick}
+                                style={{
+                                    justifyContent: "flex-start",
+                                    color: "black",
+                                }}
+                            >
+                                Find'O Now
+                            </Button>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={6}
+                            style={{ flexGrow: 1, justifyContent: "center" }}
+                        >
+                            <SearchBar showLabel={true} />
+                        </Grid>
+                        <Grid
+                            item
+                            xs={3}
+                            style={{ alignItems: "end" }}
+                        >
+                            <Button
+                                color="inherit"
+                                onClick={onLoginClick}
+                                style={{ color: "black", fontWeight: "500" }}
+                            >
+                                {loginButtonText}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -195,6 +256,7 @@ const RootPage = () => {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
+                
                 <Outlet />
             </Box>
         </Box>

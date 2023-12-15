@@ -66,34 +66,7 @@ const SortOptions = () => {
     );
 };
 
-interface SearchBarProps {
-    showLabel: boolean;
-}
-const SearchBar = ({ showLabel }: SearchBarProps) => {
-    const [query, setQuery] = useState("");
-    const searchQuery = useDebounce(query, 2000);
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(searchBy(searchQuery));
-    }, [dispatch, searchQuery]);
 
-    return (
-        <TextField
-            id="search-bar"
-            className="text"
-            onInput={(e: any) => {
-                const { target } = e;
-                if (target) {
-                    setQuery(e.target.value);
-                }
-            }}
-            label={showLabel ? "Search a product name" : ""}
-            variant="outlined"
-            placeholder="Search..."
-            size="small"
-        />
-    );
-};
 
 interface OptionProps {
     categories: CategoryType[];
@@ -172,19 +145,12 @@ const Options = ({ categories }: OptionProps) => {
     if (isDesktop) {
         return (
             <Grid container spacing={2}>
-                <Grid item xs={6}>
-                    <SearchBar showLabel={true} />
-                </Grid>
-                <Grid item xs={2} />
-                <Grid item xs={4}>
                     <SortOptions />
-                </Grid>
             </Grid>
         );
     } else if (isMobile) {
         const items = [
             <Select options={categoryOptions} onChange={onChange} />,
-            <SearchBar showLabel={false} />,
             <SortOptions />,
         ];
 
@@ -206,9 +172,6 @@ const Options = ({ categories }: OptionProps) => {
                     <Select options={categoryOptions} onChange={onChange} />
                 </Grid>
 
-                <Grid item xs={4} className="center-div">
-                    <SearchBar showLabel={true} />
-                </Grid>
                 <Grid item xs={4}>
                     <SortOptions />
                 </Grid>

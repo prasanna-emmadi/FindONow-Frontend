@@ -2,19 +2,34 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 50px 50px;
+}
 
+.products-grid-item-price-cart {
+  opacity: 1;
+  transform: all ease 0.5s;
 }
 
 .products-grid-item {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 3.5em;
 }
+
+/*.products-grid-item:hover .products-grid-item-price-cart {
+  opacity: 1;
+  transform: all ease 0.5s;
+}*/
 
 .products-pagination {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: larger;
+}
+
+.products-pagination-element {
+  font-size: larger;
 }
 
 @media (min-width: 601px) {

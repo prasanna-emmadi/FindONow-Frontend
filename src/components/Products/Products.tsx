@@ -17,6 +17,7 @@ import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
 import logo from "./logo.png";
+import CenterDiv from "../common/CenterDiv";
 
 interface ActualProductListProps {
     products: ProductType[];
@@ -71,11 +72,6 @@ const ActualProductList = ({
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Options categories={categories} />
-            <ProductsPagination
-                pageCount={pageCount}
-                page={page}
-                handleChange={handleChange}
-            />
             <Box className="products-grid-container l m">
                 {productsSlice.map((product, index) => (
                     <Box className="products-grid-item" key={index}>
@@ -86,6 +82,14 @@ const ActualProductList = ({
                     </Box>
                 ))}
             </Box>
+            <CenterDiv>
+                <ProductsPagination
+                    pageCount={pageCount}
+                    page={page}
+                    handleChange={handleChange}
+                />
+            </CenterDiv>
+
             <Snackbar
                 open={snackOpen}
                 autoHideDuration={6000}
@@ -160,14 +164,7 @@ const ProductList = () => {
         />
     );
 
-    return (
-        <section className="products-list">
-            <Box className="root-banner-container l">
-                <img src={logo} alt="Logo" height={400} width={1100} />
-            </Box>
-            {content}
-        </section>
-    );
+    return <section className="products-list">{content}</section>;
 };
 
 export default ProductList;

@@ -123,7 +123,10 @@ const Login = () => {
 
     return (
         <>
-            <Grid>
+            <Grid
+                container
+                style={{ paddingTop: "100px", justifyItems: "start" }}
+            >
                 <Paper elevation={2} style={loginPaperStyle}>
                     <Grid container spacing={2}>
                         <Grid item xs={8}>

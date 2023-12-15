@@ -44,14 +44,18 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                 <Typography variant="body2" color="text.secondary">
                     {product.description}
                 </Typography>
-                <Stack direction="row" spacing={4}>
+                <Stack
+                    direction="row"
+                    spacing={4}
+                    className="products-grid-item-price-cart"
+                >
                     <Typography variant="h5" color="text.primary" pt={2}>
                         ${product.price}
                     </Typography>
                     <IconButton
                         aria-label="share"
                         onClick={() => handleAddToCart(product)}
-                        style={{ marginTop: "12px" }}
+                        style={{ marginTop: "12px", color: "red" }}
                     >
                         <AddShoppingCartIcon />
                     </IconButton>
