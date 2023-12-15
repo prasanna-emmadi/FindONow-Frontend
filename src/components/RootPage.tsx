@@ -223,7 +223,7 @@ const RootPage = () => {
                         <Grid
                             item
                             xs={3}
-                            style={{ alignItems: "end" }}
+                            style={{ display: "flex" }}
                         >
                             <Button
                                 color="inherit"
