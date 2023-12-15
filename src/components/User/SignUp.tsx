@@ -1,10 +1,6 @@
 import {
     Box,
     CssBaseline,
-    FormControlLabel,
-    FormLabel,
-    Radio,
-    RadioGroup,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -45,7 +41,7 @@ const newUserDefaultValues: DefaultValues = {
     email: "",
     password: "",
     name: "",
-    role: "ADMIN",
+    role: "USER",
     avatar: "",
 };
 
@@ -81,22 +77,12 @@ const SignUp = (props: Props) => {
     const onSubmit = async (d: any) => {
         try {
             await signup(d).unwrap();
-            navigate("/home");
+            navigate("/login");
         } catch {
             console.error("error in signup");
         }
     };
 
-    const generateRadioOptions = () => {
-        return options.map((singleOption, index) => (
-            <FormControlLabel
-                key={index}
-                value={singleOption.value}
-                label={singleOption.label}
-                control={<Radio />}
-            />
-        ));
-    };
 
     const form = (
         <Box>
@@ -126,20 +112,7 @@ const SignUp = (props: Props) => {
                     type="text"
                     control={control}
                 />
-                <FormLabel id="gender_label">Gender</FormLabel>
-                <Controller
-                    name={"role"}
-                    control={control}
-                    render={({
-                        field: { onChange, value },
-                        fieldState: { error },
-                        formState,
-                    }) => (
-                        <RadioGroup row value={value} onChange={onChange}>
-                            {generateRadioOptions()}
-                        </RadioGroup>
-                    )}
-                />
+               
                 <FieldController
                     name="avatar"
                     label="Avatar"
