@@ -36,7 +36,7 @@ const SortOptions = () => {
     return (
         <Select
             styles={{
-                control: (baseStyles, state) => ({
+                control: (baseStyles: any, _state) => ({
                     ...baseStyles,
                     maxWidth: "300px",
                 }),
