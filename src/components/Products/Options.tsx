@@ -22,6 +22,7 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { CategoryType } from "../../types/productType";
 import { useIsDesktop } from "../hooks/useIsDesktop";
 import { useIsMobile } from "../hooks/useIsMobile";
+import CategoryTabs from "./CategoryTabs";
 
 const options: any = [
     { value: "title_increasing", label: "Title ↑" },
@@ -138,7 +139,16 @@ const Options = ({ categories }: OptionProps) => {
     };
 
     if (isDesktop) {
-        return <SortOptions />;
+        return (
+            <Grid container spacing={2}>
+                <Grid item xs={8}>
+                    <CategoryTabs categories={categories} />
+                </Grid>
+                <Grid item xs={4}>
+                    <SortOptions />
+                </Grid>
+            </Grid>
+        );
     } else if (isMobile) {
         const items = [
             <Select options={categoryOptions} onChange={onChange} />,

@@ -72,7 +72,6 @@ const ActualProductList = ({
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
 
-            <Options categories={categories} />
             <Box className="products-grid-container l m">
                 {productsSlice.map((product, index) => (
                     <Box className="products-grid-item" key={index}>
@@ -127,14 +126,14 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     }, []);
 
     return (
-        <>
-            <CategoryTabs categories={categoriesSlice} />
+        <Box sx={{paddingTop: "10px"}}>
+            <Options categories={categoriesSlice} />
             <ActualProductList
                 products={categoryProducts}
                 dispatch={dispatch}
                 categories={categoriesSlice}
             />
-        </>
+        </Box>
     );
 };
 
