@@ -284,7 +284,22 @@ const RootPage = () => {
         </Button>
     );
 
-    const loginOrProfile = isLoggedIn? <Profile /> : loginButton;
+    const signupButton = (
+        <Button
+            onClick={onLoginClick}
+            variant="contained"
+            style={{
+                color: "white",
+                fontWeight: "500",
+                borderRadius: 16,
+                backgroundColor: "#00BDC8",
+            }}
+        >
+            Sign Up
+        </Button>
+    );
+
+    const loginOrProfile = isLoggedIn ? <Profile /> : loginButton;
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -334,6 +349,7 @@ const RootPage = () => {
                             }}
                         >
                             {loginOrProfile}
+                            {signupButton}
                         </Grid>
                     </Grid>
                 </Toolbar>

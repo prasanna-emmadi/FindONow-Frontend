@@ -71,7 +71,7 @@ const ActualProductList = ({
         <ProductsStyles data-testid="products">
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
-            
+
             <Options categories={categories} />
             <Box className="products-grid-container l m">
                 {productsSlice.map((product, index) => (
@@ -165,13 +165,6 @@ const ProductList = () => {
         />
     );
 
-    // return (
-    //     <section className="products-list" style={{ paddingTop: "15px" }}>
-    //         {content}
-    //     </section>
-    // );
-
-    
     return (
         <section className="products-list" style={{ paddingTop: "20px" }}>
             <Box className="root-banner-container l">
