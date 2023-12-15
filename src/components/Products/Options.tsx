@@ -35,6 +35,12 @@ const SortOptions = () => {
     const dispatch = useAppDispatch();
     return (
         <Select
+            styles={{
+                control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    maxWidth: "300px",
+                }),
+            }}
             options={options}
             onChange={(newValue: any) => {
                 switch (newValue.value) {
