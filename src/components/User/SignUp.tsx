@@ -157,7 +157,7 @@ const SignUp = (props: Props) => {
     );
 
     return (
-        <Grid>
+        <Grid style={{ paddingTop: "15px" }}>
             <Paper elevation={2} style={signupPaperStyle}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
