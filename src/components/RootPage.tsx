@@ -236,6 +236,10 @@ const RootPage = () => {
         }
     };
 
+    const onSignupClick = () => {
+        navigate("/signup");
+    };
+
     const onHomeClick = () => {
         navigate("/");
     };
@@ -286,7 +290,7 @@ const RootPage = () => {
 
     const signupButton = (
         <Button
-            onClick={onLoginClick}
+            onClick={onSignupClick}
             variant="contained"
             style={{
                 color: "white",
