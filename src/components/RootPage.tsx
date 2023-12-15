@@ -303,7 +303,15 @@ const RootPage = () => {
         </Button>
     );
 
-    const loginOrProfile = isLoggedIn ? <Profile /> : loginButton;
+    const loggedInContent = <Profile />;
+    const notLoggedInContent = (
+        <>
+            {loginButton}
+            {signupButton}
+        </>
+    );
+
+    const authContent = isLoggedIn ? loggedInContent : notLoggedInContent;
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -352,8 +360,7 @@ const RootPage = () => {
                                 justifyContent: "end",
                             }}
                         >
-                            {loginOrProfile}
-                            {signupButton}
+                            {authContent}
                         </Grid>
                     </Grid>
                 </Toolbar>
