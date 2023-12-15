@@ -39,71 +39,75 @@ import { useIsDesktop } from "./hooks/useIsDesktop";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
+const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean) => {
+    const options = [
+        {
+            path: "/home",
+            name: "Home",
+            icon: <HomeIcon />,
+        },
+    ];
+
+    let allOptions = options;
+
+    if (isLoggedIn) {
+        const loggedInOptions = [
+            {
+                path: "/users",
+                name: "Users",
+                icon: <GroupIcon />,
+            },
+            {
+                path: "/profile",
+                name: "Profile",
+                icon: <Person2Icon />,
+            },
+            {
+                path: "/users/orders",
+                name: "Orders",
+                icon: <Person2Icon />,
+            },
+        ];
+
+        allOptions = allOptions.concat(loggedInOptions);
+        if (isAdmin) {
+            allOptions = [
+                ...allOptions,
+                {
+                    path: "/admin",
+                    name: "Admin Dashboard",
+                    icon: <InventoryIcon />,
+                },
+                {
+                    path: "/products/create",
+                    name: "Create Product",
+                    icon: <AddToPhotosIcon />,
+                },
+                {
+                    path: API_DOCUMENTATION_URL,
+                    name: "Swagger API Documentation",
+                    icon: <ApiIcon />,
+                },
+            ];
+        }
+    } else {
+        allOptions = [
+            ...allOptions,
+            {
+                path: "/signup",
+                name: "SignUp",
+                icon: <HowToRegIcon />,
+            },
+        ];
+    }
+    return allOptions;
+};
+
 const NavOptions = () => {
     const { token, isAdmin } = useAuthContext();
 
     const allOptions = useMemo(() => {
-        const options = [
-            {
-                path: "/home",
-                name: "Home",
-                icon: <HomeIcon />,
-            },
-        ];
-
-        let allOptions = options;
-
-        if (token !== undefined) {
-            const loggedInOptions = [
-                {
-                    path: "/users",
-                    name: "Users",
-                    icon: <GroupIcon />,
-                },
-                {
-                    path: "/profile",
-                    name: "Profile",
-                    icon: <Person2Icon />,
-                },
-                {
-                    path: "/users/orders",
-                    name: "Orders",
-                    icon: <Person2Icon />,
-                },
-            ];
-
-            allOptions = allOptions.concat(loggedInOptions);
-            if (isAdmin) {
-                allOptions = [
-                    ...allOptions,
-                    {
-                        path: "/admin",
-                        name: "Admin Dashboard",
-                        icon: <InventoryIcon />,
-                    },
-                    {
-                        path: "/products/create",
-                        name: "Create Product",
-                        icon: <AddToPhotosIcon />,
-                    },
-                    {
-                        path: API_DOCUMENTATION_URL,
-                        name: "Swagger API Documentation",
-                        icon: <ApiIcon />,
-                    },
-                ];
-            }
-        } else {
-            allOptions = [
-                ...allOptions,
-                {
-                    path: "/signup",
-                    name: "SignUp",
-                    icon: <HowToRegIcon />,
-                },
-            ];
-        }
-        return allOptions;
+        return getAllOptions(isAdmin, token !== undefined);
     }, [token, isAdmin]);
 
     const optionComponents = allOptions.map((option, index) => {
@@ -164,13 +168,17 @@ const SearchBar = () => {
 };
 
 const Profile = () => {
-    const settings = ["Profile", "Account", "Dashboard", "Logout"];
+    const { token, isAdmin } = useAuthContext();
+    const settings = getAllOptions(isAdmin, token !== undefined)
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (setting: any) => {
+        navigate(setting.path)
         setAnchorElUser(null);
     };
 
@@ -201,8 +209,11 @@ const Profile = () => {
                 onClose={handleCloseUserMenu}
             >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem
+                        key={setting.name}
+                        onClick={() => handleCloseUserMenu(setting)}
+                    >
+                        <Typography textAlign="center">{setting.name}</Typography>
                     </MenuItem>
                 ))}
             </Menu>

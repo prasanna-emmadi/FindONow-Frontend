@@ -31,20 +31,23 @@ const getPageCount = (productsLength: number) => {
     return Math.ceil(productsLength / ProductCountPerPage);
 };
 
-const getSlice = (page: number, products: ProductType[]) => {
+const getSlice = (page: number, products: ProductType[]): ProductType[] => {
     const adjust = (page - 1) * ProductCountPerPage;
     return products.slice(adjust, page * ProductCountPerPage);
 };
 
-const ActualProductList = ({
-    products,
-    categories,
-    dispatch,
-}: ActualProductListProps) => {
+const checkNotAnyUrl = (images: string[]) => {
+    const index = images.findIndex((image) => image.includes("/any"));
+    return index === -1;
+};
+
+const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     const [snackOpen, setSnackOpen] = useState(false);
     const [page, setPage] = useState(1);
     const pageCount = getPageCount(products.length);
-    const productsSlice = getSlice(page, products);
+    let productsSlice = getSlice(page, products).filter(
+        (product) => product.images?.length !== 0,
+    );
 
     const handleChange = (
         _event: React.ChangeEvent<unknown>,
@@ -72,16 +75,17 @@ const ActualProductList = ({
         <ProductsStyles data-testid="products">
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
-
-            <Box className="products-grid-container l m">
-                {productsSlice.map((product, index) => (
-                    <Box className="products-grid-item" key={index}>
-                        <ProductCard
-                            product={product}
-                            handleAddToCart={handleAddToCart}
-                        />
-                    </Box>
-                ))}
+            <Box className="products-grid-container-wrapper">
+                <Box className="products-grid-container l m">
+                    {productsSlice.map((product, index) => (
+                        <Box className="products-grid-item" key={index}>
+                            <ProductCard
+                                product={product}
+                                handleAddToCart={handleAddToCart}
+                            />
+                        </Box>
+                    ))}
+                </Box>
             </Box>
             <CenterDiv>
                 <ProductsPagination

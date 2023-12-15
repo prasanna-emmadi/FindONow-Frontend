@@ -105,7 +105,7 @@ const ProductForm = (props: Props) => {
     };
 
     return (
-        <Grid width={"80%"}>
+        <Grid width={"60%"} style={{ paddingTop: "25px" }}>
             <Grid
                 alignItems="center"
                 justifyContent="center"
