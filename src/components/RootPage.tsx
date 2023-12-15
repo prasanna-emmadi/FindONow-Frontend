@@ -169,16 +169,15 @@ const SearchBar = () => {
 
 const Profile = () => {
     const { token, isAdmin } = useAuthContext();
-    const settings = getAllOptions(isAdmin, token !== undefined)
+    const settings = getAllOptions(isAdmin, token !== undefined);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = (setting: any) => {
-        navigate(setting.path)
+        navigate(setting.path);
         setAnchorElUser(null);
     };
 
@@ -213,7 +212,9 @@ const Profile = () => {
                         key={setting.name}
                         onClick={() => handleCloseUserMenu(setting)}
                     >
-                        <Typography textAlign="center">{setting.name}</Typography>
+                        <Typography textAlign="center">
+                            {setting.name}
+                        </Typography>
                     </MenuItem>
                 ))}
             </Menu>

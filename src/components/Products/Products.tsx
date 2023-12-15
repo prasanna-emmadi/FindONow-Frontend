@@ -16,7 +16,6 @@ import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
 import logo from "./logo.png";
-//import logo from "./shopping_bags_image.jpeg";
 
 import CenterDiv from "../common/CenterDiv";
 
@@ -34,11 +33,6 @@ const getPageCount = (productsLength: number) => {
 const getSlice = (page: number, products: ProductType[]): ProductType[] => {
     const adjust = (page - 1) * ProductCountPerPage;
     return products.slice(adjust, page * ProductCountPerPage);
-};
-
-const checkNotAnyUrl = (images: string[]) => {
-    const index = images.findIndex((image) => image.includes("/any"));
-    return index === -1;
 };
 
 const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {

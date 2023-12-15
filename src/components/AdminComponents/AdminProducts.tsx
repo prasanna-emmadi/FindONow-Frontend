@@ -17,7 +17,7 @@ const InnerAdminProducts = ({ data }: Props) => {
     const products = data;
     const navigate = useNavigate();
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{ paddingTop: "25px" }}>
             <Table
                 sx={{ minWidth: 650 }}
                 size="small"
