@@ -340,6 +340,8 @@ const RootPage = () => {
                                 style={{
                                     justifyContent: "flex-start",
                                     color: "black",
+                                    fontWeight: "bold",
+                                    fontSize: "24px",
                                 }}
                             >
                                 Find'O Now

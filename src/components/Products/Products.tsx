@@ -16,6 +16,8 @@ import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
 import logo from "./logo.png";
+//import logo from "./shopping_bags_image.jpeg";
+
 import CenterDiv from "../common/CenterDiv";
 
 interface ActualProductListProps {
@@ -124,9 +126,8 @@ const CategoryProducts = (props: CategoryProductsProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     return (
-        <Box sx={{paddingTop: "10px"}}>
+        <Box sx={{ paddingTop: "10px" }}>
             <Options categories={categoriesSlice} />
             <ActualProductList
                 products={categoryProducts}
@@ -165,7 +166,7 @@ const ProductList = () => {
     );
 
     return (
-        <section className="products-list" style={{ paddingTop: "20px" }}>
+        <section className="products-list" style={{ paddingTop: "50px" }}>
             <Box className="root-banner-container l">
                 <img src={logo} alt="Logo" height={400} width={1100} />
             </Box>
