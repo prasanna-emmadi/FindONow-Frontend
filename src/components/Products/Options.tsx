@@ -146,7 +146,7 @@ const Options = ({ categories }: OptionProps) => {
 
     if (isDesktop) {
         return (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} style={{ paddingTop: "20px" }}>
                 <Grid item xs={8}>
                     <CategoryTabs categories={categories} />
                 </Grid>

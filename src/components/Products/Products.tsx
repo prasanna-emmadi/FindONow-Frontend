@@ -15,7 +15,7 @@ import CartDrawer from "./CartDrawer";
 import Options from "./Options";
 import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
-import logo from "./logo.png";
+import logo from "./blue_mobile_ecommerce.jpg";
 
 import CenterDiv from "../common/CenterDiv";
 
@@ -125,7 +125,7 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     }, []);
 
     return (
-        <Box sx={{ paddingTop: "10px" }}>
+        <Box sx={{ paddingTop: "30px" }}>
             <Options categories={categoriesSlice} />
             <ActualProductList
                 products={categoryProducts}
@@ -164,9 +164,15 @@ const ProductList = () => {
     );
 
     return (
-        <section className="products-list" style={{ paddingTop: "50px" }}>
+        <section className="products-list">
             <Box className="root-banner-container l">
-                <img src={logo} alt="Logo" height={400} width={1100} />
+                <img
+                    className="root-banner-container-image"
+                    src={logo}
+                    alt="Logo"
+                    height={400}
+                    width={1500}
+                />
             </Box>
             {content}
         </section>
