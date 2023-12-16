@@ -306,10 +306,8 @@ const RootPage = () => {
             onClick={onSignupClick}
             variant="contained"
             style={{
-                color: "white",
                 fontWeight: "500",
                 borderRadius: 16,
-                backgroundColor: "#00BDC8",
             }}
         >
             Sign Up
