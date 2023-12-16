@@ -10,6 +10,8 @@ import useFormStyle from "../hooks/useFormStyle";
 import CenterDiv from "../common/CenterDiv";
 import BoldH4Text from "../common/BoldH4Text";
 import CenterColumnDiv from "../common/CenterColumnDiv";
+import useColors from "../hooks/useColors";
+import InfoContainer from "./InfoContainer";
 
 interface DefaultValues {
     email?: string;
@@ -116,16 +118,21 @@ const SignUp = (props: Props) => {
 
     return (
         <Grid style={{ paddingTop: "15px" }}>
-            <Paper elevation={2} style={signupPaperStyle}>
-                <Grid container spacing={2}>
-                    <Grid item xs={8}>
+            <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <Paper
+                        elevation={2}
+                        style={signupPaperStyle}
+                        square={false}
+                    >
                         {form}
-                    </Grid>
-                    <Grid item xs={4}>
-                        <LoginInfo />
-                    </Grid>
+                    </Paper>
                 </Grid>
-            </Paper>
+                <InfoContainer>
+                    <LoginInfo />
+                </InfoContainer>
+                <Grid item xs={3} />
+            </Grid>
         </Grid>
     );
 };

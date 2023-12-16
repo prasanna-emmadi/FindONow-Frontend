@@ -18,6 +18,7 @@ import useFormStyle from "../hooks/useFormStyle";
 import BoldH4Text from "../common/BoldH4Text";
 import CenterColumnDiv from "../common/CenterColumnDiv";
 import CenterDiv from "../common/CenterDiv";
+import InfoContainer from "../User/InfoContainer";
 
 const SignupInfo = () => {
     const navigate = useNavigate();
@@ -119,21 +120,25 @@ const Login = () => {
 
     return (
         <>
-            <Grid
-                container
-                style={{ paddingTop: "100px", justifyItems: "start" }}
-            >
-                <Paper elevation={2} style={loginPaperStyle}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={8}>
+
+            <Grid style={{ paddingTop: "15px" }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Paper
+                            elevation={2}
+                            style={loginPaperStyle}
+                            square={false}
+                        >
                             {form}
-                        </Grid>
-                        <Grid item xs={4}>
-                            <SignupInfo />
-                        </Grid>
+                        </Paper>
                     </Grid>
-                </Paper>
+                    <InfoContainer>
+                        <SignupInfo />
+                    </InfoContainer>
+                    <Grid item xs={2} />
+                </Grid>
             </Grid>
+
             <Snackbar
                 open={snackOpen}
                 autoHideDuration={6000}

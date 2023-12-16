@@ -1,5 +1,5 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Stack, useTheme } from "@mui/material";
+import { Stack } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../types/productType";
+import useColors from "../hooks/useColors";
 
 interface Props {
     product: ProductType;
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const ProductCard = ({ product, handleAddToCart }: Props) => {
-  const theme = useTheme();
+    const { mainColor, secondaryColor } = useColors();
 
     const navigate = useNavigate();
     const onClick = () => {
@@ -26,10 +27,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
         <Card sx={{ maxWidth: 390 }}>
             <CardHeader
                 avatar={
-                    <Avatar
-                        sx={{ bgcolor: theme.palette.primary.main }}
-                        aria-label="recipe"
-                    >
+                    <Avatar sx={{ bgcolor: mainColor }} aria-label="recipe">
                         {product.category.name[0].toLocaleUpperCase()}
                     </Avatar>
                 }
@@ -61,7 +59,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                         onClick={() => handleAddToCart(product)}
                         style={{
                             marginTop: "12px",
-                            color: "#D8774C",
+                            color: secondaryColor,
                             fontSize: "24px",
                         }}
                         className="products-grid-item-price-cart-icon"
