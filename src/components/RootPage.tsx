@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
 import {
     Avatar,
+    Divider,
     Drawer,
     Grid,
     IconButton,
@@ -31,6 +32,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 import { useIsDesktop } from "./hooks/useIsDesktop";
+import Footer from "./Footer/Footer";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
@@ -283,65 +285,75 @@ const RootPage = () => {
     const authContent = isLoggedIn ? loggedInContent : notLoggedInContent;
 
     return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                enableColorOnDark
-                style={{
-                    background: "#ffffff",
-                    height: "100px",
-                    justifyContent: "center",
-                }}
-            >
-                <Toolbar>
-                    {!isDesktop && menuButton}
-                    <Grid
-                        container
-                        spacing={2}
-                        style={{ justifyContent: "center", paddingTop: "8px" }}
-                    >
-                        <Grid item xs={3}>
-                            <Button
-                                color="inherit"
-                                onClick={onHomeClick}
-                                style={{
-                                    justifyContent: "flex-start",
-                                    color: "black",
-                                    fontWeight: "bold",
-                                    fontSize: "24px",
-                                }}
-                            >
-                                Find'O Now
-                            </Button>
-                        </Grid>
+        <>
+            <Box sx={{ display: "flex" }}>
+                <CssBaseline />
+                <AppBar
+                    position="fixed"
+                    sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    enableColorOnDark
+                    style={{
+                        background: "#ffffff",
+                        height: "100px",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Toolbar>
+                        {!isDesktop && menuButton}
                         <Grid
-                            item
-                            xs={6}
-                            style={{ flexGrow: 1, paddingTop: "-2px" }}
-                        >
-                            <div />
-                        </Grid>
-                        <Grid
-                            item
-                            xs={3}
+                            container
+                            spacing={2}
                             style={{
-                                display: "flex",
-                                justifyContent: "end",
+                                justifyContent: "center",
+                                paddingTop: "8px",
                             }}
                         >
-                            {authContent}
+                            <Grid item xs={3}>
+                                <Button
+                                    color="inherit"
+                                    onClick={onHomeClick}
+                                    style={{
+                                        justifyContent: "flex-start",
+                                        color: "black",
+                                        fontWeight: "bold",
+                                        fontSize: "24px",
+                                    }}
+                                >
+                                    Find'O Now
+                                </Button>
+                            </Grid>
+                            <Grid
+                                item
+                                xs={6}
+                                style={{ flexGrow: 1, paddingTop: "-2px" }}
+                            >
+                                <div />
+                            </Grid>
+                            <Grid
+                                item
+                                xs={3}
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "end",
+                                }}
+                            >
+                                {authContent}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-            {!isDesktop && drawer}
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <Toolbar />
-                <Outlet />
+                    </Toolbar>
+                </AppBar>
+                {!isDesktop && drawer}
+                <Box
+                    component="main"
+                    sx={{ flexGrow: 1, p: 3, minHeight: "75vh" }}
+                >
+                    <Toolbar />
+                    <Outlet />
+                </Box>
             </Box>
-        </Box>
+            <Divider />
+            <Footer />
+        </>
     );
 };
 

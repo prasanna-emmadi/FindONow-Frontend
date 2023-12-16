@@ -21,7 +21,7 @@ const ProductsPagination = ({ pageCount, page, handleChange }: Props) => {
                 shape="rounded"
                 page={page}
                 onChange={handleChange}
-                color="secondary"
+                color="primary"
                 siblingCount={siblingCount}
                 size="large"
                 className="products-pagination-element"
