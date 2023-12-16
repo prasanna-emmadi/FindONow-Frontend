@@ -18,6 +18,7 @@ import ProductsPagination from "./ProductsPagination";
 import logo from "./blue_mobile_ecommerce.jpg";
 
 import CenterDiv from "../common/CenterDiv";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface ActualProductListProps {
     products: ProductType[];
@@ -166,13 +167,16 @@ const ProductList = () => {
     return (
         <section className="products-list">
             <Box className="root-banner-container l">
-                <img
-                    className="root-banner-container-image"
-                    src={logo}
-                    alt="Logo"
-                    height={400}
-                    width={1500}
-                />
+                <Box className="root-banner-container-image-wrapper">
+                    <img
+                        className="root-banner-container-image"
+                        src={logo}
+                        alt="Logo"
+                        height={400}
+                        width={1500}
+                    />
+                    <SearchBar className="root-banner-container-image-wrapper-searchbar" />
+                </Box>
             </Box>
             {content}
         </section>

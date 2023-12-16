@@ -6,7 +6,6 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import MenuIcon from "@mui/icons-material/Menu";
 import Person2Icon from "@mui/icons-material/Person2";
-import SearchIcon from "@mui/icons-material/Search";
 import {
     Avatar,
     Drawer,
@@ -25,16 +24,12 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import InputBase from "@mui/material/InputBase";
-import Paper from "@mui/material/Paper";
 import Toolbar from "@mui/material/Toolbar";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { removeToken } from "../redux/authSlice";
-import { searchBy } from "../redux/productSlice";
 import { useAppDispatch } from "../redux/store/hooks";
-import { useDebounce } from "./hooks/useDebounce";
 import { useIsDesktop } from "./hooks/useIsDesktop";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
@@ -129,43 +124,6 @@ const NavOptions = () => {
         );
     });
     return <>{optionComponents}</>;
-};
-
-const SearchBar = () => {
-    const [query, setQuery] = useState("");
-    const searchQuery = useDebounce(query, 2000);
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(searchBy(searchQuery));
-    }, [dispatch, searchQuery]);
-
-    return (
-        <Paper
-            component="form"
-            sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                borderRadius: "12px",
-            }}
-        >
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-            </IconButton>
-            <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search Products"
-                inputProps={{ "aria-label": "search products" }}
-                onInput={(e: any) => {
-                    const { target } = e;
-                    if (target) {
-                        setQuery(e.target.value);
-                    }
-                }}
-            />
-        </Paper>
-    );
 };
 
 const Profile = () => {
@@ -363,7 +321,7 @@ const RootPage = () => {
                             xs={6}
                             style={{ flexGrow: 1, paddingTop: "-2px" }}
                         >
-                            <SearchBar />
+                            <div />
                         </Grid>
                         <Grid
                             item

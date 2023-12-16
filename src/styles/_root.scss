@@ -11,8 +11,25 @@
   display: none;
 }
 
+.root-banner-container-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  margin-bottom: 205px;
+}
+
 .root-banner-container-image {
   border-radius: 40px;
+
+}
+
+.root-banner-container-image-wrapper-searchbar {
+  margin-top: -205px;
+  z-index: 1;
+  width: 300px;
 }
 
 .root-appbar-grid-last-item {
