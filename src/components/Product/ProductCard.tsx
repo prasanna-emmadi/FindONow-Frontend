@@ -56,6 +56,7 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                         aria-label="share"
                         onClick={() => handleAddToCart(product)}
                         style={{ marginTop: "12px", color: "red" }}
+                        className="products-grid-item-price-cart-icon"
                     >
                         <AddShoppingCartIcon />
                     </IconButton>

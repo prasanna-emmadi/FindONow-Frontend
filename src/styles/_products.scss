@@ -27,6 +27,13 @@
   transform: rotateY(180deg);
 }
 
+.products-grid-item-price-cart-icon {
+  transition: transform 0.8s;
+}
+
+.products-grid-item-price-cart-icon:hover {
+  transform: scale(1.2);
+}
 .products-pagination {
   display: flex;
   align-items: center;
