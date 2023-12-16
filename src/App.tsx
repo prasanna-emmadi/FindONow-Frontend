@@ -6,7 +6,7 @@ import AuthContextProvider from "./context/AuthContext";
 const theme = createTheme({
     palette: {
         primary: {
-            main: "#83B4DD",
+            main: "#5F7FB8",
         },
     },
 });

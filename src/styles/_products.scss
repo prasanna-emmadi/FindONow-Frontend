@@ -29,11 +29,12 @@
 }
 
 .products-grid-item-price-cart-icon {
+  transform: scale(1.2);
   transition: transform 0.8s;
 }
 
 .products-grid-item-price-cart-icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.4);
 }
 .products-pagination {
   display: flex;

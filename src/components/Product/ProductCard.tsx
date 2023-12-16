@@ -1,5 +1,5 @@
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Stack } from "@mui/material";
+import { Stack, useTheme } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,7 +7,6 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import { ProductType } from "../../types/productType";
 
@@ -17,6 +16,8 @@ interface Props {
 }
 
 const ProductCard = ({ product, handleAddToCart }: Props) => {
+  const theme = useTheme();
+
     const navigate = useNavigate();
     const onClick = () => {
         navigate("/products/" + product._id);
@@ -25,7 +26,10 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
         <Card sx={{ maxWidth: 390 }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar
+                        sx={{ bgcolor: theme.palette.primary.main }}
+                        aria-label="recipe"
+                    >
                         {product.category.name[0].toLocaleUpperCase()}
                     </Avatar>
                 }
@@ -55,7 +59,11 @@ const ProductCard = ({ product, handleAddToCart }: Props) => {
                     <IconButton
                         aria-label="share"
                         onClick={() => handleAddToCart(product)}
-                        style={{ marginTop: "12px", color: "red" }}
+                        style={{
+                            marginTop: "12px",
+                            color: "#D8774C",
+                            fontSize: "24px",
+                        }}
                         className="products-grid-item-price-cart-icon"
                     >
                         <AddShoppingCartIcon />
