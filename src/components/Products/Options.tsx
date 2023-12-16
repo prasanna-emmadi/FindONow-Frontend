@@ -7,6 +7,7 @@ import {
     ListItem,
     Stack,
     SwipeableDrawer,
+    useTheme,
 } from "@mui/material";
 
 import { useMemo, useState } from "react";
@@ -33,14 +34,24 @@ const options: any = [
 
 const SortOptions = () => {
     const dispatch = useAppDispatch();
+    const muitheme = useTheme();
     return (
         <Select
             styles={{
                 control: (baseStyles: any, _state) => ({
                     ...baseStyles,
                     maxWidth: "300px",
+                    fontWeight: "600",
                 }),
             }}
+            theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                    ...theme.colors,
+                    primary: muitheme.palette.primary.main,
+                },
+            })}
             options={options}
             onChange={(newValue: any) => {
                 switch (newValue.value) {

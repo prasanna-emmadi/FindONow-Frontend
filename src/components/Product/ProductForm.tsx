@@ -92,7 +92,6 @@ const ProductForm = (props: Props) => {
             d.category = d.categoryId.value;
             d.images = [d.images];
             d.price = Number(d.price);
-            console.log({ finalD: d });
             // async
             if (props.newProduct) {
                 await addProduct(d).unwrap();
