@@ -10,7 +10,6 @@ import useFormStyle from "../hooks/useFormStyle";
 import CenterDiv from "../common/CenterDiv";
 import BoldH4Text from "../common/BoldH4Text";
 import CenterColumnDiv from "../common/CenterColumnDiv";
-import useColors from "../hooks/useColors";
 import InfoContainer from "./InfoContainer";
 
 interface DefaultValues {

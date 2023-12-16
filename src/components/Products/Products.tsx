@@ -126,7 +126,7 @@ const CategoryProducts = (props: CategoryProductsProps) => {
     }, []);
 
     return (
-        <Box sx={{ paddingTop: "30px" }}>
+        <Box>
             <Options categories={categoriesSlice} />
             <ActualProductList
                 products={categoryProducts}
