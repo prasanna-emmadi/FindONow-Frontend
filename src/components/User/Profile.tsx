@@ -1,69 +1,79 @@
-import EditIcon from "@mui/icons-material/Edit";
-import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Grid,
-    Paper,
-    Typography,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Grid, Paper, Skeleton } from "@mui/material";
+import useFormStyle from "../hooks/useFormStyle";
+import { UserType } from "../../types/userType";
+import profileBackground from "./profileBackground.jpg";
 import { useAppSelector } from "../../redux/store/hooks";
-import { paperStyle } from "../common/paperStyles";
+import CenterDiv from "../common/CenterDiv";
+//import absentProfile from "./absentProfile.jpg";
+import absentProfile from "./defaultprofile.jpg";
 
-const loginPaperStyle = {
-    ...paperStyle,
-    width: 400,
+interface Props {
+    user: UserType;
+}
+
+const Content = ({ user }: Props) => {
+    const loginPaperStyle = useFormStyle();
+
+    let avatar = <Skeleton />;
+    if (user?.avatar?.length > 0) {
+        avatar = (
+            <img
+                src={absentProfile}
+                alt={user.name}
+                className="users-profile-container-avatar-img-container"
+            />
+        );
+    } else {
+        avatar = (
+            <CenterDiv>
+                <img
+                    src={absentProfile}
+                    alt={user.name}
+                    className="users-profile-container-avatar-img-container"
+                />
+            </CenterDiv>
+        );
+    }
+
+    const content = (
+        <Box>
+            <img
+                src={profileBackground}
+                alt="profile background"
+                className="users-profile-container-avatar-img-backgroud"
+            />
+            {avatar}
+            <CenterDiv>
+                <p>{user.name}</p>
+            </CenterDiv>
+            <CenterDiv>
+                <p>{user.email}</p>
+            </CenterDiv>
+        </Box>
+    );
+    return (
+        <Box
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignContent: "center",
+                height: "100%",
+                width: "100%",
+            }}
+        >
+            <Paper elevation={2} style={loginPaperStyle} square={false}>
+                {content}
+            </Paper>
+        </Box>
+    );
 };
 
 const Profile = () => {
     const { user, token } = useAppSelector((state) => state.auth);
-    const navigate = useNavigate();
+
     if (!token || !user) return <div>Not loggedIn</div>;
 
-    const onEditClick = () => {
-        navigate("/users/edit");
-    };
-
-    return (
-        <Paper elevation={1} style={loginPaperStyle}>
-            <Grid
-                alignItems="center"
-                justifyContent="center"
-                style={{ textAlign: "center" }}
-            >
-                <Card sx={{ maxWidth: 345 }}>
-                    <CardMedia
-                        sx={{ height: 140 }}
-                        image={user.avatar}
-                        title="profile"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {user.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {user.email}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            {user.role}
-                        </Typography>
-                    </CardContent>
-                    <CardActions disableSpacing>
-                        <Button
-                            color="primary"
-                            onClick={onEditClick}
-                            startIcon={<EditIcon />}
-                        >
-                            Edit
-                        </Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-        </Paper>
-    );
+    return <Content user={user} />;
 };
 
 export default Profile;

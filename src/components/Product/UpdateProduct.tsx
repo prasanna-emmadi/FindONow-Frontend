@@ -12,11 +12,11 @@ interface DataType {
     id: string;
 }
 
-interface Props {
+interface ContentProps {
     data: DataType;
 }
 
-const Content = ({ data }: Props) => {
+const Content = ({ data }: ContentProps) => {
     const { categories, id } = data;
     const { product } = useGetProductsQuery(undefined, {
         selectFromResult: ({ data }) => ({
@@ -33,14 +33,18 @@ const Content = ({ data }: Props) => {
                 categories={categories}
                 defaultValues={defaultValues}
                 newProduct={false}
+                showSubmit={false}
             />
         );
     }
     return <div />;
 };
 
-const UpdateProduct = () => {
-    const { id } = useParams();
+interface Props {
+    id: string;
+}
+
+const LoadProduct = ({ id }: Props) => {
     const {
         data: categories,
         isLoading,
@@ -67,6 +71,19 @@ const UpdateProduct = () => {
             Component={Content}
         />
     );
+};
+
+const UpdateProduct = () => {
+    const { id } = useParams();
+    if (id) {
+        return <LoadProduct id={id} />;
+    } else {
+        return <div>No Product found</div>;
+    }
+};
+
+export const UpdateProductWithId = ({ id }: Props) => {
+    return <LoadProduct id={id} />;
 };
 
 export default UpdateProduct;
