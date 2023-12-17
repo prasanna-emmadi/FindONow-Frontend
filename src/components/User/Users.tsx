@@ -1,5 +1,6 @@
 import {
     Paper,
+    Skeleton,
     Table,
     TableBody,
     TableCell,
@@ -29,32 +30,43 @@ const InnerUserList = ({ data }: Props) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Id</TableCell>
+                        <TableCell align="right">Image</TableCell>
                         <TableCell align="right">Email</TableCell>
                         <TableCell align="right">Name</TableCell>
                         <TableCell align="right">Role</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {users.map((user, index) => (
-                        <TableRow
-                            key={index}
-                            sx={{
-                                "&:last-child td, &:last-child th": {
-                                    border: 0,
-                                },
-                            }}
-                            onClick={() => {
-                                navigate("/users/" + user._id);
-                            }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {user._id}
-                            </TableCell>
-                            <TableCell align="right">{user.email}</TableCell>
-                            <TableCell align="right">{user.name}</TableCell>
-                            <TableCell align="right">{user.role}</TableCell>
-                        </TableRow>
-                    ))}
+                    {users.map((user, index) => {
+                        let avatar = <Skeleton />;
+                        if (user?.avatar?.length > 0) {
+                            avatar = <img src={user.avatar} alt={user.name} />;
+                        }
+
+                        return (
+                            <TableRow
+                                key={index}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
+                                onClick={() => {
+                                    navigate("/users/" + user._id);
+                                }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {user._id}
+                                </TableCell>
+                                <TableCell align="right">{avatar}</TableCell>
+                                <TableCell align="right">
+                                    {user.email}
+                                </TableCell>
+                                <TableCell align="right">{user.name}</TableCell>
+                                <TableCell align="right">{user.role}</TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>
