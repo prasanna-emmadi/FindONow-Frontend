@@ -18,13 +18,10 @@ const InnerAdminProducts = ({ data }: Props) => {
     const navigate = useNavigate();
     return (
         <TableContainer component={Paper} style={{ paddingTop: "25px" }}>
-            <Table
-                sx={{ minWidth: 650 }}
-                size="small"
-                aria-label="a dense table"
-            >
+            <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>Image</TableCell>
                         <TableCell>Title</TableCell>
                         <TableCell align="right">Category</TableCell>
                         <TableCell align="right">Price</TableCell>
@@ -46,6 +43,15 @@ const InnerAdminProducts = ({ data }: Props) => {
                             <TableCell component="th" scope="row">
                                 {product.title}
                             </TableCell>
+                            <TableCell align="right">
+                                <img
+                                    src={product.images[0]}
+                                    alt={product.title}
+                                    width={60}
+                                    height={60}
+                                />
+                            </TableCell>
+
                             <TableCell align="right">
                                 {product.category.name}
                             </TableCell>
