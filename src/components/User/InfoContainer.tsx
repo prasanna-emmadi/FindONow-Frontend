@@ -11,10 +11,9 @@ const InfoContainer = ({ children }: Props) => {
     return (
         <Grid
             item
-            xs={3}
             style={{
                 backgroundColor: secondaryColor,
-                margin: "35px 20px 20px 0",
+                margin: "19px 20px 20px 0",
                 padding: "30px 20px",
             }}
         >

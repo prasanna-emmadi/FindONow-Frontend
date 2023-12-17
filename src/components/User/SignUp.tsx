@@ -117,8 +117,11 @@ const SignUp = (props: Props) => {
 
     return (
         <Grid style={{ paddingTop: "15px" }}>
-            <Grid container spacing={2}>
-                <Grid item xs={6}>
+            <Grid
+                container
+                style={{ justifyContent: "center", alignContent: "center" }}
+            >
+                <Grid item style={{ overflow: "hidden" }}>
                     <Paper
                         elevation={2}
                         style={signupPaperStyle}
@@ -130,7 +133,6 @@ const SignUp = (props: Props) => {
                 <InfoContainer>
                     <LoginInfo />
                 </InfoContainer>
-                <Grid item xs={3} />
             </Grid>
         </Grid>
     );

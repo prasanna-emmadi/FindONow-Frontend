@@ -87,7 +87,7 @@ const Login = () => {
     };
 
     const form = (
-        <Box style={{width: "90%"}}>
+        <Box style={{ width: "90%" }}>
             <Grid
                 alignItems="center"
                 justifyContent="center"
@@ -120,8 +120,11 @@ const Login = () => {
     return (
         <>
             <Grid style={{ paddingTop: "15px" }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={6} style={{ overflow: "hidden" }}>
+                <Grid
+                    container
+                    style={{ justifyContent: "center", alignContent: "center" }}
+                >
+                    <Grid item style={{ overflow: "hidden" }}>
                         <Paper
                             elevation={2}
                             style={loginPaperStyle}
@@ -133,7 +136,6 @@ const Login = () => {
                     <InfoContainer>
                         <SignupInfo />
                     </InfoContainer>
-                    <Grid item xs={2} />
                 </Grid>
             </Grid>
 
