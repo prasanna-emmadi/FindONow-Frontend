@@ -116,10 +116,14 @@ const SignUp = (props: Props) => {
     );
 
     return (
-        <Grid style={{ paddingTop: "15px" }}>
+        <Grid style={{ paddingTop: "15px", height: "100%" }}>
             <Grid
                 container
-                style={{ justifyContent: "center", alignContent: "center" }}
+                style={{
+                    justifyContent: "center",
+                    alignContent: "center",
+                    height: "100%",
+                }}
             >
                 <Grid item style={{ overflow: "hidden" }}>
                     <Paper
