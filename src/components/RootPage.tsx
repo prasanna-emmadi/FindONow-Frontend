@@ -369,7 +369,7 @@ const RootPage = () => {
                 {!isDesktop && drawer}
                 <Box
                     component="main"
-                    sx={{ flexGrow: 1, p: 3, minHeight: "75vh" }}
+                    sx={{ flexGrow: 1, p: 3, minHeight: "100vh" }}
                 >
                     <Toolbar />
                     <Outlet />

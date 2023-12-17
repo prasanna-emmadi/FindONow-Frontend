@@ -86,9 +86,8 @@ const Login = () => {
         setSnackOpen(false);
     };
 
-
     const form = (
-        <Box>
+        <Box style={{width: "90%"}}>
             <Grid
                 alignItems="center"
                 justifyContent="center"
@@ -120,10 +119,9 @@ const Login = () => {
 
     return (
         <>
-
             <Grid style={{ paddingTop: "15px" }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} style={{ overflow: "hidden" }}>
                         <Paper
                             elevation={2}
                             style={loginPaperStyle}
