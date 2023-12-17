@@ -9,6 +9,7 @@ import {
 } from "../../redux/apiSlice";
 import { CategoryType, ProductType } from "../../types/productType";
 import FieldController from "../common/FieldController";
+import CenterDiv from "../common/CenterDiv";
 
 type optionType = { value: string; label: string };
 const defaultOption = { value: "", label: "" };
@@ -158,9 +159,11 @@ const ProductForm = (props: Props) => {
                         </>
                     )}
                 />
-                <Button type="submit" variant="contained" color="primary">
-                    Submit
-                </Button>
+                <CenterDiv>
+                    <Button type="submit" variant="contained" color="primary">
+                        Submit
+                    </Button>
+                </CenterDiv>
             </form>
         </Grid>
     );
