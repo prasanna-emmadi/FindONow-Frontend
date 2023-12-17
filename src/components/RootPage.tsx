@@ -34,6 +34,7 @@ import { removeToken } from "../redux/authSlice";
 import { useAppDispatch } from "../redux/store/hooks";
 import { useIsDesktop } from "./hooks/useIsDesktop";
 import Footer from "./Footer/Footer";
+import CenterDiv from "./common/CenterDiv";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
@@ -300,10 +301,10 @@ const RootPage = () => {
 
     const loggedInContent = <Profile />;
     const notLoggedInContent = (
-        <>
+        <CenterDiv>
             {loginButton}
             {signupButton}
-        </>
+        </CenterDiv>
     );
 
     const authContent = isLoggedIn ? loggedInContent : notLoggedInContent;

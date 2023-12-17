@@ -117,7 +117,7 @@ const ProductForm = (props: Props) => {
                     style={{ textAlign: "center" }}
                     pb={2}
                 >
-                    New Product
+                    Create Product
                 </Typography>
             </Grid>
             <form onSubmit={handleSubmit(onSubmit)}>

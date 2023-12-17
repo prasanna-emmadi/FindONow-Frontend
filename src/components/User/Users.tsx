@@ -78,7 +78,7 @@ const UserList = () => {
                 style={{ textAlign: "center" }}
                 pb={2}
             >
-                Admin Users List
+                Users List
             </Typography>
 
             {content}
