@@ -2,8 +2,8 @@ import { IconButton } from "@mui/material";
 import styled from "styled-components";
 
 export const AppStyles = styled.div`
-    paddingTop: 10px;
-    margin: 80px;
+    paddingtop: 20px;
+    margin: 100px 80px 80px 80px;
 `;
 
 export const StyledButton = styled(IconButton)`

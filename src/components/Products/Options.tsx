@@ -28,8 +28,8 @@ import CategoryTabs from "./CategoryTabs";
 const options: any = [
     { value: "title_increasing", label: "A-Z" },
     { value: "title_decreasing", label: "Z-A" },
-    { value: "price_increasing", label: "Low-High" },
-    { value: "price_decreasing", label: "High-Low" },
+    { value: "price_increasing", label: "Low-Priced" },
+    { value: "price_decreasing", label: "High-Priced" },
 ];
 
 const SortOptions = () => {

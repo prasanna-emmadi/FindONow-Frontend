@@ -343,7 +343,14 @@ const RootPage = () => {
                                         fontSize: "24px",
                                     }}
                                 >
-                                    Find'O Now
+                                    Find
+                                    <Typography
+                                        variant={"h3"}
+                                        style={{ marginBottom: "13px" }}
+                                    >
+                                        {"'O "}
+                                    </Typography>
+                                    Now
                                 </Button>
                             </Grid>
                             <Grid

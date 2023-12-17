@@ -38,6 +38,7 @@ const SearchBar = ({ className }: Props) => {
                 type="button"
                 sx={{ p: "10px", color: mainColor }}
                 aria-label="search"
+                size="large"
             >
                 <SearchIcon />
             </IconButton>

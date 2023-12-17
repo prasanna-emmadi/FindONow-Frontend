@@ -153,6 +153,10 @@ const ProductList = () => {
         };
     }
 
+    useEffect(()=> {
+        window.scrollTo(0, 0);
+    }, [])
+
     let content = (
         <Suspense
             data={wrappedData}
