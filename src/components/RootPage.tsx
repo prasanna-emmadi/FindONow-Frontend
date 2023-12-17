@@ -299,7 +299,11 @@ const RootPage = () => {
         </Button>
     );
 
-    const loggedInContent = <Profile />;
+    const loggedInContent = (
+        <CenterDiv>
+            <Profile />
+        </CenterDiv>
+    );
     const notLoggedInContent = (
         <CenterDiv>
             {loginButton}
