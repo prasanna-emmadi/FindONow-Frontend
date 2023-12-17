@@ -71,7 +71,7 @@ const SignUp = (props: Props) => {
     };
 
     const form = (
-        <Box>
+        <Box style={{ width: "90%" }}>
             <Grid
                 alignItems="center"
                 justifyContent="center"

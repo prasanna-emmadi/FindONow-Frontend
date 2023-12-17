@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CategoryType, ProductType } from "../types/productType";
-import { OrderType, OrderItemType } from "../types/orderType";
+import { OrderItemType, GetOrderType } from "../types/orderType";
 import { UserType } from "../types/userType";
 import { RootState } from "./store/configureStore";
 
@@ -139,7 +139,7 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ["Category"],
             }),
-            getOrders: builder.query<OrderType[], void>({
+            getOrders: builder.query<GetOrderType[], void>({
                 query: () => "/orders",
                 providesTags: ["Order"],
             }),
