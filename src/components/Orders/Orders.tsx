@@ -143,7 +143,7 @@ const Content = ({ data }: Props) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Index</TableCell>
-                        <TableCell align="right">Id</TableCell>
+                        <TableCell>Id</TableCell>
                         <TableCell align="right">Date</TableCell>
                         <TableCell align="right">TotalAmount</TableCell>
                     </TableRow>
