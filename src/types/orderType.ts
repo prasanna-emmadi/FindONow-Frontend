@@ -25,5 +25,5 @@ export interface GetOrderType {
     _id: string;
     date: string;
     totalAmount: number;
-    orderItems?: OrderItemType[];
+    orderItems: GetOrderItemType[];
 }
