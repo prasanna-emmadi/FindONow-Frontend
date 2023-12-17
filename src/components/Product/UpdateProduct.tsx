@@ -33,7 +33,6 @@ const Content = ({ data }: ContentProps) => {
                 categories={categories}
                 defaultValues={defaultValues}
                 newProduct={false}
-                showSubmit={false}
             />
         );
     }

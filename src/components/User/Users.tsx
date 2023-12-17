@@ -1,14 +1,14 @@
 import {
-    Paper,
+    Avatar,
+    Box,
+    Divider,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
     Skeleton,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
+    Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "../../redux/apiSlice";
 import { UserType } from "../../types/userType";
 import Suspense from "../common/Suspense";
@@ -17,60 +17,43 @@ interface Props {
     data: UserType[];
 }
 
-const InnerUserList = ({ data }: Props) => {
+const Content = ({ data }: Props) => {
     const users = data;
-    const navigate = useNavigate();
-    return (
-        <TableContainer component={Paper}>
-            <Table
-                sx={{ minWidth: 650 }}
-                size="small"
-                aria-label="a dense table"
-            >
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell align="right">Image</TableCell>
-                        <TableCell align="right">Email</TableCell>
-                        <TableCell align="right">Name</TableCell>
-                        <TableCell align="right">Role</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {users.map((user, index) => {
-                        let avatar = <Skeleton />;
-                        if (user?.avatar?.length > 0) {
-                            avatar = <img src={user.avatar} alt={user.name} />;
-                        }
+    const list = (
+        <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+            {users.map((user) => {
+                let avatar = <Skeleton />;
+                if (user?.avatar?.length > 0) {
+                    avatar = <img src={user.avatar} alt={user.name} />;
+                }
 
-                        return (
-                            <TableRow
-                                key={index}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
+                return (
+                    <Box key={user._id}>
+                        <ListItem key={user._id}>
+                            <ListItemAvatar>
+                                <Avatar>{avatar}</Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={user.name}
+                                secondary={user.email}
+                                secondaryTypographyProps={{
+                                    textOverflow: "ellipsis",
+                                    overflow: "hidden",
                                 }}
-                                onClick={() => {
-                                    navigate("/users/" + user._id);
+                                style={{
+                                    maxWidth: "400px",
+                                    wordBreak: "break-all",
                                 }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {user._id}
-                                </TableCell>
-                                <TableCell align="right">{avatar}</TableCell>
-                                <TableCell align="right">
-                                    {user.email}
-                                </TableCell>
-                                <TableCell align="right">{user.name}</TableCell>
-                                <TableCell align="right">{user.role}</TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                            />
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                    </Box>
+                );
+            })}
+        </List>
     );
+
+    return list;
 };
 
 const UserList = () => {
@@ -83,10 +66,23 @@ const UserList = () => {
             isSuccess={isSuccess}
             isError={isError}
             error={error}
-            Component={InnerUserList}
+            Component={Content}
         />
     );
 
-    return <section className="users-list">{content}</section>;
+    return (
+        <section className="users-list">
+            <Typography
+                variant="h3"
+                color="text.primary"
+                style={{ textAlign: "center" }}
+                pb={2}
+            >
+                Admin Users List
+            </Typography>
+
+            {content}
+        </section>
+    );
 };
 export default UserList;
