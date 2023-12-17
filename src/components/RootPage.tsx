@@ -159,8 +159,10 @@ const Profile = () => {
     };
     const handleCloseUserMenu = (setting: any) => {
         navigate(setting.path);
-        debugger;
-        setting?.action(dispatch);
+        // execute action if one exists
+        if (setting.action) {
+            setting.action(dispatch);
+        }
         setAnchorElUser(null);
     };
 
