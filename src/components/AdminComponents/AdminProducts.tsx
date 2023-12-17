@@ -14,6 +14,9 @@ import {
     Box,
     Alert,
     Snackbar,
+    useTheme,
+    useMediaQuery,
+    DialogContentText,
 } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -34,6 +37,8 @@ interface UpdateProductProps {
 const UpdateProduct = ({ id, onClose }: UpdateProductProps) => {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleClose = () => {
         setOpen(false);
@@ -47,9 +52,13 @@ const UpdateProduct = ({ id, onClose }: UpdateProductProps) => {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={open} onClose={handleClose} fullScreen={fullScreen}>
             <DialogTitle>Update Product</DialogTitle>
             <DialogContent>
+                <DialogContentText>
+                    Here product details such as title, image, price and
+                    category can be updated.
+                </DialogContentText>
                 <UpdateProductForm
                     id={id}
                     onCancelClick={handleClose}
@@ -68,12 +77,12 @@ const Content = ({ data }: Props) => {
     const [snackOpen, setSnackOpen] = useState(false);
     const navigate = useNavigate();
 
-        useEffect(() => {
-            if (deleteResult.isSuccess) {
-                navigate("/products");
-            } else {
-            }
-        }, [deleteResult.isSuccess, navigate]);
+    useEffect(() => {
+        if (deleteResult.isSuccess) {
+            navigate("/products");
+        } else {
+        }
+    }, [deleteResult.isSuccess, navigate]);
 
     const onUpdateClick = (id: string) => {
         setUpdateId(id);
@@ -151,7 +160,7 @@ const Content = ({ data }: Props) => {
                                     border: "1px solid",
                                     borderRadius: "10px",
                                 }}
-                                onClick={() =>onDeleteClick(product._id)}
+                                onClick={() => onDeleteClick(product._id)}
                             >
                                 Delete
                             </ListItemButton>
