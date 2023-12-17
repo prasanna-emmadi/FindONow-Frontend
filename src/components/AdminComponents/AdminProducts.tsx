@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
@@ -12,12 +12,15 @@ import {
     Typography,
     Divider,
     Box,
+    Alert,
+    Snackbar,
 } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import useColors from "../hooks/useColors";
 import UpdateProductForm from "../Product/UpdateProductForm";
+import { useDeleteProductMutation } from "../../redux/apiSlice";
 
 interface Props {
     data: ProductType[];
@@ -61,6 +64,16 @@ const Content = ({ data }: Props) => {
     const products = data;
     const { secondaryColor } = useColors();
     const [updateId, setUpdateId] = useState<string | null>(null);
+    const [deleteProduct, deleteResult] = useDeleteProductMutation();
+    const [snackOpen, setSnackOpen] = useState(false);
+    const navigate = useNavigate();
+
+        useEffect(() => {
+            if (deleteResult.isSuccess) {
+                navigate("/products");
+            } else {
+            }
+        }, [deleteResult.isSuccess, navigate]);
 
     const onUpdateClick = (id: string) => {
         setUpdateId(id);
@@ -70,7 +83,24 @@ const Content = ({ data }: Props) => {
         setUpdateId(null);
     };
 
-    const onDeleteClick = () => {};
+    const onDeleteClick = async (id: string) => {
+        try {
+            await deleteProduct(id).unwrap();
+        } catch {
+            setSnackOpen(true);
+            console.error("error in delete product");
+        }
+    };
+
+    const handleSnackClose = (
+        _event: React.SyntheticEvent | Event,
+        reason?: string,
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackOpen(false);
+    };
 
     const list = (
         <List sx={{ width: "100%", bgcolor: "background.paper" }}>
@@ -121,7 +151,7 @@ const Content = ({ data }: Props) => {
                                     border: "1px solid",
                                     borderRadius: "10px",
                                 }}
-                                onClick={onDeleteClick}
+                                onClick={() =>onDeleteClick(product._id)}
                             >
                                 Delete
                             </ListItemButton>
@@ -139,6 +169,15 @@ const Content = ({ data }: Props) => {
             {updateId !== null ? (
                 <UpdateProduct id={updateId} onClose={onUpdateClose} />
             ) : null}
+            <Snackbar
+                open={snackOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackClose}
+            >
+                <Alert severity="error" sx={{ width: "100%" }}>
+                    Delete failed
+                </Alert>
+            </Snackbar>
         </>
     );
 };
