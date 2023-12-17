@@ -44,11 +44,11 @@ const InnerUserList = ({ data }: Props) => {
                                 },
                             }}
                             onClick={() => {
-                                navigate("/users/" + user.id);
+                                navigate("/users/" + user._id);
                             }}
                         >
                             <TableCell component="th" scope="row">
-                                {user.id}
+                                {user._id}
                             </TableCell>
                             <TableCell align="right">{user.email}</TableCell>
                             <TableCell align="right">{user.name}</TableCell>
