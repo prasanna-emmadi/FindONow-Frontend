@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import ApiIcon from "@mui/icons-material/Api";
 import GroupIcon from "@mui/icons-material/Group";
@@ -36,8 +37,15 @@ import Footer from "./Footer/Footer";
 
 const API_DOCUMENTATION_URL = process.env.REACT_APP_SERVER_URL + "/docs";
 
-const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean) => {
-    const options = [
+interface OptionType {
+    path: string;
+    name: string;
+    icon: ReactNode;
+    action?: (arg0: any) => void;
+}
+
+const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
+    const options: OptionType[] = [
         {
             path: "/home",
             name: "Home",
@@ -87,6 +95,17 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean) => {
                 },
             ];
         }
+        allOptions = [
+            ...allOptions,
+            {
+                path: "/home",
+                name: "Logout",
+                icon: <ApiIcon />,
+                action: (dispatch: any) => {
+                    dispatch(removeToken());
+                },
+            },
+        ];
     } else {
         allOptions = [
             ...allOptions,
@@ -133,12 +152,15 @@ const Profile = () => {
     const settings = getAllOptions(isAdmin, token !== undefined);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = (setting: any) => {
         navigate(setting.path);
+        debugger;
+        setting?.action(dispatch);
         setAnchorElUser(null);
     };
 
