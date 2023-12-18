@@ -43,6 +43,7 @@ interface OptionType {
     name: string;
     icon: ReactNode;
     action?: (arg0: any) => void;
+    link?: boolean;
 }
 
 const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
@@ -93,6 +94,7 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
                     path: API_DOCUMENTATION_URL,
                     name: "Swagger API Documentation",
                     icon: <ApiIcon />,
+                    link: true,
                 },
             ];
         }
@@ -159,7 +161,10 @@ const Profile = () => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = (setting: any) => {
-        navigate(setting.path);
+        // if link don't navigate
+        if (!setting?.link) {
+            navigate(setting.path);
+        }
         // execute action if one exists
         if (setting.action) {
             setting.action(dispatch);
@@ -193,16 +198,35 @@ const Profile = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                {settings.map((setting) => (
-                    <MenuItem
-                        key={setting.name}
-                        onClick={() => handleCloseUserMenu(setting)}
-                    >
+                {settings.map((setting) => {
+                    const content = (
                         <Typography textAlign="center">
                             {setting.name}
                         </Typography>
-                    </MenuItem>
-                ))}
+                    );
+
+                    return (
+                        <MenuItem
+                            key={setting.name}
+                            onClick={() => handleCloseUserMenu(setting)}
+                        >
+                            {setting?.link ? (
+                                <a
+                                    href={setting.path}
+                                    target="_blank"
+                                    style={{
+                                        textDecoration: "none",
+                                        color: "inherit",
+                                    }}
+                                >
+                                    {content}
+                                </a>
+                            ) : (
+                                content
+                            )}
+                        </MenuItem>
+                    );
+                })}
             </Menu>
         </Box>
     );
