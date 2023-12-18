@@ -17,7 +17,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useGetOrdersQuery } from "../../redux/apiSlice";
 import { GetOrderType } from "../../types/orderType";
 import Suspense from "../common/Suspense";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const toReadableDateString = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -32,7 +32,7 @@ const toReadableDateString = (dateStr: string) => {
         month = "0" + month;
     }
 
-    return `${dt}-${month}-${year}`;
+    return `${dt}.${month}.${year}`;
 };
 
 interface RowProps {
