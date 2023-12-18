@@ -18,6 +18,7 @@ import { useGetOrdersQuery } from "../../redux/apiSlice";
 import { GetOrderType } from "../../types/orderType";
 import Suspense from "../common/Suspense";
 import { useState } from "react";
+import useGoToTop from "../hooks/useGoToTop";
 
 const toReadableDateString = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -184,6 +185,8 @@ const Orders = () => {
             Component={Content}
         />
     );
+
+    useGoToTop();
 
     return (
         <section className="users-list">

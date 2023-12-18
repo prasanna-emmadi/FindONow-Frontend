@@ -10,6 +10,7 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
 import ProductCarousel from "./ProductCarousel";
 import { useEffect } from "react";
+import useGoToTop from "../hooks/useGoToTop";
 
 interface Props {
     data: ProductType;
@@ -19,9 +20,7 @@ const Content = ({ data }: Props) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    useGoToTop();
 
     const handleAddToCart = async () => {
         dispatch(addToCart(data));

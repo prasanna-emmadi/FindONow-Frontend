@@ -19,6 +19,7 @@ import logo from "./blue_mobile_ecommerce.jpg";
 
 import CenterDiv from "../common/CenterDiv";
 import SearchBar from "../SearchBar/SearchBar";
+import useGoToTop from "../hooks/useGoToTop";
 
 interface ActualProductListProps {
     products: ProductType[];
@@ -153,9 +154,7 @@ const ProductList = () => {
         };
     }
 
-    useEffect(()=> {
-        window.scrollTo(0, 0);
-    }, [])
+    useGoToTop();
 
     let content = (
         <Suspense

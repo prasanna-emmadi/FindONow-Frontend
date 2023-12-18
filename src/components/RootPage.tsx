@@ -60,11 +60,6 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
     if (isLoggedIn) {
         const loggedInOptions = [
             {
-                path: "/users",
-                name: "Users",
-                icon: <GroupIcon />,
-            },
-            {
                 path: "/profile",
                 name: "Profile",
                 icon: <Person2Icon />,
@@ -80,6 +75,11 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
         if (isAdmin) {
             allOptions = [
                 ...allOptions,
+                {
+                    path: "/users",
+                    name: "Users",
+                    icon: <GroupIcon />,
+                },
                 {
                     path: "/admin",
                     name: "Admin Dashboard",
