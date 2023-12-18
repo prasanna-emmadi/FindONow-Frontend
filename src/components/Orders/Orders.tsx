@@ -1,6 +1,7 @@
 import {
     Box,
     Collapse,
+    Divider,
     IconButton,
     Paper,
     Table,
@@ -21,8 +22,8 @@ import React, { useState } from "react";
 const toReadableDateString = (dateStr: string) => {
     const date = new Date(dateStr);
     const year = date.getFullYear();
-    let month: any = (date.getMonth() + 1);
-    let dt:any = date.getDate();
+    let month: any = date.getMonth() + 1;
+    let dt: any = date.getDate();
 
     if (dt < 10) {
         dt = "0" + dt;
@@ -137,6 +138,18 @@ interface Props {
 
 const Content = ({ data }: Props) => {
     const orders = data;
+    if (orders.length === 0) {
+        return (
+            <Typography
+                variant="h4"
+                color="text.primary"
+                style={{ textAlign: "center", paddingTop: "30px" }}
+                pb={2}
+            >
+                No Orders Found
+            </Typography>
+        );
+    }
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -172,6 +185,19 @@ const Orders = () => {
         />
     );
 
-    return <section className="users-list">{content}</section>;
+    return (
+        <section className="users-list">
+            <Typography
+                variant="h3"
+                color="text.primary"
+                style={{ textAlign: "center" }}
+                pb={2}
+            >
+                Orders
+            </Typography>
+            <Divider />
+            {content}
+        </section>
+    );
 };
 export default Orders;
