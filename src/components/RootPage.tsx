@@ -218,6 +218,7 @@ const Profile = () => {
                                         textDecoration: "none",
                                         color: "inherit",
                                     }}
+                                    rel="noreferrer"
                                 >
                                     {content}
                                 </a>

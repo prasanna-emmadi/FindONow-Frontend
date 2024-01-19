@@ -9,7 +9,6 @@ import { addToCart } from "../../redux/cartSlice";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { ProductType } from "../../types/productType";
 import ProductCarousel from "./ProductCarousel";
-import { useEffect } from "react";
 import useGoToTop from "../hooks/useGoToTop";
 
 interface Props {
