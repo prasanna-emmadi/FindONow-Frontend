@@ -13,7 +13,6 @@ import ProductCard from "../Product/ProductCard";
 import Suspense from "../common/Suspense";
 import CartDrawer from "./CartDrawer";
 import Options from "./Options";
-import { ProductsStyles } from "./Products.styles";
 import ProductsPagination from "./ProductsPagination";
 import logo from "./blue_mobile_ecommerce.jpg";
 
