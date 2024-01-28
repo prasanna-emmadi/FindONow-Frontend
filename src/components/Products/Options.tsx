@@ -108,11 +108,11 @@ const FilterDrawer = ({ children }: FilterDrawerProps) => {
                 </Button>
             </Box>
             <SwipeableDrawer
-                anchor="right"
+                anchor="bottom"
                 open={open}
                 onClose={() => toggleDrawer(false)}
                 onOpen={() => toggleDrawer(true)}
-                swipeAreaWidth={340}
+                swipeAreaWidth={400}
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
@@ -122,7 +122,7 @@ const FilterDrawer = ({ children }: FilterDrawerProps) => {
                     },
                 }}
             >
-                <Box sx={{ pt: 10, pr: 1, pl: 1 }}>{children}</Box>
+                {children}
             </SwipeableDrawer>
         </>
     );
