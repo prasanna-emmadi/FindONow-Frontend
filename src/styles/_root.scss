@@ -32,7 +32,7 @@
 }
 
 @media (min-width: 601px) {
-    .root-banner-container-image-wrapper {
+    .root-banner-container-image-wrapper.m {
         display: none;
     }
 }
@@ -44,7 +44,13 @@
         align-items: center;
     }
 
-    .root-banner-container-image-wrapper {
-        display: none;
+    .root-banner-container-image-wrapper.l {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        text-align: center;
+        margin-bottom: 205px;
     }
 }
