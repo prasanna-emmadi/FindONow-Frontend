@@ -68,7 +68,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
     };
 
     return (
-        <ProductsStyles data-testid="products">
+        <Box data-testid="products" className="actual-product-list-container">
             <CartDrawer setSnackOpen={setSnackOpen} dispatch={dispatch} />
             <Box pt={1} />
             <Box className="products-grid-container-wrapper">
@@ -100,7 +100,7 @@ const ActualProductList = ({ products, dispatch }: ActualProductListProps) => {
                     Item added to cart
                 </Alert>
             </Snackbar>
-        </ProductsStyles>
+        </Box>
     );
 };
 

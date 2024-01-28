@@ -46,11 +46,22 @@
     font-size: larger;
 }
 
+@media (min-width: 375px) {
+    .products-grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 4rem;
+    }
+}
+
 @media (min-width: 601px) {
 }
 
 @media (min-width: 993px) {
     .products-pagination.l {
         justify-content: right;
+    }
+    .actual-product-list-container {
+        margin: 40px;
     }
 }
