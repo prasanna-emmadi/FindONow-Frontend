@@ -1,30 +1,30 @@
-@use 'root';
-@use 'products';
-@use 'users';
+@use "root";
+@use "products";
+@use "users";
+@use "footer";
 
 .container {
-  display: flex;
+    display: flex;
 }
 
 .center-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .center-text {
-  text-align: center;
+    text-align: center;
 }
 
 .paper-style1 {
-  padding: "30px 20px";
-  width: 300px;
-  margin: "20px auto";
-
+    padding: "30px 20px";
+    width: 300px;
+    margin: "20px auto";
 }
 
 @media (min-width: 993px) {
-  .paper-style1.l{
-    width: 600px;
-  }  
+    .paper-style1.l {
+        width: 600px;
+    }
 }
