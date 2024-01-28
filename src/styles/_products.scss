@@ -5,8 +5,8 @@
 
 .products-grid-container {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 50px 50px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 4rem;
 }
 
 .products-grid-item-price-cart {
@@ -47,15 +47,9 @@
 }
 
 @media (min-width: 601px) {
-  .products-grid-container.m {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (min-width: 993px) {
-  .products-grid-container.l {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 
   .products-pagination.l {
     justify-content: right;
