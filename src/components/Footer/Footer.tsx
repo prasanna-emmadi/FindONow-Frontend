@@ -3,24 +3,26 @@ import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import EmailIcon from "@mui/icons-material/Email";
 
 const Footer = () => {
+    // change to items
+    // usage the grid template columns to do the auto thing
     return (
-        <Grid container spacing={2} style={{ margin: "0% 10%" }}>
-            <Grid item xs={4}>
+        <Box className="footer-grid-container">
+            <Box>
                 <Typography variant={"h4"}>Find'O Now</Typography>
                 <Box component="p">
                     This Ecommerce store is used for searching, sorting
                     categories products and placing orders
                 </Box>
-            </Grid>
-            <Grid item xs={4}>
+            </Box>
+            <Box>
                 <Typography variant={"h4"}>Useful links</Typography>
                 <List>
                     <ListItem>Home</ListItem>
                     <ListItem>All Products</ListItem>
                     <ListItem>Terms</ListItem>
                 </List>
-            </Grid>
-            <Grid item xs={4}>
+            </Box>
+            <Box>
                 <Typography variant={"h4"}>Contact</Typography>
                 <List>
                     <ListItem>
@@ -32,8 +34,8 @@ const Footer = () => {
                         contact@findonow.com
                     </ListItem>
                 </List>
-            </Grid>
-        </Grid>
+            </Box>
+        </Box>
     );
 };
 
