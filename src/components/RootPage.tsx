@@ -279,7 +279,6 @@ const RootPage = () => {
                     boxSizing: "border-box",
                 },
             }}
-            variant="persistent"
             anchor="left"
         >
             <Toolbar />
