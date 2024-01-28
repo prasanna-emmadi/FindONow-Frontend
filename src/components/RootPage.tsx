@@ -102,7 +102,7 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
             ...allOptions,
             {
                 path: "/home",
-                name: "Logout",
+                name: "LogOut",
                 icon: <ApiIcon />,
                 action: (dispatch: any) => {
                     dispatch(removeToken());
@@ -112,6 +112,12 @@ const getAllOptions = (isAdmin: boolean, isLoggedIn: boolean): OptionType[] => {
     } else {
         allOptions = [
             ...allOptions,
+            {
+                path: "/login",
+                name: "LogIn",
+                icon: <HowToRegIcon />,
+            },
+
             {
                 path: "/signup",
                 name: "SignUp",
@@ -336,6 +342,61 @@ const RootPage = () => {
     );
 
     const authContent = isLoggedIn ? loggedInContent : notLoggedInContent;
+    const aContent = isDesktop ? (
+        <>
+            <Grid item xs={6} style={{ flexGrow: 1, paddingTop: "-2px" }}>
+                <div />
+            </Grid>
+            <Grid
+                item
+                xs={3}
+                style={{
+                    display: "flex",
+                    justifyContent: "end",
+                }}
+            >
+                {authContent}
+            </Grid>
+        </>
+    ) : null;
+
+    const headerButton = (
+        <Button
+            color="inherit"
+            onClick={onHomeClick}
+            style={{
+                justifyContent: "flex-start",
+                color: "black",
+                fontWeight: "bold",
+                fontSize: "24px",
+            }}
+        >
+            Find
+            <Typography variant={"h3"} style={{ marginBottom: "13px" }}>
+                {"'O "}
+            </Typography>
+            Now
+        </Button>
+    );
+
+    const headerContent = isDesktop ? (
+        <Grid
+            container
+            spacing={2}
+            style={{
+                justifyContent: "center",
+                paddingTop: "8px",
+            }}
+        >
+            <Grid item xs={3}>
+                {headerButton}
+            </Grid>
+
+            {aContent}
+        </Grid>
+    ) : (
+        headerButton
+    );
 
     return (
         <>
@@ -350,56 +411,11 @@ const RootPage = () => {
                         height: "100px",
                         justifyContent: "center",
                     }}
+                    component={"nav"}
                 >
                     <Toolbar>
                         {!isDesktop && menuButton}
-                        <Grid
-                            container
-                            spacing={2}
-                            style={{
-                                justifyContent: "center",
-                                paddingTop: "8px",
-                            }}
-                        >
-                            <Grid item xs={3}>
-                                <Button
-                                    color="inherit"
-                                    onClick={onHomeClick}
-                                    style={{
-                                        justifyContent: "flex-start",
-                                        color: "black",
-                                        fontWeight: "bold",
-                                        fontSize: "24px",
-                                    }}
-                                >
-                                    Find
-                                    <Typography
-                                        variant={"h3"}
-                                        style={{ marginBottom: "13px" }}
-                                    >
-                                        {"'O "}
-                                    </Typography>
-                                    Now
-                                </Button>
-                            </Grid>
-                            <Grid
-                                item
-                                xs={6}
-                                style={{ flexGrow: 1, paddingTop: "-2px" }}
-                            >
-                                <div />
-                            </Grid>
-                            <Grid
-                                item
-                                xs={3}
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "end",
-                                }}
-                            >
-                                {authContent}
-                            </Grid>
-                        </Grid>
+                        {headerContent}
                     </Toolbar>
                 </AppBar>
                 {!isDesktop && drawer}
