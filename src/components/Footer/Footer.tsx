@@ -1,4 +1,4 @@
-import { Box, Grid, List, ListItem, Typography } from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import EmailIcon from "@mui/icons-material/Email";
 
